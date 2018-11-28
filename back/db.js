@@ -8,12 +8,31 @@ class Database {
       password: "react and express",
       database : "mediadb"
     });
+    this.connection.connect();
   }
 
+  /**
+   * Demonstration of how to use this.query correctly. Also, tests db connect
+   */
   test() {
     this.query("SELECT 1+1 AS solution")
       .then(rows => {
         console.log(rows);
+      })
+      .catch(err => {
+        throw err;
+      });
+  }
+
+  /**
+   * safely closes database
+   */
+  close() {
+      return new Promise((resolve, reject) => {
+        this.connection.end(err=>{
+          if (err) return reject(err);
+          resolve();
+        });
       });
   }
 
@@ -24,11 +43,9 @@ class Database {
    */
   query(sql) {
     return new Promise((resolve, reject) => {
-      this.connection.connect();
       this.connection.query(sql, (err, rows) => { //when results come back...
         if (err) return reject(err);// throw all errors
-        this.connection.end();      // end connection
-        resolve(rows);              // resolve promise with rows
+        resolve(rows);            // resolve original promise with rows
       });
     });
   }
