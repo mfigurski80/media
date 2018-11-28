@@ -9,7 +9,6 @@ app.use(express.static(__dirname + '/public')); // static files
 
 // DB
 const db = require("./db.js");
-db.test();
 
 // ENTRY POINT -- all requests go here
 const router_index = require("./routes/index.js");
