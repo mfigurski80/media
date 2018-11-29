@@ -12,20 +12,33 @@ class Database {
     this.connection.connect();
 
     /* make sure sql has all necessary tables */
-    // check posts table
-    this.query("SELECT * FROM posts LIMIT 0").catch(err => { // posts table doesn't exist?
-      console.log("[setting up posts table]");
-      this.query("CREATE TABLE `mediadb`.`posts` ( `postid` TEXT NOT NULL , `authorid` TEXT NOT NULL , `content` TEXT NULL , `timeposted` TIMESTAMP NOT NULL , `likesuserids` TEXT NULL ) ENGINE = InnoDB;")
-      .catch(err => {
-        throw err; // kay, guess theres an actual problem then
-      });
-    });
-    // check users table
-    this.query("SELECT * FROM users LIMIT 0").catch(err => { // users table doesnt exist?
-      console.log("[setting up users table]");
-      this.query("CREATE TABLE `mediadb`.`users` ( `userid` TEXT NOT NULL , `firstname` TEXT NULL DEFAULT NULL , `lastname` TEXT NULL DEFAULT NULL , `profilepicture` TEXT NULL DEFAULT NULL , `password` TEXT NOT NULL , `email` TEXT NOT NULL , `timejoined` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , `followinguserids` TEXT NULL DEFAULT NULL , `followersuserids` TEXT NULL DEFAULT NULL , `postids` TEXT NULL DEFAULT NULL ) ENGINE = InnoDB;")
-        .catch(err => {
-          throw err;
+    this.query("SHOW TABLES")
+      .then(rows => {
+        // console.log(rows);
+        var reqTables = ["post", "photo", "entity", "entity_tag", "entity_like", "entity_comment", "user", "user_subscription"];
+        rows.forEach(row => {
+          const tbl = row.Tables_in_mediadb;
+          reqTables.splice(reqTables.indexOf(tbl),1);
+        });
+        if (reqTables.length !== 0) {
+          throw "[db structure is incorrect. fixing...]";
+        }
+      })
+      .catch(err => { // if it doesn't... create all the tables
+        console.log(err);
+        const sqlcmmds = [
+          "CREATE TABLE post (entityId VARCHAR(255) PRIMARY KEY, content TEXT)",
+          "CREATE TABLE photo (entityId VARCHAR(255) PRIMARY KEY, photo TEXT)",
+          "CREATE TABLE entity (entityId VARCHAR(255) PRIMARY KEY, timePosted TIMESTAMP DEFAULT CURRENT_TIMESTAMP, userId VARCHAR(255))",
+          "CREATE TABLE entity_tag (entityId VARCHAR(255), tagName TEXT)",
+          "CREATE TABLE entity_like (entityId VARCHAR(255), userId VARCHAR(255))",
+          "CREATE TABLE entity_comment (entityId VARCHAR(255), userId VARCHAR(255), content TEXT)",
+          "CREATE TABLE user (userId VARCHAR(255) PRIMARY KEY, username TEXT, password TEXT, email TEXT, bio TEXT)",
+          "CREATE TABLE user_subscription (userId VARCHAR(255), targetId VARCHAR(255))"
+        ];
+        sqlcmmds.forEach(cmmd => {
+          this.query(cmmd)
+            .catch(err => {console.log(err)});
         });
       });
   }
