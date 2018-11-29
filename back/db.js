@@ -33,7 +33,7 @@ class Database {
           "CREATE TABLE entity_tag (entityId VARCHAR(255), tagName TEXT)",
           "CREATE TABLE entity_like (entityId VARCHAR(255), userId VARCHAR(255))",
           "CREATE TABLE entity_comment (entityId VARCHAR(255), userId VARCHAR(255), content TEXT)",
-          "CREATE TABLE user (userId VARCHAR(255) PRIMARY KEY, username TEXT, password TEXT, email TEXT, bio TEXT)",
+          "CREATE TABLE user (userId VARCHAR(255) PRIMARY KEY, username VARCHAR(255) UNIQUE, password TEXT, email TEXT, bio TEXT)",
           "CREATE TABLE user_subscription (userId VARCHAR(255), targetId VARCHAR(255))"
         ];
         sqlcmmds.forEach(cmmd => {
@@ -44,21 +44,9 @@ class Database {
   }
 
   /**
-   * safely closes database. Honestly, shouldnt be used
-   */
-  close() {
-      return new Promise((resolve, reject) => {
-        this.connection.end(err=>{
-          if (err) return reject(err);
-          resolve();
-        });
-      });
-  }
-
-  /**
    * async function to execute SQL queries
    * @param sql code to execute
-   * @return promise, with resolve getting rows
+   * @return promise, with resolve returning rows
    */
   query(sql) {
     return new Promise((resolve, reject) => {
@@ -70,28 +58,40 @@ class Database {
   }
 
   /**
-   * async function to add a user
-   * @param userid -- the username used for identifying user
-   * @param firstname
-   * @param lastname
-   * @param profilepicture -- link to where it's saved
-   * @param password -- hashed only in browser, rehash
-   * @param email
-   */
-  addUser(userid, firstname, lastname, profilepicture, password, email) {
-    return this.query("INSERT INTO `users` (`userid`, `firstname`, `lastname`, `profilepicture`, `password`, `email`, `timejoined`, `followinguserids`, `followersuserids`, `postids`) VALUES " +
-    "('" + userid + "', '" + firstname + "', '" + lastname + "', NULL, '" + password + "', '" + email + "', CURRENT_TIMESTAMP, NULL, NULL, NULL)");
+   * method to generate random ids with minimal collisions
+   * @return id -- unique string to be used as an id
+  */
+  GUID() {
+    function s4() {
+      return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+    }
+    return "ss-s-s-s-sss".replace(/s/g, s4);
   }
 
   /**
-   * async function to add a post
-   * @param postid
-   * @param authorid
-   * @param content
+   * @param username
+   * @param userpass -- unhashed as of yet
+   * @param email
    */
-  addPost(postid, authorid, content) {
-    return this.query("INSERT INTO `posts` (`postid`, `authorid`, `content`, `timeposted`, `likesuserids`) VALUES " +
-    "('" + postid + "', '" + authorid + "', '" + content + "', CURRENT_TIMESTAMP, NULL)");
+  addUser(username, password, email) {
+    return this.query("INSERT INTO user (userid, username, password, email, bio) VALUES " +
+    "('" + this.GUID() + "', '" + username + "', '" + password + "', '" + email + "', NULL)")
+  }
+
+  /**
+   * @param username
+   * @return promise, resolve returns array of datapackets with user info
+   */
+  getUser(username) {
+    return this.query("SELECT * FROM user WHERE username = '" + username + "'");
+  }
+
+  /**
+   * @param userId
+   * @return promise, resolve returns array of datapackets with user info
+   */
+  getUserById(userId) {
+    return this.query("SELECT * FROM user WHERE userId = '" + userId + "'");
   }
 }
 

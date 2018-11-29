@@ -1,8 +1,8 @@
 const db = require("./db.js");
 
-// db.addUser("mfigurski80", "Mikolaj", "Figurski", "", "password", "meek.f80@gmail.com")
-//   .catch(err => {
-//     throw err;
-//   });
+db.getUser("mfigurski80")
+  .then(rows => {
+    console.log(rows[0]);
+  });
 
-// db.addPost("post1", "mfigurski80", "First post!").catch(err => {throw err});
+// console.log(db.GUID());
