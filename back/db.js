@@ -2,6 +2,7 @@ const mysql = require('mysql');
 
 class Database {
   constructor() {
+    console.log("[initializing database connection]");
     // initialize connection
     this.connection = mysql.createConnection({
       user: "social_app_user",
@@ -16,10 +17,12 @@ class Database {
       .then(rows => {
         // console.log(rows);
         var reqTables = ["post", "photo", "entity", "entity_tag", "entity_like", "entity_comment", "user", "user_subscription"];
-        rows.forEach(row => {
-          const tbl = row.Tables_in_mediadb;
-          reqTables.splice(reqTables.indexOf(tbl),1);
-        });
+        if (rows) {
+          rows.forEach(row => {
+            const tbl = row.Tables_in_mediadb;
+            reqTables.splice(reqTables.indexOf(tbl),1);
+          });
+        }
         if (reqTables.length !== 0) {
           throw "[db structure is incorrect. fixing...]";
         }
@@ -43,6 +46,11 @@ class Database {
       });
   }
 
+
+  /* ****
+  UTILITY METHODS
+  **** */
+
   /**
    * async function to execute SQL queries
    * @param sql code to execute
@@ -54,7 +62,11 @@ class Database {
         if (err) return reject(err); // throw all errors
         resolve(rows);               // resolve original promise with rows
       });
-    });
+    })
+      .catch(err => {
+        console.log("[Couldn't perform operation: " + sql + "]");
+        console.log(err);
+      });
   }
 
   /**
@@ -68,31 +80,141 @@ class Database {
     return "ss-s-s-s-sss".replace(/s/g, s4);
   }
 
+
+  /* ****
+  SIMPE ADDING METHODS
+  'base' because alter only specific table and doesn't check anything
+  **** */
+
   /**
-   * @param username
-   * @param userpass -- unhashed as of yet
-   * @param email
+   * @param entityId
+   * @param content
+   * @return promise, with nothing passed as argument
    */
-  addUser(username, password, email) {
-    return this.query("INSERT INTO user (userid, username, password, email, bio) VALUES " +
-    "('" + this.GUID() + "', '" + username + "', '" + password + "', '" + email + "', NULL)")
+  baseAddPost(entityId, content) {
+    return this.query(`INSERT INTO post (entityId, content) VALUES ` +
+    `('${entityId}', '${content}')`);
   }
 
   /**
-   * @param username
-   * @return promise, resolve returns array of datapackets with user info
+   * @param entityId
+   * @param photo
+   * @return promise, with nothing passed as argument
    */
-  getUser(username) {
-    return this.query("SELECT * FROM user WHERE username = '" + username + "'");
+  baseAddPhoto(entityId, photo) {
+    return this.query(`INSERT INTO photo (entityId, photo) VALUES ` +
+    `('${entityId}', '${photo}')`);
   }
 
   /**
    * @param userId
-   * @return promise, resolve returns array of datapackets with user info
+   * @return promise, with nothing passed as argument
    */
-  getUserById(userId) {
-    return this.query("SELECT * FROM user WHERE userId = '" + userId + "'");
+  baseAddEntity(userId) {
+    return this.query(`INSERT INTO photo (entityId, timePosted, userId) VALUES ` +
+    `('${this.GUID()}', CURRENT_TIMESTAMP, '${userId}')`);
   }
+
+  /**
+   * @param entityId
+   * @param tagName
+   * @return promise, with nothing passed as argument
+   */
+  baseAddEntityTag(entityId, tagName) {
+    return this.query(`INSERT INTO entity_tag (entityId, tagName) VALUES ` +
+    `('${entityId}', '${tagName}')`);
+  }
+
+  /**
+   * @param entityId
+   * @param userId
+   * @return promise, with nothing passed as argument
+   */
+  baseAddEntityLike(entityId, userId) {
+    return this.query(`INSERT INTO entity_like (entityId, userId) VALUES ` +
+    `('${entityId}', '${userId}')`);
+  }
+
+  /**
+   * @param entityId
+   * @param userId
+   * @param content
+   * @return promise, with nothing passed as argument
+   */
+  baseAddEntityComment(entityId, userId, content) {
+    return this.query(`INSERT INTO entity_comment (entityId, userId, content) VALUES ` +
+    `('${entityId}', '${userId}', '${content}')`);
+  }
+
+  /**
+   * @param username
+   * @param userpass -- unhashed as of yet
+   * @param email
+   * @return promise, with nothing passed as argument
+   */
+  baseAddUser(username, password, email) {
+    return this.query(`INSERT INTO user (userid, username, password, email, bio) VALUES ` +
+    `('${this.GUID()}', '${username}', '${password}', '${email}', NULL)`);
+  }
+
+  /**
+   * @param userId
+   * @param targetId
+   * @return promise, with nothing passed as argument
+   */
+  baseAddUserSubscription(userId, targetId) {
+    return this.query(`INSERT INTO user_subscription (userId, targetId) VALUES ` +
+    `('${userId}', '${targetId}')`);
+  }
+
+
+  /* ****
+  SIMPE GETTING METHODS
+  **** */
+
+  /**
+   * @param table
+   * @param column
+   * @param value
+   * @return promise, resolve returns array of datapacket(s) with requested info
+   */
+  baseGetVal(table, column, value) {
+    return this.query(`SELECT * FROM ${table} WHERE ${column} = '${entityId}'`);
+  }
+
+  /**
+   * @param table
+   * @return promise, resolve returns array of datapacket(s) with requested info
+   */
+  baseGetAll(table) {
+    return this.query(`SELECT * FROM ${table}`);
+  }
+
+
+
+
+  /* ****
+  HIGH LEVEL SETTING METHODS
+  **** */
+
+  /**
+   * @param username
+   * @param password
+   * @param email
+   * @return promise
+   */
+  addUser(username, password, email) {
+    // sql will throw error if username repeats
+    return this.baseAddUser(username, password, email);
+  }
+
+
+  /* ****
+  HIGH LEVEL GETTING METHODS
+  **** */
+
+
+
 }
 
 const db = new Database();
