@@ -64,8 +64,8 @@ class Database {
       });
     })
       .catch(err => {
-        console.log("[Couldn't perform operation: " + sql + "]");
-        console.log(err);
+        console.log(`[Couldn't perform operation:  ${err.sql}] \n[${err.sqlMessage}]`);
+        // console.log(err);
       });
   }
 
@@ -107,12 +107,13 @@ class Database {
   }
 
   /**
+   * @param entityId
    * @param userId
    * @return promise, with nothing passed as argument
    */
-  baseAddEntity(userId) {
-    return this.query(`INSERT INTO photo (entityId, timePosted, userId) VALUES ` +
-    `('${this.GUID()}', CURRENT_TIMESTAMP, '${userId}')`);
+  baseAddEntity(entityId, userId) {
+    return this.query(`INSERT INTO entity (entityId, timePosted, userId) VALUES ` +
+    `('${entityId}', CURRENT_TIMESTAMP, '${userId}')`);
   }
 
   /**
@@ -147,14 +148,15 @@ class Database {
   }
 
   /**
+   * @param userId
    * @param username
    * @param userpass -- unhashed as of yet
    * @param email
    * @return promise, with nothing passed as argument
    */
-  baseAddUser(username, password, email) {
+  baseAddUser(userId, username, password, email) {
     return this.query(`INSERT INTO user (userid, username, password, email, bio) VALUES ` +
-    `('${this.GUID()}', '${username}', '${password}', '${email}', NULL)`);
+    `('${userId}', '${username}', '${password}', '${email}', NULL)`);
   }
 
   /**
@@ -179,7 +181,7 @@ class Database {
    * @return promise, resolve returns array of datapacket(s) with requested info
    */
   baseGetVal(table, column, value) {
-    return this.query(`SELECT * FROM ${table} WHERE ${column} = '${entityId}'`);
+    return this.query(`SELECT * FROM ${table} WHERE ${column} = '${value}'`);
   }
 
   /**
@@ -191,32 +193,57 @@ class Database {
   }
 
 
-
-
   /* ****
   HIGH LEVEL SETTING METHODS
   **** */
-
-  /**
-   * @param username
-   * @param password
-   * @param email
-   * @return promise
-   */
-  addUser(username, password, email) {
-    // sql will throw error if username repeats
-    return this.baseAddUser(username, password, email);
-  }
 
 
   /* ****
   HIGH LEVEL GETTING METHODS
   **** */
 
+  /**
+   * @param firstEntityId
+   * @param amount
+   * @return idk yet,
+   */
+  getRecentPosts(firstEntityId=undefined, amount=10) {
+    var conditional = ""
+    if (firstEntityId) { // if there's a firstEntityId
+      conditional = `WHERE timePosted < (SELECT timePosted FROM entity WHERE entityId = '${firstEntityId}')`;
+    }
+    var sql = `SELECT * FROM (SELECT * FROM entity ${conditional}) AS entity
+      JOIN post ON post.entityId = entity.entityId
+      UNION
+      SELECT * FROM (SELECT * FROM entity ${conditional}) AS entity
+      JOIN photo ON photo.entityId = entity.entityId
+      ORDER BY timePosted DESC LIMIT ${amount};`;
+
+    var hook = {} // saves info across requests
+    this.query(sql)
+      .then(rows => { // entityinfo + post/photo info
+        // console.log(rows);
+        hook.entities = rows;
+
+        return Promise.all(hook.entities.map(entity => {
+          return this.query(`SELECT * FROM entity_tag WHERE entityId = '${entity.entityId}'`)
+        }));
+      })
+      .then(rows => { // lots of tag data
+        rows.forEach(row => {
+          if (row.length === 0) {
+            null;
+          } else {
+            console.log(row[0].entityId);
+          }
+        });
+        // console.log(rows)
+      })
+
+  }
 
 
 }
-
 const db = new Database();
 
 module.exports = db;
