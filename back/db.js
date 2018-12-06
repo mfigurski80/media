@@ -83,91 +83,7 @@ class Database {
 
   /* ****
   SIMPE ADDING METHODS
-  'base' because alter only specific table and doesn't check anything
   **** */
-
-  /**
-   * @param entityId
-   * @param content
-   * @return promise, with nothing passed as argument
-   */
-  baseAddPost(entityId, content) {
-    return this.query(`INSERT INTO post (entityId, content) VALUES ` +
-    `('${entityId}', '${content}')`);
-  }
-
-  /**
-   * @param entityId
-   * @param photo
-   * @return promise, with nothing passed as argument
-   */
-  baseAddPhoto(entityId, photo) {
-    return this.query(`INSERT INTO photo (entityId, photo) VALUES ` +
-    `('${entityId}', '${photo}')`);
-  }
-
-  /**
-   * @param entityId
-   * @param userId
-   * @return promise, with nothing passed as argument
-   */
-  baseAddEntity(entityId, userId) {
-    return this.query(`INSERT INTO entity (entityId, timePosted, userId) VALUES ` +
-    `('${entityId}', CURRENT_TIMESTAMP, '${userId}')`);
-  }
-
-  /**
-   * @param entityId
-   * @param tagName
-   * @return promise, with nothing passed as argument
-   */
-  baseAddEntityTag(entityId, tagName) {
-    return this.query(`INSERT INTO entity_tag (entityId, tagName) VALUES ` +
-    `('${entityId}', '${tagName}')`);
-  }
-
-  /**
-   * @param entityId
-   * @param userId
-   * @return promise, with nothing passed as argument
-   */
-  baseAddEntityLike(entityId, userId) {
-    return this.query(`INSERT INTO entity_like (entityId, userId) VALUES ` +
-    `('${entityId}', '${userId}')`);
-  }
-
-  /**
-   * @param entityId
-   * @param userId
-   * @param content
-   * @return promise, with nothing passed as argument
-   */
-  baseAddEntityComment(entityId, userId, content) {
-    return this.query(`INSERT INTO entity_comment (entityId, userId, content) VALUES ` +
-    `('${entityId}', '${userId}', '${content}')`);
-  }
-
-  /**
-   * @param userId
-   * @param username
-   * @param userpass -- unhashed as of yet
-   * @param email
-   * @return promise, with nothing passed as argument
-   */
-  baseAddUser(userId, username, password, email) {
-    return this.query(`INSERT INTO user (userid, username, password, email, bio) VALUES ` +
-    `('${userId}', '${username}', '${password}', '${email}', NULL)`);
-  }
-
-  /**
-   * @param userId
-   * @param targetId
-   * @return promise, with nothing passed as argument
-   */
-  baseAddUserSubscription(userId, targetId) {
-    return this.query(`INSERT INTO user_subscription (userId, targetId) VALUES ` +
-    `('${userId}', '${targetId}')`);
-  }
 
 
   /* ****
@@ -207,7 +123,7 @@ class Database {
    * @param amount
    * @return idk yet,
    */
-  getRecentPosts(firstEntityId=undefined, amount=10) {
+  getRecentEntities(firstEntityId=undefined, amount=10) {
     var conditional = ""
     if (firstEntityId) { // if there's a firstEntityId
       conditional = `WHERE timePosted < (SELECT timePosted FROM entity WHERE entityId = '${firstEntityId}')`;
@@ -220,26 +136,42 @@ class Database {
       ORDER BY timePosted DESC LIMIT ${amount};`;
 
     var hook = {} // saves info across requests
-    this.query(sql)
+    return this.query(sql)
       .then(rows => { // entityinfo + post/photo info
-        // console.log(rows);
         hook.entities = rows;
+        hook.entitiesIndex = hook.entities.map(entity => {
+          return entity.entityId;
+        });
 
-        return Promise.all(hook.entities.map(entity => {
-          return this.query(`SELECT * FROM entity_tag WHERE entityId = '${entity.entityId}'`)
-        }));
-      })
-      .then(rows => { // lots of tag data
-        rows.forEach(row => {
-          if (row.length === 0) {
-            null;
+        var conditional = ""; // create a conditional statement
+        hook.entities.forEach(entity => {
+          entity.tags = []; // really quick, just add a tag for future
+          if (conditional.length === 0) {
+            conditional += ` WHERE entityId = '${entity.entityId}'`;
           } else {
-            console.log(row[0].entityId);
+            conditional += ` OR entityId = '${entity.entityId}'`;
           }
         });
-        // console.log(rows)
+        return Promise.all([ // get tags, amoung of likes and amount of comments
+          this.query(`SELECT * FROM entity_tag ${conditional}`),
+          this.query(`SELECT * FROM entity_like ${conditional}`), // TODO: get these without requesting ALL the info
+          this.query(`SELECT * FROM entity_comment ${conditional}`)
+        ]);
       })
+      .then(rows => { // lots of tag, like, comment data
+        // rows[0] == tags
+        // rows[1] == likes
+        // rows[2] == comments
 
+        rows[0].forEach(tag => {
+          const i = hook.entitiesIndex.indexOf(tag.entityId);
+          hook.entities[i].tags.push(tag.tagName);
+        });
+
+        // TODO: do likes and comments as well
+
+        return(hook.entities); // give back the entities!!!
+      })
   }
 
 

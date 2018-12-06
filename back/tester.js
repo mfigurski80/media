@@ -2,7 +2,10 @@ const db = require("./db.js");
 
 
 var postId = "89c6225d-362c-c6a0-e028-b6273a2b2c2f";
-db.getRecentPosts();
+db.getRecentEntities()
+  .then(result => {
+    console.log(result);
+  });
 
 
 
