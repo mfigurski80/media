@@ -5,13 +5,13 @@ const router = express.Router();
 // import the database connection
 const db = require("../db.js");
 
-router.use("/", function(req, res, next) {
-  db.getRecentEntities(amount=10)
+router.get("/", function(req, res, next) { // get recent articles
+  db.getRecentEntities(req.query.entityId)
     .then(entities => {
       res.json(entities);
     })
     .catch(err => {
-      res.send("The information you requested could not be retrieved");
+      res.send(err);
     });
 });
 

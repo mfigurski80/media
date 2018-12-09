@@ -19,7 +19,7 @@ router.use("/users", router_users); // give users routes to users router
 
 
 
-router.use("*", function(req, res, next) {
+router.use("*", function(req, res, next) { // 404
   res.send("It seems like the page you're looking for doesn't exist. Sorry, we're still under development");
 });
 

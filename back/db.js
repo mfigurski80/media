@@ -124,7 +124,7 @@ class Database {
    * @param amount
    * @return Promise, with json of entities on resolve
    */
-  getRecentEntities(amount=10, firstEntityId=undefined) {
+  getRecentEntities(firstEntityId=undefined, amount=10) {
     var conditional = ""
     if (firstEntityId) { // if there's a firstEntityId
       conditional = `WHERE timePosted < (SELECT timePosted FROM entity WHERE entityId = '${firstEntityId}')`;
