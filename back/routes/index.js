@@ -10,21 +10,11 @@ router.use("*", function(req, res, next) {
   next();
 });
 
-router.get("/posts", function(req, res, next) {
-  res.json([
-    {"title":"hello"},
-    {"title":"world"}
-  ]);
-})
 
-router.get("/users", function(req, res, next){
-  db.baseGetAll("user")
-    .then(rows => {
-      res.json(rows);
-    })
-    .catch(err => {
-      res.send(err);
-    });
-});
+const router_posts = require("./posts.js");
+router.use("/posts", router_posts); // give posts routes to posts router
+
+const router_users = require("./users.js");
+router.use("/users", router_users); // give users routes to users router
 
 module.exports = router;

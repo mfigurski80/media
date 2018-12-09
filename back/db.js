@@ -66,6 +66,7 @@ class Database {
       .catch(err => {
         console.log(`[Couldn't perform operation:  ${err.sql}] \n[${err.sqlMessage}]`);
         // console.log(err);
+        throw err;
       });
   }
 
@@ -121,9 +122,9 @@ class Database {
   /**
    * @param firstEntityId
    * @param amount
-   * @return idk yet,
+   * @return Promise, with json of entities on resolve
    */
-  getRecentEntities(firstEntityId=undefined, amount=10) {
+  getRecentEntities(amount=10, firstEntityId=undefined) {
     var conditional = ""
     if (firstEntityId) { // if there's a firstEntityId
       conditional = `WHERE timePosted < (SELECT timePosted FROM entity WHERE entityId = '${firstEntityId}')`;
