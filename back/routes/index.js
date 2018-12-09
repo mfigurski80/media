@@ -17,4 +17,10 @@ router.use("/posts", router_posts); // give posts routes to posts router
 const router_users = require("./users.js");
 router.use("/users", router_users); // give users routes to users router
 
+
+
+router.use("*", function(req, res, next) {
+  res.send("It seems like the page you're looking for doesn't exist. Sorry, we're still under development");
+});
+
 module.exports = router;
