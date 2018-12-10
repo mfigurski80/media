@@ -1,0 +1,43 @@
+✅ - Done
+❌ - Problems, TODO'd and skipped.
+
+
+getting posts by most recent ✅
+  after certain post         ✅
+  for a specific user
+  with a specific tag
+
+getting posts by most liked
+  after certain post
+  for a specific user
+  with a specific tag
+
+get posts by trending (recent + liked?)
+  after certain post
+  for a specific user
+  with a specific tag
+
+getting details for specific post
+  get comments after (comment Id)
+  get like usernames
+  get similar??
+
+getting (public) user information
+
+adding a post
+  with certain tags
+  as a photo/gif/video
+
+adding a like
+
+adding a comment
+
+
+edit post
+  change tags
+
+edit comment
+
+delete post
+
+delete comment
