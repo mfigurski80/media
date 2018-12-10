@@ -2,10 +2,12 @@
 ❌ - Problems, TODO'd and skipped.
 
 
-getting posts by most recent ✅
-  after certain post         ✅
-  for a specific user
-  with a specific tag
+getting posts by most recent  ✅
+  after certain post          ✅
+  for a specific user         ✅
+  with a specific tag         ✅
+  independently of each other ✅
+  include comments, likes
 
 getting posts by most liked
   after certain post

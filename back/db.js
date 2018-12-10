@@ -24,7 +24,7 @@ class Database {
           });
         }
         if (reqTables.length !== 0) {
-          throw "[db structure is incorrect. fixing...]";
+          throw "[db structure is missing tables. 'fixing'...]";
         }
       })
       .catch(err => { // if it doesn't... create all the tables
@@ -124,11 +124,25 @@ class Database {
    * @param amount
    * @return Promise, with json of entities on resolve
    */
-  getRecentEntities(firstEntityId=undefined, amount=10) {
-    var conditional = ""
-    if (firstEntityId) { // if there's a firstEntityId
-      conditional = `WHERE timePosted < (SELECT timePosted FROM entity WHERE entityId = '${firstEntityId}')`;
+  getRecentEntities(props={}, amount=10) {
+
+    var conditions = []; // get all the props (search parameters), and develop sql conditions
+    if (props.firstEntityId) { // if there's a firstEntityId
+      conditions.push(`timePosted < (SELECT timePosted FROM entity WHERE entityId = '${props.firstEntityId}')`);
     }
+    if (props.userId) { // if there's a userId
+      conditions.push(`userId = '${props.userId}'`);
+    }
+    if (props.tag) { // if there's a tag
+      conditions.push(`EXISTS (SELECT * FROM entity_tag WHERE entityId = entity.entityId AND tagName = '${props.tag}')`);
+      // I'm really surprised that worked ^. Fucking magic.
+    }
+    var conditional = "";
+    if (conditions.length > 0) { // form conditional from array
+      conditional = "WHERE " + conditions.join(" AND ");
+    }
+
+
     var sql = `SELECT * FROM (SELECT * FROM entity ${conditional}) AS entity
       JOIN post ON post.entityId = entity.entityId
       UNION
@@ -144,7 +158,7 @@ class Database {
           return entity.entityId;
         });
 
-        var conditional = ""; // create a conditional statement
+        var conditional = ""; // create another conditional statement
         hook.entities.forEach(entity => {
           entity.tags = []; // really quick, just add a tag for future
           if (conditional.length === 0) {
