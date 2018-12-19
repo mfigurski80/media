@@ -125,7 +125,6 @@ class Database {
    * @return Promise, with json of entities on resolve
    */
   getRecentEntities(props={}, amount=10) {
-
     var conditions = []; // get all the props (search parameters), and develop sql conditions
     if (props.firstEntityId) { // if there's a firstEntityId
       conditions.push(`timePosted < (SELECT timePosted FROM entity WHERE entityId = '${props.firstEntityId}')`);
@@ -137,6 +136,7 @@ class Database {
       conditions.push(`EXISTS (SELECT * FROM entity_tag WHERE entityId = entity.entityId AND tagName = '${props.tag}')`);
       // I'm really surprised that worked ^. Fucking magic.
     }
+
     var conditional = "";
     if (conditions.length > 0) { // form conditional from array
       conditional = "WHERE " + conditions.join(" AND ");
@@ -157,16 +157,10 @@ class Database {
         hook.entitiesIndex = hook.entities.map(entity => {
           return entity.entityId;
         });
-
         var conditional = ""; // create another conditional statement
-        hook.entities.forEach(entity => {
-          entity.tags = []; // really quick, just add a tag for future
-          if (conditional.length === 0) {
-            conditional += ` WHERE entityId = '${entity.entityId}'`;
-          } else {
-            conditional += ` OR entityId = '${entity.entityId}'`;
-          }
-        });
+        if (hook.entitiesIndex.length > 0) {
+          conditional = " WHERE entityId = '" + hook.entitiesIndex.join("' OR entityId = '") + "'";
+        }
         return Promise.all([ // get tags, amoung of likes and amount of comments
           this.query(`SELECT * FROM entity_tag ${conditional}`),
           this.query(`SELECT * FROM entity_like ${conditional}`), // TODO: get these without requesting ALL the info
@@ -180,11 +174,14 @@ class Database {
 
         rows[0].forEach(tag => {
           const i = hook.entitiesIndex.indexOf(tag.entityId);
-          hook.entities[i].tags.push(tag.tagName);
+          if (hook.entities[i].tags) { // if tags already exists...
+            hook.entities[i].tags.push(tag.tagName);
+          } else {
+            hook.entities[i].tags = [tag.tagName];
+          }
         });
 
-        // TODO: do likes and comments as well
-
+        // TODO: get likes and comments as well
         return(hook.entities); // give back the entities!!!
       })
   }
