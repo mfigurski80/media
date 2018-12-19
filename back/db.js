@@ -24,25 +24,12 @@ class Database {
           });
         }
         if (reqTables.length !== 0) {
-          throw "[db structure is missing tables. 'fixing'...]";
+          throw "[db structure is missing tables...]";
         }
       })
       .catch(err => { // if it doesn't... create all the tables
         console.log(err);
-        const sqlcmmds = [
-          "CREATE TABLE post (entityId VARCHAR(255) PRIMARY KEY, content TEXT)",
-          "CREATE TABLE photo (entityId VARCHAR(255) PRIMARY KEY, photo TEXT)",
-          "CREATE TABLE entity (entityId VARCHAR(255) PRIMARY KEY, timePosted TIMESTAMP DEFAULT CURRENT_TIMESTAMP, userId VARCHAR(255))",
-          "CREATE TABLE entity_tag (entityId VARCHAR(255), tagName TEXT)",
-          "CREATE TABLE entity_like (entityId VARCHAR(255), userId VARCHAR(255))",
-          "CREATE TABLE entity_comment (entityId VARCHAR(255), userId VARCHAR(255), content TEXT)",
-          "CREATE TABLE user (userId VARCHAR(255) PRIMARY KEY, username VARCHAR(255) UNIQUE, password TEXT, email TEXT, bio TEXT)",
-          "CREATE TABLE user_subscription (userId VARCHAR(255), targetId VARCHAR(255))"
-        ];
-        sqlcmmds.forEach(cmmd => {
-          this.query(cmmd)
-            .catch(err => {console.log(err)});
-        });
+        __resetDB__(); // reset the table structures.
       });
   }
 
@@ -73,12 +60,41 @@ class Database {
   /**
    * method to generate random ids with minimal collisions
    * @return id -- unique string to be used as an id
-  */
+   */
   GUID() {
     function s4() {
       return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
     }
     return "ss-s-s-s-sss".replace(/s/g, s4);
+  }
+
+  /**
+   * WARNING: DO NOT EVER CALL THIS FUNCTION OUTSIDE OF THE DB CONSTRUCTOR.
+   * IT WILL RESET THE DATABASE AND ITS STRUCTURE. BAD
+   */
+  __resetDB__() {
+    console.log("\n\n[NOTICE: resetting table structure]\n\n");
+    const sqlcmmds = [
+      "CREATE TABLE post (entityId VARCHAR(255) PRIMARY KEY, content TEXT)",
+      "CREATE TABLE photo (entityId VARCHAR(255) PRIMARY KEY, photo TEXT)",
+      "CREATE TABLE entity (entityId VARCHAR(255) PRIMARY KEY, timePosted TIMESTAMP DEFAULT CURRENT_TIMESTAMP, userId VARCHAR(255))",
+      "CREATE TABLE entity_tag (entityId VARCHAR(255), tagName TEXT)",
+      "CREATE TABLE entity_like (entityId VARCHAR(255), userId VARCHAR(255))",
+      "CREATE TABLE entity_comment (entityId VARCHAR(255), userId VARCHAR(255), content TEXT)",
+      "CREATE TABLE user (userId VARCHAR(255) PRIMARY KEY, username VARCHAR(255) UNIQUE, password TEXT, email TEXT, bio TEXT)",
+      "CREATE TABLE user_subscription (userId VARCHAR(255), targetId VARCHAR(255))"
+    ];
+    return Promise.all(sqlcmmds.map(cmmd => {
+      return this.query(cmmd);
+    }))
+      .then(rows => {
+        console.log("[NOTICE: database cleared and formatted]");
+        return rows;
+      })
+      .catch(err => {
+        console.log("[NOTICE: could not clear and format database]");
+        throw err;
+      });
   }
 
 
