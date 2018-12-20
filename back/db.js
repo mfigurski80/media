@@ -188,19 +188,38 @@ class Database {
         // rows[1] == likes
         // rows[2] == comments
 
-        rows[0].forEach(tag => {
+        rows[0].forEach(tag => { // tags
           const i = hook.entitiesIndex.indexOf(tag.entityId);
-          if (hook.entities[i].tags) { // if tags already exists...
+          if (hook.entities[i].tags) { // if tags exists...
             hook.entities[i].tags.push(tag.tagName);
           } else {
             hook.entities[i].tags = [tag.tagName];
           }
         });
 
-        // TODO: get likes and comments as well
+        rows[1].forEach(like => { // likes
+          const i = hook.entitiesIndex.indexOf(like.entityId);
+          if (hook.entities[i].likes) { // if likes exist...
+            hook.entities[i].likes += 1;
+          } else {
+            hook.entities[i].likes = 1;
+          }
+        });
+
+        rows[2].forEach(cmmnt => { // comments
+          const i = hook.entitiesIndex.indexOf(cmmnt.entityId);
+          if (hook.entities[i].comments) { // if comments exist...
+            hook.entities[i].comments += 1
+          } else {
+            hook.entities[i].comments = 1;
+          }
+        });
+
+        // TODO: get comments as well
         return(hook.entities); // give back the entities!!!
       })
   }
+
 
 
 }

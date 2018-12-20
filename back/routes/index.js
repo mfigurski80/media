@@ -7,6 +7,7 @@ const db = require("../db.js");
 // log and clean request
 router.use("*", function(req, res, next) {
   // console.log(req.cookies);
+  console.log("[request received]");
   next();
 });
 
