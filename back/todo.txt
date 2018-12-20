@@ -19,9 +19,8 @@ get posts by trending (recent + liked?)
   for a specific user
   with a specific tag
 
-getting details for specific post
+getting details for specific post ✅
   get comments after (comment Id)
-  get like usernames
   get similar??
 
 getting (public) user information

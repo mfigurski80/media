@@ -225,16 +225,19 @@ class Database {
   getEntity(entityId, amountOfComments=20) {
     // INSIGHT: select specific columns, otherwise it'll replace from the joined table
     // aka, stop selecting *, making it specific
-    var sql = [`SELECT entity.*, post.content, photo.photo FROM
+    var sql = [`SELECT entity.*, post.content, photo.photo, user.username FROM
       entity
       LEFT JOIN post ON post.entityId = entity.entityId
       LEFT JOIN photo ON photo.entityId = entity.entityId
+      JOIN user ON user.userId = entity.userId
       WHERE entity.entityId = '${entityId}' LIMIT 1`, // only one post after all
       `SELECT entity_tag.* FROM entity_tag
       WHERE entity_tag.entityId = '${entityId}'`,
       `SELECT COUNT(*) AS likes FROM entity_like
       WHERE entity_like.entityId = '${entityId}'`,
-      `SELECT entity_comment.userId, entity_comment.content FROM entity_comment
+      `SELECT entity_comment.userId, entity_comment.content, user.username FROM
+      entity_comment
+      JOIN user ON user.userId = entity_comment.userId
       WHERE entity_comment.entityId = '${entityId}' LIMIT ${amountOfComments}`
     ];
 
@@ -259,20 +262,6 @@ class Database {
         users.push(hook.comments.map(comment => {
           return comment.userId;
         }));
-
-        return this.query(`SELECT user.userId, user.username FROM user
-          WHERE user.userId = '${users.join(`' OR user.userId = '`)}'`);
-      })
-      .then(rows => { // all the mentioned users
-        var names = {};
-        rows.forEach(user => { // basically, convert to JSON
-          names[user.userId] = user.username;
-        });
-
-        hook.username = names[hook.userId]; // lookup userId in JSON and add it in
-        hook.comments.forEach(cmmt => {
-          cmmt.username = names[cmmt.userId];
-        });
 
         return hook;
       });

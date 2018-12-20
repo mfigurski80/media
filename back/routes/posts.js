@@ -27,6 +27,6 @@ router.get("/:entityId", function(req, res, next) { // get specific entity
     .catch(err => {
       res.send(err);
     });
-})
+});
 
 module.exports = router;
