@@ -234,7 +234,7 @@ class Database {
       WHERE entity_tag.entityId = '${entityId}'`,
       `SELECT COUNT(*) AS likes FROM entity_like
       WHERE entity_like.entityId = '${entityId}'`,
-      `SELECT entity_comment.* FROM entity_comment
+      `SELECT entity_comment.userId, entity_comment.content FROM entity_comment
       WHERE entity_comment.entityId = '${entityId}' LIMIT ${amountOfComments}`
     ];
 
@@ -253,7 +253,7 @@ class Database {
           return tag.tagName;
         });
         hook.likes = rows[2][0].likes;
-        hook.comments = rows[3]; //TODO: reformat comments, once you get some of those
+        hook.comments = rows[3];
 
         var users = [hook.userId]; //make array of all the userId's we'd like the name of
         users.push(hook.comments.map(comment => {
@@ -264,16 +264,14 @@ class Database {
           WHERE user.userId = '${users.join(`' OR user.userId = '`)}'`);
       })
       .then(rows => { // all the mentioned users
-        var foundAuthor = false;
-        const commentUsers = hook.comments.map(cmmt => { // create list of userIds
-          return cmmt.userId;
-        })
-        rows.forEach(user => { // attach each user to correct comment or post
-          if (user.userId == hook.userId) {
-            hook.username = user.username;
-          } else {
-            hook.comments[commentUsers.indexOf(user.userId)].username = user.username;
-          }
+        var names = {};
+        rows.forEach(user => { // basically, convert to JSON
+          names[user.userId] = user.username;
+        });
+
+        hook.username = names[hook.userId]; // lookup userId in JSON and add it in
+        hook.comments.forEach(cmmt => {
+          cmmt.username = names[cmmt.userId];
         });
 
         return hook;
