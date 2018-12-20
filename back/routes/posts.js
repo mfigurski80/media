@@ -19,4 +19,14 @@ router.get("/", function(req, res, next) { // get recent articles
     });
 });
 
+router.get("/:entityId", function(req, res, next) { // get specific entity
+  db.getEntity(req.params.entityId)
+    .then(entity => {
+      res.json(entity);
+    })
+    .catch(err => {
+      res.send(err);
+    });
+})
+
 module.exports = router;

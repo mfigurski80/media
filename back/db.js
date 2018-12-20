@@ -159,11 +159,11 @@ class Database {
     }
 
 
-    var sql = `SELECT * FROM (SELECT * FROM entity ${conditional}) AS entity
-      JOIN post ON post.entityId = entity.entityId
-      UNION
-      SELECT * FROM (SELECT * FROM entity ${conditional}) AS entity
-      JOIN photo ON photo.entityId = entity.entityId
+    var sql = `SELECT entity.*, post.content, photo.photo FROM
+      entity
+      LEFT JOIN post ON post.entityId = entity.entityId
+      LEFT JOIN photo ON photo.entityId = entity.entityId
+      ${conditional}
       ORDER BY timePosted DESC LIMIT ${amount};`;
 
     var hook = {} // saves info across requests
@@ -196,7 +196,6 @@ class Database {
             hook.entities[i].tags = [tag.tagName];
           }
         });
-
         rows[1].forEach(like => { // likes
           const i = hook.entitiesIndex.indexOf(like.entityId);
           if (hook.entities[i].likes) { // if likes exist...
@@ -205,7 +204,6 @@ class Database {
             hook.entities[i].likes = 1;
           }
         });
-
         rows[2].forEach(cmmnt => { // comments
           const i = hook.entitiesIndex.indexOf(cmmnt.entityId);
           if (hook.entities[i].comments) { // if comments exist...
@@ -215,12 +213,72 @@ class Database {
           }
         });
 
-        // TODO: get comments as well
         return(hook.entities); // give back the entities!!!
       })
   }
 
+  /**
+   * Gets all data on specific entity
+   * @param entityId
+   * @param amountOfComments
+   */
+  getEntity(entityId, amountOfComments=20) {
+    // INSIGHT: select specific columns, otherwise it'll replace from the joined table
+    // aka, stop selecting *, making it specific
+    var sql = [`SELECT entity.*, post.content, photo.photo FROM
+      entity
+      LEFT JOIN post ON post.entityId = entity.entityId
+      LEFT JOIN photo ON photo.entityId = entity.entityId
+      WHERE entity.entityId = '${entityId}' LIMIT 1`, // only one post after all
+      `SELECT entity_tag.* FROM entity_tag
+      WHERE entity_tag.entityId = '${entityId}'`,
+      `SELECT COUNT(*) AS likes FROM entity_like
+      WHERE entity_like.entityId = '${entityId}'`,
+      `SELECT entity_comment.* FROM entity_comment
+      WHERE entity_comment.entityId = '${entityId}' LIMIT ${amountOfComments}`
+    ];
 
+    var hook = {};
+    return Promise.all(sql.map(sql_code => {
+      return this.query(sql_code);
+    }))
+      .then(rows => {
+        // rows[0] = entity + post/photo
+        // rows[1] = tags
+        // rows[2] = likes
+        // rows[3] = comments
+
+        hook = rows[0][0];
+        hook.tags = rows[1].map(tag => {
+          return tag.tagName;
+        });
+        hook.likes = rows[2][0].likes;
+        hook.comments = rows[3]; //TODO: reformat comments, once you get some of those
+
+        var users = [hook.userId]; //make array of all the userId's we'd like the name of
+        users.push(hook.comments.map(comment => {
+          return comment.userId;
+        }));
+
+        return this.query(`SELECT user.userId, user.username FROM user
+          WHERE user.userId = '${users.join(`' OR user.userId = '`)}'`);
+      })
+      .then(rows => { // all the mentioned users
+        var foundAuthor = false;
+        const commentUsers = hook.comments.map(cmmt => { // create list of userIds
+          return cmmt.userId;
+        })
+        rows.forEach(user => { // attach each user to correct comment or post
+          if (user.userId == hook.userId) {
+            hook.username = user.username;
+          } else {
+            hook.comments[commentUsers.indexOf(user.userId)].username = user.username;
+          }
+        });
+
+        return hook;
+      });
+  }
 
 }
 const db = new Database();

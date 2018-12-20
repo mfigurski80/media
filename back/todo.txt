@@ -7,7 +7,7 @@ getting posts by most recent  ✅
   for a specific user         ✅
   with a specific tag         ✅
   independently of each other ✅
-  include comments, likes
+  include comments, likes     ✅
 
 getting posts by most liked
   after certain post
