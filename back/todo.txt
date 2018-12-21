@@ -25,7 +25,11 @@ getting details for specific post ✅
 getting (public) user information ✅
   get all posts by user           ✅
   get all likes by user           ✅
-  get subscriptions (if logged in)
+  get subscriptions
+  get amount of people subscribing
+
+get posts by user subscription  ✅
+  get posts after
 
 adding a post
   with certain tags

@@ -21,4 +21,14 @@ router.get("/:userId", function(req, res, next) {
     })
 });
 
+router.get("/:userId/subscriptions", function(req, res, next) {
+  db.getSubscribedEntities(req.params.userId)
+    .then(rows => {
+      res.json(rows);
+    })
+    .catch(err => {
+      res.send(err);
+    });
+});
+
 module.exports = router;

@@ -59,7 +59,7 @@ class Database {
 
   /**
    * method to generate random ids with minimal collisions
-   * @return id -- unique string to be used as an id
+   * @return random id
    */
   GUID() {
     function s4() {
@@ -188,10 +188,78 @@ class Database {
   }
 
   /**
+   * @param userId
+   * @param amount
+   * @return json of entities
+   */
+  getSubscribedEntities(userId, amount=10) { // TODO: get posts after...
+    var hook = {};
+    return this.query(`SELECT user_subscription.targetId FROM
+      user_subscription
+      WHERE user_subscription.userId = '${userId}'`)
+      .then(rows=> { // get all users subscribed to
+        const conditions = rows.map(row => {
+          return `entity.userId = '${row.targetId}'`;
+        });
+        return this.query(`SELECT entity.*, post.content, photo.photo, user.username FROM
+          entity
+          LEFT JOIN post ON post.entityId = entity.entityId
+          LEFT JOIN photo ON photo.entityId = entity.entityId
+          JOIN user ON user.userId = entity.userId
+          WHERE ${conditions.join(` OR `)}
+          ORDER BY entity.timePosted DESC LIMIT ${amount}`);
+      })
+      .then(rows => { // get all entities by those users (limit to ${amount})
+        hook.entityIds = rows.map(row => {return row.entityId});
+        hook.returnable = rows;
+        return Promise.all([
+          `SELECT entity_tag.* FROM entity_tag
+            WHERE entity_tag.entityId = '${hook.entityIds.join(`' OR entity_tag.entityId = '`)}'`,
+          `SELECT entity_like.entityId FROM entity_like
+            WHERE entity_like.entityId = '${hook.entityIds.join(`' OR entity_like.entityId = '`)}'`,
+          `SELECT entity_comment.entityId FROM entity_comment
+            WHERE entity_comment.entityId = '${hook.entityIds.join(`' OR entity_comment.entityId = '`)}'`
+        ].map(sql => {return this.query(sql)}));
+      })
+      .then(rows => { // get tags/likes/comments of these entities
+        // rows[0] = tags
+        // rows[1] = likes
+        // rows[2] = comments
+
+        rows[0].forEach(tag => { // for each tag
+          var entity_ref = hook.returnable[hook.entityIds.indexOf(tag.entityId)];
+          if (entity_ref.tags) {
+            entity_ref.tags.push(tag.tagName);
+          } else {
+            entity_ref.tags = [tag.tagName];
+          }
+        });
+        rows[1].forEach(like => { // for each like
+          var entity_ref = hook.returnable[hook.entityIds.indexOf(like.entityId)];
+          if (entity_ref.likes) {
+            entity_ref.likes += 1;
+          } else {
+            entity_ref.likes = 1;
+          }
+        });
+        rows[2].forEach(comment => {
+          var entity_ref = hook.returnable[hook.entityIds.indexOf(comment.entityId)];
+          if (entity_ref.comments) {
+            entity_ref.comments += 1;
+          } else {
+            entity_ref.comments = 1;
+          }
+        });
+
+        return hook.returnable;
+      })
+  }
+
+  /**
    * Gets all data on specific entity
    * @param entityId
    * @param amountOfComments'
-   * @return json post
+   * @return json entity
    */
   getEntity(entityId) {
     // INSIGHT: select specific columns, otherwise it'll replace from the joined table
