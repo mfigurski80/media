@@ -128,10 +128,11 @@ class Database {
     }
 
 
-    var sql = `SELECT entity.*, post.content, photo.photo FROM
+    var sql = `SELECT entity.*, post.content, photo.photo, user.username FROM
       entity
       LEFT JOIN post ON post.entityId = entity.entityId
       LEFT JOIN photo ON photo.entityId = entity.entityId
+      JOIN user ON user.userId = entity.userId
       ${conditional}
       ORDER BY timePosted DESC LIMIT ${amount};`;
 
