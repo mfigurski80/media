@@ -11,4 +11,14 @@ router.use("/", function(req, res, next) {
 });
 
 
+router.get("/:userId", function(req, res, next) {
+  db.getUser(req.params.userId)
+    .then(rows => {
+      res.json(rows);
+    })
+    .catch(err => {
+      res.send(err);
+    })
+});
+
 module.exports = router;

@@ -98,47 +98,16 @@ class Database {
   }
 
 
-  /* ****
-  SIMPE ADDING METHODS
-  **** */
 
 
   /* ****
-  SIMPE GETTING METHODS
-  **** */
-
-  /**
-   * @param table
-   * @param column
-   * @param value
-   * @return promise, resolve returns array of datapacket(s) with requested info
-   */
-  baseGetVal(table, column, value) {
-    return this.query(`SELECT * FROM ${table} WHERE ${column} = '${value}'`);
-  }
-
-  /**
-   * @param table
-   * @return promise, resolve returns array of datapacket(s) with requested info
-   */
-  baseGetAll(table) {
-    return this.query(`SELECT * FROM ${table}`);
-  }
-
-
-  /* ****
-  HIGH LEVEL SETTING METHODS
-  **** */
-
-
-  /* ****
-  HIGH LEVEL GETTING METHODS
+  GETTING METHODS
   **** */
 
   /**
    * @param firstEntityId
    * @param amount
-   * @return Promise, with json of entities on resolve
+   * @return json of entities
    */
   getRecentEntities(props={}, amount=10) {
     var conditions = []; // get all the props (search parameters), and develop sql conditions
@@ -220,9 +189,10 @@ class Database {
   /**
    * Gets all data on specific entity
    * @param entityId
-   * @param amountOfComments
+   * @param amountOfComments'
+   * @return json post
    */
-  getEntity(entityId, amountOfComments=20) {
+  getEntity(entityId) {
     // INSIGHT: select specific columns, otherwise it'll replace from the joined table
     // aka, stop selecting *, making it specific
     var sql = [`SELECT entity.*, post.content, photo.photo, user.username FROM
@@ -238,7 +208,7 @@ class Database {
       `SELECT entity_comment.userId, entity_comment.content, user.username FROM
       entity_comment
       JOIN user ON user.userId = entity_comment.userId
-      WHERE entity_comment.entityId = '${entityId}' LIMIT ${amountOfComments}`
+      WHERE entity_comment.entityId = '${entityId}'`
     ];
 
     var hook = {};
@@ -264,6 +234,34 @@ class Database {
         }));
 
         return hook;
+      });
+  }
+
+  /**
+   * Get all (public) data on specific user
+   * @param userId
+   * @return json user
+   */
+  getUser(userId) {
+    return Promise.all([
+      `SELECT user.userId, user.username, user.bio FROM user
+        WHERE userId = '${userId}' LIMIT 1`,
+      `SELECT entity_like.entityId FROM entity_like
+        WHERE userId = '${userId}'`,
+      `SELECT entity_comment.entityId, entity_comment.content FROM entity_comment
+        WHERE userId = '${userId}'`
+    ].map(sql => {return db.query(sql)}))
+      .then(rows => {
+        // rows[0] = user data
+        // rows[1] = likes
+        // rows[2] = comments
+
+        var ret = rows[0][0]; // note, these are references here
+        ret.likes = rows[1].map(like => {
+          return like.entityId;
+        });
+        ret.comments = rows[2];
+        return ret;
       });
   }
 

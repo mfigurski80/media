@@ -20,10 +20,12 @@ get posts by trending (recent + liked?)
   with a specific tag
 
 getting details for specific post ✅
-  get comments after (comment Id)
   get similar??
 
-getting (public) user information
+getting (public) user information ✅
+  get all posts by user           ✅
+  get all likes by user           ✅
+  get subscriptions (if logged in)
 
 adding a post
   with certain tags
