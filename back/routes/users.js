@@ -10,7 +10,7 @@ router.use("/", function(req, res, next) {
   next();
 });
 
-
+// get all (public) user information
 router.get("/:userId", function(req, res, next) {
   db.getUser(req.params.userId)
     .then(rows => {
