@@ -192,21 +192,28 @@ class Database {
    * @param amount
    * @return json of entities
    */
-  getSubscribedEntities(userId, amount=10) { // TODO: get posts after...
+  getSubscribedEntities(params, amount=10) { // TODO: get posts after...
+    // params should have userId, may also have lastEntity (for getting more)
     var hook = {};
     return this.query(`SELECT user_subscription.targetId FROM
       user_subscription
-      WHERE user_subscription.userId = '${userId}'`)
+      WHERE user_subscription.userId = '${params.userId}'`)
       .then(rows=> { // get all users subscribed to
         const conditions = rows.map(row => {
           return `entity.userId = '${row.targetId}'`;
         });
+
+        var conditional = `WHERE ${conditions.join(` OR `)}`; // form conditional to grab posts by users
+        if (params.lastEntity) {                              // and after certain entity, if lastEntity provided
+          conditional += ` AND entity.timePosted < (SELECT entity.timePosted FROM entity WHERE entity.entityId = '${params.lastEntity}')`;
+        }
+
         return this.query(`SELECT entity.*, post.content, photo.photo, user.username FROM
           entity
           LEFT JOIN post ON post.entityId = entity.entityId
           LEFT JOIN photo ON photo.entityId = entity.entityId
           JOIN user ON user.userId = entity.userId
-          WHERE ${conditions.join(` OR `)}
+          ${conditional}
           ORDER BY entity.timePosted DESC LIMIT ${amount}`);
       })
       .then(rows => { // get all entities by those users (limit to ${amount})

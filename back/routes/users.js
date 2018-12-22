@@ -22,7 +22,7 @@ router.get("/:userId", function(req, res, next) {
 });
 
 router.get("/:userId/subscriptions", function(req, res, next) {
-  db.getSubscribedEntities(req.params.userId)
+  db.getSubscribedEntities({userId: req.params.userId, lastEntity: req.query.after})
     .then(rows => {
       res.json(rows);
     })
