@@ -318,18 +318,28 @@ class Database {
       `SELECT entity_like.entityId FROM entity_like
         WHERE userId = '${userId}'`,
       `SELECT entity_comment.entityId, entity_comment.content FROM entity_comment
-        WHERE userId = '${userId}'`
+        WHERE userId = '${userId}'`,
+      `SELECT user_subscription.targetId, user.username FROM
+        user_subscription
+        LEFT JOIN user ON user.userId = user_subscription.targetId
+        WHERE user_subscription.userId = '${userId}'`,
+      `SELECT COUNT(user_subscription.userId) AS subscribers FROM user_subscription
+        WHERE user_subscription.targetId = '${userId}'`
     ].map(sql => {return db.query(sql)}))
       .then(rows => {
         // rows[0] = user data
         // rows[1] = likes
         // rows[2] = comments
+        // rows[3] = subscriptions
+        // rows[4] = subscribers
 
         var ret = rows[0][0]; // note, these are references here
         ret.likes = rows[1].map(like => {
           return like.entityId;
         });
         ret.comments = rows[2];
+        ret.subscriptions = rows[3];
+        ret.subscribers = rows[4][0].subscribers;
         return ret;
       });
   }
