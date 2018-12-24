@@ -29,7 +29,7 @@ getting (public) user information ✅
   get amount of people subscribing✅
 
 get posts by user subscription  ✅
-  get posts after
+  get posts after               ✅
 
 adding a post
   with certain tags

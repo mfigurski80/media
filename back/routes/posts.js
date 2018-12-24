@@ -19,6 +19,16 @@ router.get("/", function(req, res, next) { // get recent articles
     });
 });
 
+router.get("/trending", function(req, res, next) { // get most liked within 2 weeks
+  db.getTrendingEntities()
+    .then(entities => {
+      res.json(entities);
+    })
+    .catch(err => {
+      res.send(err);
+    })
+});
+
 router.get("/:entityId", function(req, res, next) { // get specific entity
   db.getEntity(req.params.entityId)
     .then(entity => {

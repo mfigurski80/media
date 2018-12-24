@@ -105,7 +105,7 @@ class Database {
   **** */
 
   /**
-   * @param firstEntityId
+   * @param props - firstEntityId, userId, tag
    * @param amount
    * @return json of entities
    */
@@ -132,7 +132,7 @@ class Database {
       entity
       LEFT JOIN post ON post.entityId = entity.entityId
       LEFT JOIN photo ON photo.entityId = entity.entityId
-      JOIN user ON user.userId = entity.userId
+      LEFT JOIN user ON user.userId = entity.userId
       ${conditional}
       ORDER BY timePosted DESC LIMIT ${amount};`;
 
@@ -188,31 +188,32 @@ class Database {
   }
 
   /**
-   * @param userId
+   * gets posts from users that a given user subscribes to
+   * @param props - userId, lastEntity
    * @param amount
    * @return json of entities
    */
-  getSubscribedEntities(params, amount=10) { // TODO: get posts after...
-    // params should have userId, may also have lastEntity (for getting more)
+  getSubscribedEntities(props={}, amount=10) {
+    // props should have userId, may also have lastEntity (for getting more)
     var hook = {};
     return this.query(`SELECT user_subscription.targetId FROM
       user_subscription
-      WHERE user_subscription.userId = '${params.userId}'`)
+      WHERE user_subscription.userId = '${props.userId}'`)
       .then(rows=> { // get all users subscribed to
         const conditions = rows.map(row => {
           return `entity.userId = '${row.targetId}'`;
         });
 
         var conditional = `WHERE ${conditions.join(` OR `)}`; // form conditional to grab posts by users
-        if (params.lastEntity) {                              // and after certain entity, if lastEntity provided
-          conditional += ` AND entity.timePosted < (SELECT entity.timePosted FROM entity WHERE entity.entityId = '${params.lastEntity}')`;
+        if (props.lastEntity) {                              // and after certain entity, if lastEntity provided
+          conditional += ` AND entity.timePosted < (SELECT entity.timePosted FROM entity WHERE entity.entityId = '${props.lastEntity}')`;
         }
 
         return this.query(`SELECT entity.*, post.content, photo.photo, user.username FROM
           entity
           LEFT JOIN post ON post.entityId = entity.entityId
           LEFT JOIN photo ON photo.entityId = entity.entityId
-          JOIN user ON user.userId = entity.userId
+          LEFT JOIN user ON user.userId = entity.userId
           ${conditional}
           ORDER BY entity.timePosted DESC LIMIT ${amount}`);
       })
@@ -263,6 +264,45 @@ class Database {
   }
 
   /**
+   * gives back trending entities -- composite of amount of comments and amount of likes, limit to 2 weeks?
+   * @param props - firstEntityId, userId, tag
+   * @param amount
+   * @return json of entities
+   */
+  getTrendingEntities(props={}, amount=10) {
+    // TODO: props can have the firstEntityId, userId, and/or tag
+    // TODO: in final version, change interval to like 14 days
+    // TODO: figure out how to order by likes + comments
+    // TODO: figure out how to select all comments?
+    // this is insane... its working. Wow. Will need to restructure like every other get method ^^^
+    return this.query(`SELECT entity.*,
+      COUNT(entity_comment.userId) AS comments,
+      COUNT(DISTINCT entity_like.userId) AS likes,
+      GROUP_CONCAT(DISTINCT entity_tag.tagName) AS tags,
+      post.content,
+      photo.photo,
+      user.username
+    FROM entity
+    LEFT JOIN entity_comment ON entity_comment.entityId = entity.entityId
+    LEFT JOIN entity_like ON entity_like.entityId = entity.entityId
+    LEFT JOIN entity_tag ON entity_tag.entityId = entity.entityId
+    LEFT JOIN post ON post.entityId = entity.entityId
+    LEFT JOIN photo ON photo.entityId = entity.entityId
+    LEFT JOIN user ON user.userId = entity.userId
+    WHERE entity.timePosted >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
+    GROUP BY entity.entityId
+    ORDER BY likes DESC, entity.timePosted DESC
+    LIMIT ${amount}`)
+      .then(entities => { // have all entities, fix tags and comments real quick...
+        entities.forEach(entity => {
+          entity.tags ? entity.tags = entity.tags.split(",") : entity.tags = []; // make tags an array
+          entity.comments = entity.comments / (entity.likes * entity.tags.length); // extrapolate true comments length
+        });
+        return entities
+      });
+  }
+
+  /**
    * Gets all data on specific entity
    * @param entityId
    * @param amountOfComments'
@@ -275,7 +315,7 @@ class Database {
       entity
       LEFT JOIN post ON post.entityId = entity.entityId
       LEFT JOIN photo ON photo.entityId = entity.entityId
-      JOIN user ON user.userId = entity.userId
+      LEFT JOIN user ON user.userId = entity.userId
       WHERE entity.entityId = '${entityId}' LIMIT 1`, // only one post after all
       `SELECT entity_tag.* FROM entity_tag
       WHERE entity_tag.entityId = '${entityId}'`,
