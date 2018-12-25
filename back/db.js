@@ -105,6 +105,18 @@ class Database {
   **** */
 
   /**
+   * Performs the necessary cleaning operations after the standard sql get query
+   * @param entities
+   * @return enties
+   */
+  __util__fixEntities(entities) {
+    entities.forEach(entity => {
+      entity.tags ? entity.tags = entity.tags.split(",") : entity.tags = [];
+    });
+    return entities;
+  }
+
+  /**
    * @param props - firstEntityId, userId, tag
    * @param amount
    * @return json of entities
@@ -128,7 +140,7 @@ class Database {
     }
 
     return this.query(`SELECT entity.*,
-        COUNT(entity_comment.userId) AS comments,
+        COUNT(DISTINCT entity_comment.content) AS comments,
         COUNT(DISTINCT entity_like.userId) AS likes,
         GROUP_CONCAT(DISTINCT entity_tag.tagName) AS tags,
         post.content,
@@ -146,12 +158,8 @@ class Database {
       ORDER BY timePosted DESC
       LIMIT ${amount}`)
         .then(entities => { // fix tags and comments real quick
-          entities.forEach(entity => {
-            entity.tags ? entity.tags = entity.tags.split(",") : entity.tags = [];
-            entity.comments = entity.comments / (entity.likes * entity.tags.length)
-          });
-          return entities;
-        })
+          return this.__util__fixEntities(entities);
+        });
   }
 
   /**
@@ -162,72 +170,32 @@ class Database {
    */
   getSubscribedEntities(props={}, amount=10) {
     // props should have userId, may also have lastEntity (for getting more)
+    var conditions = [`user_subscription.userId = '${props.userId}'`]
+    props.lastEntity ? conditions.push(`entity.timePosted < (SELECT entity.timePosted FROM entity WHERE entity.entityId = '${props.lastEntity}')`) : null;
+
     var hook = {};
-    return this.query(`SELECT user_subscription.targetId FROM
-      user_subscription
-      WHERE user_subscription.userId = '${props.userId}'`)
-      .then(rows=> { // get all users subscribed to
-        const conditions = rows.map(row => {
-          return `entity.userId = '${row.targetId}'`;
+    return this.query(`SELECT entity.*,
+        post.content,
+        photo.photo,
+        user.username,
+        COUNT(DISTINCT entity_comment.content) AS comments,
+        COUNT(DISTINCT entity_like.userId) AS likes,
+        GROUP_CONCAT(DISTINCT entity_tag.tagName) AS tags
+      FROM user_subscription
+      JOIN entity ON entity.userId = user_subscription.targetId
+      LEFT JOIN post ON post.entityId = entity.entityId
+      LEFT JOIN photo ON photo.entityId = entity.entityId
+      JOIN user ON user.userId = entity.userId
+      LEFT JOIN entity_comment ON entity_comment.entityId = entity.entityId
+      LEFT JOIN entity_like ON entity_like.entityId = entity.entityId
+      LEFT JOIN entity_tag ON entity_tag.entityId = entity.entityId
+      ${`WHERE ` + conditions.join(` AND `)}
+      GROUP BY entity.entityId
+      ORDER BY entity.timePosted DESC
+      LIMIT ${amount}`)
+        .then(entities => {
+          return this.__util__fixEntities(entities);
         });
-
-        var conditional = `WHERE ${conditions.join(` OR `)}`; // form conditional to grab posts by users
-        if (props.lastEntity) {                              // and after certain entity, if lastEntity provided
-          conditional += ` AND entity.timePosted < (SELECT entity.timePosted FROM entity WHERE entity.entityId = '${props.lastEntity}')`;
-        }
-
-        return this.query(`SELECT entity.*, post.content, photo.photo, user.username FROM
-          entity
-          LEFT JOIN post ON post.entityId = entity.entityId
-          LEFT JOIN photo ON photo.entityId = entity.entityId
-          LEFT JOIN user ON user.userId = entity.userId
-          ${conditional}
-          ORDER BY entity.timePosted DESC LIMIT ${amount}`);
-      })
-      .then(rows => { // get all entities by those users (limit to ${amount})
-        hook.entityIds = rows.map(row => {return row.entityId});
-        hook.returnable = rows;
-        return Promise.all([
-          `SELECT entity_tag.* FROM entity_tag
-            WHERE entity_tag.entityId = '${hook.entityIds.join(`' OR entity_tag.entityId = '`)}'`,
-          `SELECT entity_like.entityId FROM entity_like
-            WHERE entity_like.entityId = '${hook.entityIds.join(`' OR entity_like.entityId = '`)}'`,
-          `SELECT entity_comment.entityId FROM entity_comment
-            WHERE entity_comment.entityId = '${hook.entityIds.join(`' OR entity_comment.entityId = '`)}'`
-        ].map(sql => {return this.query(sql)}));
-      })
-      .then(rows => { // get tags/likes/comments of these entities
-        // rows[0] = tags
-        // rows[1] = likes
-        // rows[2] = comments
-
-        rows[0].forEach(tag => { // for each tag
-          var entity_ref = hook.returnable[hook.entityIds.indexOf(tag.entityId)];
-          if (entity_ref.tags) {
-            entity_ref.tags.push(tag.tagName);
-          } else {
-            entity_ref.tags = [tag.tagName];
-          }
-        });
-        rows[1].forEach(like => { // for each like
-          var entity_ref = hook.returnable[hook.entityIds.indexOf(like.entityId)];
-          if (entity_ref.likes) {
-            entity_ref.likes += 1;
-          } else {
-            entity_ref.likes = 1;
-          }
-        });
-        rows[2].forEach(comment => {
-          var entity_ref = hook.returnable[hook.entityIds.indexOf(comment.entityId)];
-          if (entity_ref.comments) {
-            entity_ref.comments += 1;
-          } else {
-            entity_ref.comments = 1;
-          }
-        });
-
-        return hook.returnable;
-      })
   }
 
   /**
@@ -243,7 +211,7 @@ class Database {
     // TODO: figure out how to select all comments?
     // TODO: restructure every other get method ^^^
     return this.query(`SELECT entity.*,
-      COUNT(entity_comment.userId) AS comments,
+      COUNT(DISTINCT entity_comment.content) AS comments,
       COUNT(DISTINCT entity_like.userId) AS likes,
       GROUP_CONCAT(DISTINCT entity_tag.tagName) AS tags,
       post.content,
@@ -260,12 +228,8 @@ class Database {
     GROUP BY entity.entityId
     ORDER BY likes DESC, entity.timePosted DESC
     LIMIT ${amount}`)
-      .then(entities => { // have all entities, fix tags and comments real quick...
-        entities.forEach(entity => {
-          entity.tags ? entity.tags = entity.tags.split(",") : entity.tags = []; // make tags an array
-          entity.comments = entity.comments / (entity.likes * entity.tags.length); // extrapolate true comments length
-        });
-        return entities
+      .then(entities => { // have all entities
+        return this.__util__fixEntities(entities);
       });
   }
 
