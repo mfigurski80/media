@@ -127,64 +127,31 @@ class Database {
       conditional = "WHERE " + conditions.join(" AND ");
     }
 
-
-    var sql = `SELECT entity.*, post.content, photo.photo, user.username FROM
-      entity
+    return this.query(`SELECT entity.*,
+        COUNT(entity_comment.userId) AS comments,
+        COUNT(DISTINCT entity_like.userId) AS likes,
+        GROUP_CONCAT(DISTINCT entity_tag.tagName) AS tags,
+        post.content,
+        photo.photo,
+        user.username
+      FROM entity
+      LEFT JOIN entity_comment ON entity_comment.entityId = entity.entityId
+      LEFT JOIN entity_like ON entity_like.entityId = entity.entityId
+      LEFT JOIN entity_tag ON entity_tag.entityId = entity.entityId
       LEFT JOIN post ON post.entityId = entity.entityId
       LEFT JOIN photo ON photo.entityId = entity.entityId
       LEFT JOIN user ON user.userId = entity.userId
+      GROUP BY entity.entityId
       ${conditional}
-      ORDER BY timePosted DESC LIMIT ${amount};`;
-
-    var hook = {} // saves info across requests
-    return this.query(sql)
-      .then(rows => { // entityinfo + post/photo info
-        hook.entities = rows;
-        hook.entitiesIndex = hook.entities.map(entity => {
-          return entity.entityId;
-        });
-        var conditional = ""; // create another conditional statement
-        if (hook.entitiesIndex.length > 0) {
-          conditional = " WHERE entityId = '" + hook.entitiesIndex.join("' OR entityId = '") + "'";
-        }
-        return Promise.all([ // get tags, amoung of likes and amount of comments
-          this.query(`SELECT * FROM entity_tag ${conditional}`),
-          this.query(`SELECT * FROM entity_like ${conditional}`), // TODO: get these without requesting ALL the info
-          this.query(`SELECT * FROM entity_comment ${conditional}`)
-        ]);
-      })
-      .then(rows => { // lots of tag, like, comment data
-        // rows[0] == tags
-        // rows[1] == likes
-        // rows[2] == comments
-
-        rows[0].forEach(tag => { // tags
-          const i = hook.entitiesIndex.indexOf(tag.entityId);
-          if (hook.entities[i].tags) { // if tags exists...
-            hook.entities[i].tags.push(tag.tagName);
-          } else {
-            hook.entities[i].tags = [tag.tagName];
-          }
-        });
-        rows[1].forEach(like => { // likes
-          const i = hook.entitiesIndex.indexOf(like.entityId);
-          if (hook.entities[i].likes) { // if likes exist...
-            hook.entities[i].likes += 1;
-          } else {
-            hook.entities[i].likes = 1;
-          }
-        });
-        rows[2].forEach(cmmnt => { // comments
-          const i = hook.entitiesIndex.indexOf(cmmnt.entityId);
-          if (hook.entities[i].comments) { // if comments exist...
-            hook.entities[i].comments += 1
-          } else {
-            hook.entities[i].comments = 1;
-          }
-        });
-
-        return(hook.entities); // give back the entities!!!
-      })
+      ORDER BY timePosted DESC
+      LIMIT ${amount}`)
+        .then(entities => { // fix tags and comments real quick
+          entities.forEach(entity => {
+            entity.tags ? entity.tags = entity.tags.split(",") : entity.tags = [];
+            entity.comments = entity.comments / (entity.likes * entity.tags.length)
+          });
+          return entities;
+        })
   }
 
   /**
@@ -274,7 +241,7 @@ class Database {
     // TODO: in final version, change interval to like 14 days
     // TODO: figure out how to order by likes + comments
     // TODO: figure out how to select all comments?
-    // this is insane... its working. Wow. Will need to restructure like every other get method ^^^
+    // TODO: restructure every other get method ^^^
     return this.query(`SELECT entity.*,
       COUNT(entity_comment.userId) AS comments,
       COUNT(DISTINCT entity_like.userId) AS likes,
