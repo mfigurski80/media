@@ -9,12 +9,7 @@ getting posts by most recent  ✅
   independently of each other ✅
   include comments, likes     ✅
 
-getting posts by most liked
-  after certain post
-  for a specific user
-  with a specific tag
-
-get posts by trending (recent + liked?)
+get posts by trending (recent + liked?) ✅
   after certain post
   for a specific user
   with a specific tag
@@ -31,11 +26,11 @@ getting (public) user information ✅
 get posts by user subscription  ✅
   get posts after               ✅
 
-adding a post
-  with certain tags
+adding a post                   ✅
+  with certain tags             ✅
   as a photo/gif/video
 
-adding a like
+adding a like ✅
 
 adding a comment
 

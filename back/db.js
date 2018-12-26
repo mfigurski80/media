@@ -106,6 +106,7 @@ class Database {
 
   /**
    * Performs the necessary cleaning operations after the standard sql get query
+   * Basically just replaces splits the tags
    * @param entities
    * @return enties
    */
@@ -117,6 +118,7 @@ class Database {
   }
 
   /**
+   * Gets most recent entities (globally)
    * @param props - firstEntityId, userId, tag
    * @param amount
    * @return json of entities
@@ -208,8 +210,6 @@ class Database {
     // TODO: props can have the firstEntityId, userId, and/or tag
     // TODO: in final version, change interval to like 14 days
     // TODO: figure out how to order by likes + comments
-    // TODO: figure out how to select all comments?
-    // TODO: restructure every other get method ^^^
     return this.query(`SELECT entity.*,
       COUNT(DISTINCT entity_comment.content) AS comments,
       COUNT(DISTINCT entity_like.userId) AS likes,
@@ -320,6 +320,73 @@ class Database {
         ret.subscribers = rows[4][0].subscribers;
         return ret;
       });
+  }
+
+
+  /* ****
+  ADDING METHODS
+  **** */
+
+  /**
+   * Adds a post into the db
+   * @param userId
+   * @param content
+   * @param tags
+   */
+  addPost(userId, content, tags=undefined) {
+    const entityId = this.GUID();
+    let sql = [
+      `INSERT INTO entity (entityId, timePosted, userId)
+        VALUES ('${entityId}', CURRENT_TIMESTAMP, '${userId}')`,
+      `INSERT INTO post (entityId, content)
+        VALUES ('${entityId}', ${this.connection.escape(content)})`
+    ];
+    tags.forEach(tag => {
+      sql.push(`INSERT INTO entity_tag (entityId, tagName)
+      VALUES ('${entityId}', ${this.connection.escape(tag)})`);
+    });
+    return Promise.all(sql.map(qur => {return this.query(qur)}));
+  }
+
+  /**
+   * Adds a photo into the db
+   * @param userId
+   * @param photo
+   * @param tags
+   */
+  addPhoto(userId, photo, tags=undefined) {
+    const entityId = this.GUID();
+    let sql = [`INSERT INTO entity (entityId, timePosted, userId)
+      VALUES ('${entityId}', CURRENT_TIMESTAMP, '${userId}')`,
+      `INSERT INTO photo (entityId, photo)
+      VALUES ('${entityId}', '${photo}')`
+    ];
+    tags.forEach(tag => {
+      sql.push(`INSERT INTO entity_tag (entityId, tagName)
+      VALUES ('${entityId}', ${this.connection.escape(tag)})`);
+    });
+    return Promise.all(sql.map(qur => {return this.query(qur)}));
+  }
+
+  /**
+   * Adds a like
+   * @param entityId
+   * @param userId
+   */
+  addLike(entityId, userId) {
+    return this.query(`INSERT INTO entity_like (entityId, userId)
+      VALUES ('${entityId}', ${userId})`);
+  }
+
+  /**
+   * Adds a comment
+   * @param entityId
+   * @param entityId
+   * @param content
+   */
+  addComment(entityId, userId, content) {
+    return this.query(`INSERT INTO entity_comment (entityId, userId, content)
+      VALUES ('${entityId}', '${userId}', ${this.connection.escape(content)})`);
   }
 
 }
