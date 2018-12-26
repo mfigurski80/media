@@ -155,8 +155,8 @@ class Database {
       LEFT JOIN post ON post.entityId = entity.entityId
       LEFT JOIN photo ON photo.entityId = entity.entityId
       LEFT JOIN user ON user.userId = entity.userId
-      GROUP BY entity.entityId
       ${conditional}
+      GROUP BY entity.entityId
       ORDER BY timePosted DESC
       LIMIT ${amount}`)
         .then(entities => { // fix tags and comments real quick
@@ -202,14 +202,22 @@ class Database {
 
   /**
    * gives back trending entities -- composite of amount of comments and amount of likes, limit to 2 weeks?
-   * @param props - firstEntityId, userId, tag
+   * @param props - lastEntity //PROBLEMS
    * @param amount
    * @return json of entities
    */
   getTrendingEntities(props={}, amount=10) {
-    // TODO: props can have the firstEntityId, userId, and/or tag
+    // TODO: props can have the lastEntity, userId, and/or tag
     // TODO: in final version, change interval to like 14 days
     // TODO: figure out how to order by likes + comments
+    var conditions = [`entity.timePosted >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)`];
+    if (props.lastEntity) {
+      conditions.push(`(SELECT COUNT(DISTINCT entity_like.userId)) <= (SELECT COUNT(DISTINCT entity_like.userId)
+        FROM entity_like WHERE entity.entityId = '${props.lastEntity}')`)
+    } //TODO: select correct range. Notice that re-selecting old data will be inevitable as there is a lot of overlap
+
+    console.log(conditions);
+
     return this.query(`SELECT entity.*,
       COUNT(DISTINCT entity_comment.content) AS comments,
       COUNT(DISTINCT entity_like.userId) AS likes,
@@ -224,7 +232,7 @@ class Database {
     LEFT JOIN post ON post.entityId = entity.entityId
     LEFT JOIN photo ON photo.entityId = entity.entityId
     LEFT JOIN user ON user.userId = entity.userId
-    WHERE entity.timePosted >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
+    ${(conditions.length > 0) ? `WHERE ` + conditions.join(` AND `) : null}
     GROUP BY entity.entityId
     ORDER BY likes DESC, entity.timePosted DESC
     LIMIT ${amount}`)

@@ -10,7 +10,7 @@ getting posts by most recent  ✅
   include comments, likes     ✅
 
 get posts by trending (recent + liked?) ✅
-  after certain post
+  after certain post                    ❌
   for a specific user
   with a specific tag
 
