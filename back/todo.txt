@@ -34,18 +34,26 @@ adding a like ✅
 
 adding a comment  ✅
 
-subscribe
+subscribe ✅
+
+add user ✅
 
 
 edit post
-  change tags
+
+edit tags
 
 edit comment
 
-delete post
+edit user
 
-delete comment
 
-delete like
+delete post/photo ✅
 
-unsubscribe
+delete comment ✅
+
+delete like ✅
+
+unsubscribe ✅
+
+delete user ✅

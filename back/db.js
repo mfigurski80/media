@@ -389,12 +389,24 @@ class Database {
   /**
    * Adds a comment
    * @param entityId
-   * @param entityId
+   * @param userId
    * @param content
    */
   addComment(entityId, userId, content) {
     return this.query(`INSERT INTO entity_comment (entityId, userId, content)
       VALUES ('${entityId}', '${userId}', ${this.connection.escape(content)})`);
+  }
+
+  /**
+   * Adds a user
+   * @param username
+   * @param password
+   * @param email
+   * @param bio
+   */
+  addUser(username, password, email, bio="") {
+    return this.query(`INSERT INTO user (userId, username, password, email, bio)
+      VALUES ('${this.GUID()}', ${this.connection.escape(username)}, ${this.connection.escape(password)}, ${this.connection.escape(email)}, ${this.connection.escape(bio)})`);
   }
 
   /**
@@ -405,6 +417,70 @@ class Database {
   addSubscription(userId, targetId) {
     return this.query(`INSERT INTO user_subscription (userId, targetId)
       VALUES ('${userId}', '${targetId}')`);
+  }
+
+
+  /* ****
+  DELETING METHODS
+  **** */
+
+  /**
+   * Deletes entity, and all associated data from post, comments, tags, likes
+   * @param entityId
+   */
+  deleteEntity(entityId) {
+    return Promise.all([`DELETE FROM entity WHERE entityId = '${entityId}'`,
+      `DELETE FROM post WHERE entityId = '${entityId}'`,
+      `DELETE FROM photo WHERE entityId = '${entityId}'`,
+      `DELETE FROM entity_tag WHERE entityId = '${entityId}'`,
+      `DELETE FROM entity_like WHERE entityId = '${entityId}'`,
+      `DELETE FROM entity_comment WHERE entityId = '${entityId}'`].map(sql=>{return this.query(sql)}));
+  }
+
+  /**
+   * Deletes a like
+   * @param entityId
+   * @param userId
+   */
+  deleteLike(entityId, userId) {
+    return this.query(`DELETE FROM entity_like
+      WHERE entityId = '${entityId}' AND userId = '${userId}'`);
+  }
+
+  /**
+   * Deletes a comment
+   * @param entityId
+   * @param userId
+   * @param content
+   */
+  deleteComment(entityId, userId, content) {
+    return this.query(`DELETE FROM entity_comment
+      WHERE entityId = '${entityId}' AND userId = '${userId}' AND content = '${this.connection.escape(content)}'`);
+  }
+
+  /**
+   * Deletes a user and associated data
+   * @param userId
+   */
+  deleteUser(userId) {
+    return Promise.all([`DELETE FROM user WHERE userId = '${userId}'`,
+      `DELETE FROM user_subscription WHERE userId = '${userId}'`,
+      `DELETE FROM entity_like WHERE userId = '${userId}'`,
+      `DELETE FROM entity_comment WHERE userId = '${userId}'`,
+      `DELETE entity, post, photo FROM entity
+        LEFT JOIN post ON post.entityId = entity.entityId
+        LEFT JOIN photo ON photo.entityId = entity.entityId
+        WHERE entity.userId = '${userId}'`].map(sql=>{return this.query(sql)}));
+  }
+
+  /**
+   * Deletes a subscription
+   * @param userId
+   * @param targetId
+   */
+  deleteSubscription(userId, targetId) {
+    return this.query(`DELETE FROM user_subscription
+      WHERE userId = '${userId}' AND targetId = '${targetId}'`);
   }
 }
 const db = new Database();
