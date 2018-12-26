@@ -397,6 +397,15 @@ class Database {
       VALUES ('${entityId}', '${userId}', ${this.connection.escape(content)})`);
   }
 
+  /**
+   * Adds a subscription
+   * @param userId
+   * @param targetId
+   */
+  addSubscription(userId, targetId) {
+    return this.query(`INSERT INTO user_subscription (userId, targetId)
+      VALUES ('${userId}', '${targetId}')`);
+  }
 }
 const db = new Database();
 

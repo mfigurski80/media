@@ -32,7 +32,9 @@ adding a post                   ✅
 
 adding a like ✅
 
-adding a comment
+adding a comment  ✅
+
+subscribe
 
 
 edit post
@@ -43,3 +45,7 @@ edit comment
 delete post
 
 delete comment
+
+delete like
+
+unsubscribe
