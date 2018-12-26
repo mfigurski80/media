@@ -482,6 +482,45 @@ class Database {
     return this.query(`DELETE FROM user_subscription
       WHERE userId = '${userId}' AND targetId = '${targetId}'`);
   }
+
+  /* ****
+  UPDATING METHODS
+  **** */
+
+  /**
+   * Updates the given post's content
+   * @param entityId
+   * @param newContent
+   */
+  updatePost(entityId, newContent) {
+    return this.query(`UPDATE post SET content = ${this.connection.escape(newContent)}
+      WHERE entityId = '${entityId}'`);
+  }
+
+  /**
+   * Updates given user
+   * @param userId
+   * @param props -- username, password, email, bio
+   */
+  updateUser(userId, props = {}) {
+    var updateStatements = Object.keys(props).map(key => {
+      return `${key} = ${this.connection.escape(props[key])}`;
+    });
+    return this.query(`UPDATE user SET ${updateStatements.join(`, `)}
+      WHERE userId = '${userId}'`);
+  }
+
+  /**
+   * Updates given comment
+   * @param entityId
+   * @param userId
+   * @param oldContent
+   * @param newContent
+   */
+  updateComment(entityId, userId, oldContent, newContent) {
+    return this.query(`UPDATE entity_comment SET content = ${this.connection.escape(newContent)}
+      WHERE entityId = '${entityId}' AND userId = '${userId}' AND content = ${this.connection.escape(oldContent)}`);
+  }
 }
 const db = new Database();
 

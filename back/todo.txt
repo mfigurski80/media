@@ -39,13 +39,11 @@ subscribe ✅
 add user ✅
 
 
-edit post
-
-edit tags
+edit post ✅
 
 edit comment
 
-edit user
+edit user ✅
 
 
 delete post/photo ✅
