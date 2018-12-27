@@ -2,6 +2,12 @@
 ❌ - Problems, TODO'd and skipped.
 
 
+Session management
+  
+
+
+
+
 getting posts by most recent  ✅
   after certain post          ✅
   for a specific user         ✅
