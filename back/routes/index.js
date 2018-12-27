@@ -7,9 +7,8 @@ const db = require("../db.js");
 const SessionManager = require("../SessionManager.js");
 sessionManager = new SessionManager(db);
 
-// log and clean request
+// pass request and response through sessionManager
 router.use("*", function(req, res, next) {
-  // console.log(req.cookies);
   req = sessionManager.manageRequest(req, res);
   next();
 });

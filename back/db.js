@@ -16,7 +16,7 @@ class Database {
     this.query("SHOW TABLES")
       .then(rows => {
         // console.log(rows);
-        var reqTables = ["post", "photo", "entity", "entity_tag", "entity_like", "entity_comment", "user", "user_subscription"];
+        var reqTables = ["request","post", "photo", "entity", "entity_tag", "entity_like", "entity_comment", "user", "user_subscription"];
         if (rows) {
           rows.forEach(row => {
             const tbl = row.Tables_in_mediadb;
@@ -82,7 +82,8 @@ class Database {
       "CREATE TABLE entity_like (entityId VARCHAR(255), userId VARCHAR(255))",
       "CREATE TABLE entity_comment (entityId VARCHAR(255), userId VARCHAR(255), content TEXT)",
       "CREATE TABLE user (userId VARCHAR(255) PRIMARY KEY, username VARCHAR(255) UNIQUE, password TEXT, email TEXT, bio TEXT)",
-      "CREATE TABLE user_subscription (userId VARCHAR(255), targetId VARCHAR(255))"
+      "CREATE TABLE user_subscription (userId VARCHAR(255), targetId VARCHAR(255))",
+      "CREATE TABLE request (sessionId VARCHAR(255), userId VARCHAR(255) DEFAULT NULL, method TEXT, location TEXT, timestamp INT)"
     ];
     return Promise.all(sqlcmmds.map(cmmd => {
       return this.query(cmmd);
@@ -328,6 +329,12 @@ class Database {
       });
   }
 
+  /**
+   * Gets all requests stored in db
+   */
+  getRequests() {
+    return this.query(`SELECT * FROM request`);
+  }
 
   /* ****
   ADDING METHODS
@@ -415,6 +422,18 @@ class Database {
   addSubscription(userId, targetId) {
     return this.query(`INSERT INTO user_subscription (userId, targetId)
       VALUES ('${userId}', '${targetId}')`);
+  }
+
+  /**
+   * Adds requests performed by the given session
+   * @param session
+   */
+  addRequests(session) {
+    var values = session.requests.map(request => {
+      return `('${session.sessionId}', ${session.userId ? "'" + session.userId + "'" : "NULL"}, '${request.type}', ${this.connection.escape(request.location)}, ${request.time})`;
+    });
+    return this.query(`INSERT INTO request (sessionId, userId, method, location, timestamp)
+    VALUES ${values.join(", ")}`);
   }
 
 

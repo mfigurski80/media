@@ -30,7 +30,7 @@ class SessionManager {
       this.sessionObjects.push(curSession);
       this.addSessionTimeout(curSession); // make sure it can timeout
     }
-    console.log(`\t[SessionManager] '${curSession.sessionId}' requesting`);
+    console.log(`\t[SessionManager] '${curSession.sessionId}' ${req.method} '${req._parsedOriginalUrl._raw}'`);
 
     // update the cookie timeout (client side)
     res.cookie('sessionId', curSession.sessionId, {maxAge: curSession.timeout});
@@ -69,9 +69,8 @@ class Session {
     this.sessionId = "ss-s-s-s-sss".replace(/s/g, s4);
     this.isLoggedIn = false;
     this.userId;
-    this.timeout = (1000*60)*15; // 15 minute(s)
+    this.timeout = (1000*60)*.5; // .5 minute(s)
     this.lastReqTimestamp = Date.now();
-    this.requestsCount = 0;
     this.requests = [];
     /* single request structure should look like this:
     {
@@ -99,11 +98,12 @@ class Session {
   }
 
   /**
-   * TODO: saves requests to db somehow. Run when deleting request
+   * saves requests to db. Run when deleting request
+   * //TODO: uncomment to enable saving!!!
    * @param db
    */
   saveToDB(db) {
-    //TODO: write all this stuff
+    // db.addRequests(this);
   }
 }
 
