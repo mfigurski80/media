@@ -3,10 +3,19 @@
 
 
 Session management
-  
+  create sessions
+  find sessions
+  timeout sessions
+  save sessions to db
 
 
+DB must check user login information
 
+DB must securely hold user passwords
+
+DB must save sessions
+
+DB must get sessions
 
 getting posts by most recent  ✅
   after certain post          ✅

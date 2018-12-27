@@ -3,11 +3,14 @@ const router = express.Router();
 
 // import the database connection
 const db = require("../db.js");
+// import the SessionManager Object
+const SessionManager = require("../SessionManager.js");
+sessionManager = new SessionManager(db);
 
 // log and clean request
 router.use("*", function(req, res, next) {
   // console.log(req.cookies);
-  console.log("[request received]");
+  req = sessionManager.manageRequest(req, res);
   next();
 });
 
