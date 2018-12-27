@@ -91,7 +91,11 @@ class Session {
    */
   logRequest(req) {
     this.lastReqTimestamp = Date.now(); // update timeout
-    // TODO: write all this stuff
+    this.requests.push({
+      type: req.method,
+      location: req._parsedOriginalUrl._raw,
+      time: Date.now()
+    });
   }
 
   /**

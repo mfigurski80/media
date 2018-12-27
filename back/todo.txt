@@ -2,10 +2,10 @@
 ❌ - Problems, TODO'd and skipped.
 
 
-Session management
-  create sessions
-  find sessions
-  timeout sessions
+Session management    ✅
+  create sessions     ✅
+  find sessions       ✅
+  timeout sessions    ✅
   save sessions to db
 
 

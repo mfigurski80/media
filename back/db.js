@@ -216,8 +216,6 @@ class Database {
         FROM entity_like WHERE entity.entityId = '${props.lastEntity}')`)
     } //TODO: select correct range. Notice that re-selecting old data will be inevitable as there is a lot of overlap
 
-    console.log(conditions);
-
     return this.query(`SELECT entity.*,
       COUNT(DISTINCT entity_comment.content) AS comments,
       COUNT(DISTINCT entity_like.userId) AS likes,
