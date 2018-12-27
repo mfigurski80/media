@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 
 const app = express();
 app.use(express.static(__dirname + '/public')); // static files
-
+app.use(cookieParser());
 
 // ENTRY POINT -- all requests go here
 const router_index = require("./routes/index.js");
