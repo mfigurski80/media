@@ -5,6 +5,8 @@ const router = express.Router();
 // import the database connection
 const db = require("../db.js");
 
+// GET
+
 router.get("/", function(req, res, next) { // get recent articles
   db.getRecentEntities({
     firstEntityId: req.query.after, // if any get parameters exist, add em in
@@ -42,5 +44,14 @@ router.get("/:entityId", function(req, res, next) { // get specific entity
       res.send(err);
     });
 });
+
+
+// POST
+
+router.post("/", function(req, res, next) {
+  console.log(req.body);
+  res.end();
+});
+
 
 module.exports = router;

@@ -30,7 +30,7 @@ class SessionManager {
       this.sessionObjects.push(curSession);
       this.addSessionTimeout(curSession); // make sure it can timeout
     }
-    console.log(`\t[SessionManager] '${curSession.sessionId}' ${req.method} '${req._parsedOriginalUrl._raw}'`);
+    console.log(`\t[SessionManager] '${curSession.sessionId}' ${req.method} '${req.originalUrl}'`);
 
     // update the cookie timeout (client side)
     res.cookie('sessionId', curSession.sessionId, {maxAge: curSession.timeout});
@@ -92,7 +92,7 @@ class Session {
     this.lastReqTimestamp = Date.now(); // update timeout
     this.requests.push({
       type: req.method,
-      location: req._parsedOriginalUrl._raw,
+      location: req.originalUrl,
       time: Date.now()
     });
   }

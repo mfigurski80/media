@@ -2,6 +2,19 @@
 ❌ - Problems, TODO'd and skipped.
 
 
+server must create posts
+  also, delete
+
+server must create photos
+  also, delete
+
+server must add comments
+  also, delete
+
+server must add likes
+  also, delete
+
+
 Read Out DB content as csv
 
 Session management    ✅
