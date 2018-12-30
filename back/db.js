@@ -51,8 +51,7 @@ class Database {
       });
     })
       .catch(err => {
-        console.log(`[Couldn't perform operation:  ${err.sql}] \n[${err.sqlMessage}]`);
-        // console.log(err);
+        console.log(`\x1b[41m\t[DB] Couldn't perform operation: ${err.sql}\x1b[40m \n\t[DB] ${err.sqlMessage}`);
         throw err;
       });
   }
@@ -388,7 +387,7 @@ class Database {
    */
   addLike(entityId, userId) {
     return this.query(`INSERT INTO entity_like (entityId, userId)
-      VALUES ('${entityId}', ${userId})`);
+      VALUES ('${entityId}', '${userId}')`);
   }
 
   /**

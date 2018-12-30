@@ -1,17 +1,18 @@
 ✅ - Done
-❌ - Problems, TODO'd and skipped.
+❌ - Problems, TODO'd and skipped
+💀 - Problems, abandoned/reconsidered
 
 
-server must create posts
+server must create posts ✅
   also, delete
 
-server must create photos
+server must create photos ❌
   also, delete
 
-server must add comments
+server must add comments ✅
   also, delete
 
-server must add likes
+server must add likes ✅
   also, delete
 
 
@@ -41,8 +42,8 @@ getting posts by most recent  ✅
 
 get posts by trending (recent + liked?) ✅
   after certain post                    ❌
-  for a specific user
-  with a specific tag
+  for a specific user                   💀
+  with a specific tag                   
 
 getting details for specific post ✅
   get similar??
