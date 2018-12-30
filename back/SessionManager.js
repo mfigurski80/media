@@ -1,3 +1,7 @@
+/**
+ * Object that intelligently tracks given requests into sessions and attaches associated
+ * session to the request
+ */
 class SessionManager {
   constructor(db) {
     this.sessionObjects = [];
@@ -15,9 +19,10 @@ class SessionManager {
   }
 
   /**
-   * finds the correct session and handles everything
-   * @param req
-   * @return req -- now with req.session as the session
+   * finds the correct session and handles everything associated
+   * @param  {Request Object} req request to be tracked/logged
+   * @param  {Response Object} res will be altered to set cookies
+   * @return {Request Object}     returns updated request with the session attached in req.session
    */
   manageRequest(req, res) {
     var curSession;
@@ -42,9 +47,9 @@ class SessionManager {
   }
 
   /**
-   * handles session timeouts
-   * @param session
-   * @param timeout
+   * handles session timeout
+   * @param {Session Object} session Session Object to be logged
+   * @param {timestamp} [timeout=session.timeout] time in millisecond for timeout
    */
   addSessionTimeout(session, timeout=session.timeout) {
     setTimeout(()=>{
@@ -84,8 +89,8 @@ class Session {
   }
 
   /**
-   * TODO: save request details
-   * @param req
+   * Saves request details
+   * @param  {Request Object} req Request to be logged
    */
   logRequest(req) {
     this.lastReqTimestamp = Date.now(); // update timeout
@@ -97,9 +102,9 @@ class Session {
   }
 
   /**
-   * saves requests to db. Run when deleting request
-   * //TODO: uncomment to enable saving!!!
-   * @param db
+   * saves requests to db -- last step in session lifecycle
+   * //TODO: uncomment for functionality -- after dev finished
+   * @param  {Database Object} db database to log to. Should have appropriate functions
    */
   saveToDB(db) {
     // db.addRequests(this);
