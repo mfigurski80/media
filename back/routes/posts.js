@@ -19,7 +19,8 @@ function __util__resolveOn(res, promise) { // resolves request when promise reso
       res.json(_successMessage(true, "Operation was successful"));
     })
     .catch(err => {
-      res.json(_successMessage(false, err));
+      console.log(err);
+      res.json(_successMessage(false, err.toString()));
     });
 }
 
@@ -87,12 +88,23 @@ router.post("/", function(req, res, next) { // add a photo/post
   }
 });
 
-router.post("/:entityId", function(req, res, next) { // add a comment
+router.post("/:entityId/comment", function(req, res, next) { // add a comment
   __util__resolveOn(res, db.addComment(req.params.entityId, req.session.userId, req.body.content));
 });
 
 router.post("/:entityId/like", function(req, res, next) { // add a like
-  __util__resolveOn(res, db.addLike(req.params.entityId, req.session.userId));
+  __util__resolveOn(res,
+    db.query(`SELECT userId FROM entity_like WHERE entityId = '${req.params.entityId}'`) // get all likes first...
+      .then(rows => {
+        if (!rows.some(row => { // if any of them bear session's userId, can't like again
+          return row.userId == req.session.userId;
+        })) {
+          db.addLike(req.params.entityId, req.session.userId)
+        } else {
+          throw new Error("You have liked this already");
+        }
+      })
+  );
 });
 
 // DELETE
@@ -115,6 +127,15 @@ router.delete("/:entityId", function(req, res, next) { // delete entity
         }
       })
   );
+});
+
+router.delete("/:entityId/comment", function(req, res, next) { // delete comment
+  // TODO: Wait, should this delete all comments? Nooo... get commentId implemented first.
+})
+
+router.delete("/:entityId/like", function(req, res, next) { // delete like
+  __util__resolveOn(res, db.deleteLike(req.params.entityId, req.session.userId));
+  // ^ don't care if it doesn't exist... db will handle that
 });
 
 
