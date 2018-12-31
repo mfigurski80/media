@@ -1,6 +1,18 @@
 ✅ - Done
+⚠️ - Next feature to implement
 ❌ - Problems, TODO'd and skipped
 💀 - Problems, abandoned/reconsidered
+
+PLAN FRONTEND --- OOOH, SCAARY
+  design
+  post page
+  recent/trending/subscribed posts page
+  user page
+  login page
+  createPost page
+  createComment section
+  editUserSettings page
+  competent service worker
 
 
 server must create posts ✅
@@ -15,11 +27,11 @@ server must add comments ✅
 server must add likes ✅
   also, delete        ✅
 
-server must add users
-  also, delete
+server must add users ✅
+  also, delete        ✅
 
-server must add subscriptions
-  also, delete
+server must add subscriptions ✅
+  also, delete                ✅
 
 Read Out DB content as csv
 
@@ -30,9 +42,13 @@ Session management    ✅
   save sessions to db ✅
 
 
-DB must check user login information
+DB must check user login information  ⚠️
 
-DB must securely hold user passwords
+DB must securely hold user passwords  ⚠️
+
+Must be able to log session in
+  (with dedicated "/login" route?)
+  and out
 
 DB must save sessions ✅
 

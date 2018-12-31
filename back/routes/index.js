@@ -17,14 +17,14 @@ router.use("*", function(req, res, next) {
 router.post("*", function(req, res, next) { // clean post requests
   const routesWithoutLogin = ["/users", "/login"];
   if (!(req.session.userId && req.body) && !routesWithoutLogin.some(route => {return route == req.originalUrl})) { // if not logged in or not posting
-    res.json({success: false, message: "You are not logged in"});
+
   } else {
     next();
   }
 });
 router.delete("*", function(req, res, next) { // clean delete requests
   if (!req.session.userId) {
-    res.end();
+    res.json({success: false, message: "You are not logged in"});
   } else {
     next();
   }

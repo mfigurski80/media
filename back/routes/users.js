@@ -54,7 +54,23 @@ router.post("/", function(req, res, next) { // make a new user
 });
 
 router.post("/:userId/subscriptions", function(req, res, next) { // subscribe to userId
-  __util__resolveOn(res, db.addSubscription(req.session.userId, req.body.targetId));
+  __util__resolveOn(res, db.addSubscription(req.session.userId, req.params.userId));
+});
+
+// DELETE
+router.delete("/:userId", function(req, res, next) { // delete user
+  __util__resolveOn(res, new Promise((resolve, reject)=>{
+    if (req.params.userId == req.session.userId) {
+      resolve(db.deleteUser(req.params.userId));
+    } else {
+      return reject("You are not the user you are deleting")
+    }
+  }));
+
+});
+
+router.delete("/:userId/subscriptions", function(req, res, next) { // delete subscription to userId
+  __util__resolveOn(res, db.deleteSubscription(req.session.userId, req.params.userId));
 });
 
 module.exports = router;
