@@ -403,10 +403,10 @@ class Database {
 
   /**
    * Adds a user
-   * @param username
-   * @param password
-   * @param email
-   * @param bio
+   * @param {String} username desired username
+   * @param {String} password unhashed password
+   * @param {String} email    email address
+   * @param {String} [bio=""] short description of user
    */
   addUser(username, password, email, bio="") {
     return this.query(`INSERT INTO user (userId, username, password, email, bio)

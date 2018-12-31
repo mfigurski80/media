@@ -8,7 +8,7 @@ const db = require("../db.js");
 /**
  * resolves given response appropriately when promise resolved/catched
  * @param {Response Object} res     request response object
- * @param {Promise}         promise any promise object
+ * @param {Promise} promise         any promise object
  */
 function __util__resolveOn(res, promise) { // resolves request when promise resolves
   function _successMessage(isSuccessful = true, message = undefined) { // returns standard success message
@@ -27,7 +27,7 @@ function __util__resolveOn(res, promise) { // resolves request when promise reso
 
 
 // GET
-
+// curl -i -X GET http://localhost:3001/posts
 router.get("/", function(req, res, next) { // get recent articles
   db.getRecentEntities({
     firstEntityId: req.query.after, // if any get parameters exist, add em in
@@ -68,14 +68,7 @@ router.get("/:entityId", function(req, res, next) { // get specific entity
 
 
 // POST
-// curl -i --data "content=first remote post&tags=[dev]" http://localhost:3001/posts
-router.post("*", function(req, res, next) { // clean post requests
-  if (!(req.session.userId && req.body)) { // if not logged in or not posting
-    res.end();
-  }
-  next();
-});
-
+// curl -i -X POST --data "content=first remote post&tags=[dev]" http://localhost:3001/posts
 router.post("/", function(req, res, next) { // add a photo/post
   var tags = req.body.tags ? req.body.tags.substr(1).slice(0,-1).split(",") : [];
   if (req.body.content) { // if posting text post
@@ -108,14 +101,7 @@ router.post("/:entityId/like", function(req, res, next) { // add a like
 });
 
 // DELETE
-// curl -X DELETE http://localhost:3001/posts/89185a73-4d83-020d-b5cd-0bccb97a7237
-router.delete("*", function(req, res, next) { // clean delete requests
-  if (!req.session.userId) {
-    res.end();
-  }
-  next();
-});
-
+// curl -i -X DELETE http://localhost:3001/posts/89185a73-4d83-020d-b5cd-0bccb97a7237
 router.delete("/:entityId", function(req, res, next) { // delete entity
   __util__resolveOn(res,
     db.query(`SELECT entity.userId FROM entity WHERE entity.entityId = '${req.params.entityId}'`)

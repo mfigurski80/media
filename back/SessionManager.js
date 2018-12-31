@@ -72,7 +72,8 @@ class SessionManager {
 class Session {
   constructor() {
     this.sessionId = "ss-s-s-s-sss".replace(/s/g, s4);
-    this.userId = "62b8f202-f0df-2411-a216-8bd9eee2073d"; //TODO: EVERYTHING is logged in!!
+    this.userId;
+    // this.userId = "62b8f202-f0df-2411-a216-8bd9eee2073d"; //TODO: EVERYTHING is logged in!!
     this.timeout = (1000*60)*45; // 45 minute(s)
     this.lastReqTimestamp = Date.now();
     this.requests = [];

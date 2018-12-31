@@ -13,7 +13,7 @@ server must add comments ✅
   also, delete           ❌
 
 server must add likes ✅
-  also, delete
+  also, delete        ✅
 
 server must add users
   also, delete

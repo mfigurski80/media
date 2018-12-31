@@ -14,6 +14,23 @@ router.use("*", function(req, res, next) {
 });
 
 
+router.post("*", function(req, res, next) { // clean post requests
+  const routesWithoutLogin = ["/users", "/login"];
+  if (!(req.session.userId && req.body) && !routesWithoutLogin.some(route => {return route == req.originalUrl})) { // if not logged in or not posting
+    res.json({success: false, message: "You are not logged in"});
+  } else {
+    next();
+  }
+});
+router.delete("*", function(req, res, next) { // clean delete requests
+  if (!req.session.userId) {
+    res.end();
+  } else {
+    next();
+  }
+});
+
+
 const router_posts = require("./posts.js");
 router.use("/posts", router_posts); // give posts routes to posts router
 
