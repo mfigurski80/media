@@ -75,6 +75,14 @@ class Database {
     function k(r,n){var t=(65535&r)+(65535&n);return(r>>16)+(n>>16)+(t>>16)<<16|65535&t}function q(r,n){return r>>>n|r<<32-n}function s(r,n){return r>>>n}return function(r){for(var n="0123456789abcdef",t="",e=0;e<4*r.length;e++)t+=n.charAt(r[e>>2]>>8*(3-e%4)+4&15)+n.charAt(r[e>>2]>>8*(3-e%4)&15);return t}(function(r,n){var t,e,o,a,f,u,c,h,i,C,g,A,d,v,l,S,m,y,w=new Array(1116352408,1899447441,3049323471,3921009573,961987163,1508970993,2453635748,2870763221,3624381080,310598401,607225278,1426881987,1925078388,2162078206,2614888103,3248222580,3835390401,4022224774,264347078,604807628,770255983,1249150122,1555081692,1996064986,2554220882,2821834349,2952996808,3210313671,3336571891,3584528711,113926993,338241895,666307205,773529912,1294757372,1396182291,1695183700,1986661051,2177026350,2456956037,2730485921,2820302411,3259730800,3345764771,3516065817,3600352804,4094571909,275423344,430227734,506948616,659060556,883997877,958139571,1322822218,1537002063,1747873779,1955562222,2024104815,2227730452,2361852424,2428436474,2756734187,3204031479,3329325298),b=new Array(1779033703,3144134277,1013904242,2773480762,1359893119,2600822924,528734635,1541459225),p=new Array(64);r[n>>5]|=128<<24-n%32,r[15+(n+64>>9<<4)]=n;for(var H=0;H<r.length;H+=16){t=b[0],e=b[1],o=b[2],a=b[3],f=b[4],u=b[5],c=b[6],h=b[7];for(var j=0;j<64;j++)p[j]=j<16?r[j+H]:k(k(k(q(y=p[j-2],17)^q(y,19)^s(y,10),p[j-7]),q(m=p[j-15],7)^q(m,18)^s(m,3)),p[j-16]),i=k(k(k(k(h,q(S=f,6)^q(S,11)^q(S,25)),(l=f)&u^~l&c),w[j]),p[j]),C=k(q(v=t,2)^q(v,13)^q(v,22),(g=t)&(A=e)^g&(d=o)^A&d),h=c,c=u,u=f,f=k(a,i),a=o,o=e,e=t,t=k(i,C);b[0]=k(t,b[0]),b[1]=k(e,b[1]),b[2]=k(o,b[2]),b[3]=k(a,b[3]),b[4]=k(f,b[4]),b[5]=k(u,b[5]),b[6]=k(c,b[6]),b[7]=k(h,b[7])}return b}(function(r){for(var n=Array(),t=0;t<8*r.length;t+=8)n[t>>5]|=(255&r.charCodeAt(t/8))<<24-t%32;return n}(r=function(r){r=r.replace(/\r\n/g,"\n");for(var n="",t=0;t<r.length;t++){var e=r.charCodeAt(t);e<128?n+=String.fromCharCode(e):(127<e&&e<2048?n+=String.fromCharCode(e>>6|192):(n+=String.fromCharCode(e>>12|224),n+=String.fromCharCode(e>>6&63|128)),n+=String.fromCharCode(63&e|128))}return n}(r)),8*r.length))
   }
 
+  /**
+   * Escapes given sql string to disable sql injections
+   * @param  {String} string unsafe string
+   * @return {String}        safe string (without '')
+   */
+  esc(string) {
+    return this.connection.escape(string).slice(1,-1); // remove '' that have been added
+  }
 
   /**
    * WARNING: DO NOT EVER CALL THIS FUNCTION OUTSIDE OF THE DB CONSTRUCTOR.
@@ -135,13 +143,13 @@ class Database {
   getRecentEntities(props={}, amount=10) {
     var conditions = []; // get all the props (search parameters), and develop sql conditions
     if (props.firstEntityId) { // if there's a firstEntityId
-      conditions.push(`timePosted < (SELECT timePosted FROM entity WHERE entityId = '${props.firstEntityId}')`);
+      conditions.push(`timePosted < (SELECT timePosted FROM entity WHERE entityId = '${this.esc(props.firstEntityId)}')`);
     }
     if (props.userId) { // if there's a userId
-      conditions.push(`userId = '${props.userId}'`);
+      conditions.push(`userId = '${this.esc(props.userId)}'`);
     }
     if (props.tag) { // if there's a tag
-      conditions.push(`EXISTS (SELECT * FROM entity_tag WHERE entityId = entity.entityId AND tagName = '${props.tag}')`);
+      conditions.push(`EXISTS (SELECT * FROM entity_tag WHERE entityId = entity.entityId AND tagName = '${this.esc(props.tag)}')`);
       // I'm really surprised that worked ^. Fucking magic.
     }
 
@@ -181,8 +189,8 @@ class Database {
    */
   getSubscribedEntities(props={}, amount=10) {
     // props should have userId, may also have lastEntity (for getting more)
-    var conditions = [`user_subscription.userId = '${props.userId}'`]
-    props.lastEntity ? conditions.push(`entity.timePosted < (SELECT entity.timePosted FROM entity WHERE entity.entityId = '${props.lastEntity}')`) : null;
+    var conditions = [`user_subscription.userId = '${this.esc(props.userId)}'`]
+    props.lastEntity ? conditions.push(`entity.timePosted < (SELECT entity.timePosted FROM entity WHERE entity.entityId = '${this.esc(props.lastEntity)}')`) : null;
 
     var hook = {};
     return this.query(`SELECT entity.*,
@@ -222,7 +230,7 @@ class Database {
     var conditions = [`entity.timePosted >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)`];
     if (props.lastEntity) {
       conditions.push(`(SELECT COUNT(DISTINCT entity_like.userId)) <= (SELECT COUNT(DISTINCT entity_like.userId)
-        FROM entity_like WHERE entity.entityId = '${props.lastEntity}')`)
+        FROM entity_like WHERE entity.entityId = '${this.esc(props.lastEntity)}')`)
     } //TODO: select correct range. Notice that re-selecting old data will be inevitable as there is a lot of overlap
 
     return this.query(`SELECT entity.*,
@@ -255,6 +263,7 @@ class Database {
    * @return json entity
    */
   getEntity(entityId) {
+    entityId = this.esc(entityId) // escape entityId
     // INSIGHT: select specific columns, otherwise it'll replace from the joined table
     // aka, stop selecting *, making it specific
     var sql = [`SELECT entity.*, post.content, photo.photo, user.username FROM
@@ -305,6 +314,7 @@ class Database {
    * @return json user
    */
   getUser(userId) {
+    userId = this.esc(userId); // escape userId
     return Promise.all([
       `SELECT user.userId, user.username, user.bio FROM user
         WHERE userId = '${userId}' LIMIT 1`,
@@ -351,6 +361,8 @@ class Database {
    * @return {Boolean}          is given password corresponding to password on file?
    */
   isPasswordMatching(username, password) {
+    username = this.esc(username); password = this.esc(password); // escape arguments
+
     return Promise.all([ // asynchronously hash password and get saved password
       db.query(`SELECT user.password FROM user WHERE user.username = '${username}'`),
       this.SHA256(password)
@@ -374,16 +386,18 @@ class Database {
    * @param tags
    */
   addPost(userId, content, tags=undefined) {
+    userId = this.esc(userId); content = this.esc(content); tags.map(tag=>{return this.esc(tag)}); // escape arguments
+
     const entityId = this.GUID();
     let sql = [
       `INSERT INTO entity (entityId, timePosted, userId)
         VALUES ('${entityId}', CURRENT_TIMESTAMP, '${userId}')`,
       `INSERT INTO post (entityId, content)
-        VALUES ('${entityId}', ${this.connection.escape(content)})`
+        VALUES ('${entityId}', '${content}')`
     ];
     tags.forEach(tag => {
       sql.push(`INSERT INTO entity_tag (entityId, tagName)
-      VALUES ('${entityId}', ${this.connection.escape(tag)})`);
+      VALUES ('${entityId}', '${tag}')`);
     });
     return Promise.all(sql.map(qur => {return this.query(qur)}));
   }
@@ -395,6 +409,8 @@ class Database {
    * @param tags
    */
   addPhoto(userId, photo, tags=undefined) {
+    userId = this.esc(userId); photo = this.esc(photo); tags.map(tag=>{return this.esc(tag)}); // escape arguments
+
     const entityId = this.GUID();
     let sql = [`INSERT INTO entity (entityId, timePosted, userId)
       VALUES ('${entityId}', CURRENT_TIMESTAMP, '${userId}')`,
@@ -403,7 +419,7 @@ class Database {
     ];
     tags.forEach(tag => {
       sql.push(`INSERT INTO entity_tag (entityId, tagName)
-      VALUES ('${entityId}', ${this.connection.escape(tag)})`);
+      VALUES ('${entityId}', '${tag}')`);
     });
     return Promise.all(sql.map(qur => {return this.query(qur)}));
   }
@@ -414,6 +430,7 @@ class Database {
    * @param userId
    */
   addLike(entityId, userId) {
+    entityId = this.esc(entityId); userId = this.esc(userId);
     return this.query(`INSERT INTO entity_like (entityId, userId)
       VALUES ('${entityId}', '${userId}')`);
   }
@@ -425,8 +442,9 @@ class Database {
    * @param content
    */
   addComment(entityId, userId, content) {
+    entityId = this.esc(entityId), userId = this.esc(userId), content = this.esc(content);
     return this.query(`INSERT INTO entity_comment (entityId, userId, content)
-      VALUES ('${entityId}', '${userId}', ${this.connection.escape(content)})`);
+      VALUES ('${entityId}', '${userId}', '${content}')`);
   }
 
   /**
@@ -437,8 +455,9 @@ class Database {
    * @param {String} [bio=""] short description of user
    */
   addUser(username, password, email, bio="") {
+    username = this.esc(username); password = this.esc(password); email = this.esc(email); bio = this.esc(bio); // escaping args
     return this.query(`INSERT INTO user (userId, username, password, email, bio)
-      VALUES ('${this.GUID()}', ${this.connection.escape(username)}, ${this.connection.escape(this.SHA256(password))}, ${this.connection.escape(email)}, ${this.connection.escape(bio)})`);
+      VALUES ('${this.GUID()}', '${username}', '${this.SHA256(password)}', '${email}', '${bio}')`);
   }
 
   /**
@@ -447,6 +466,7 @@ class Database {
    * @param targetId
    */
   addSubscription(userId, targetId) {
+    userId = this.esc(userId); targetId = this.esc(targetId);
     return this.query(`INSERT INTO user_subscription (userId, targetId)
       VALUES ('${userId}', '${targetId}')`);
   }
@@ -456,8 +476,10 @@ class Database {
    * @param session
    */
   addRequests(session) {
+    const userId = session.userId ? `'${this.esc(session.userId)}'` : "NULL"; // figure out userId
     var values = session.requests.map(request => {
-      return `('${session.sessionId}', ${session.userId ? "'" + session.userId + "'" : "NULL"}, '${request.type}', ${this.connection.escape(request.location)}, ${request.time})`;
+      request.type = this.esc(request.type); request.location = this.esc(request.location); // escape strings
+      return `('${session.sessionId}', ${userId}, '${request.type}', '${request.location}', ${request.time})`;
     });
     return this.query(`INSERT INTO request (sessionId, userId, method, location, timestamp)
     VALUES ${values.join(", ")}`);
@@ -473,6 +495,7 @@ class Database {
    * @param entityId
    */
   deleteEntity(entityId) {
+    entityId = this.esc(entityId);
     return Promise.all([`DELETE FROM entity WHERE entityId = '${entityId}'`,
       `DELETE FROM post WHERE entityId = '${entityId}'`,
       `DELETE FROM photo WHERE entityId = '${entityId}'`,
@@ -487,6 +510,7 @@ class Database {
    * @param userId
    */
   deleteLike(entityId, userId) {
+    entityId = this.esc(entityId); userId = this.esc(userId); // escape args
     return this.query(`DELETE FROM entity_like
       WHERE entityId = '${entityId}' AND userId = '${userId}'`);
   }
@@ -498,8 +522,9 @@ class Database {
    * @param content
    */
   deleteComment(entityId, userId, content) {
+    entityId = this.esc(entityId); userId = this.esc(userId); content = this.esc(content);
     return this.query(`DELETE FROM entity_comment
-      WHERE entityId = '${entityId}' AND userId = '${userId}' AND content = '${this.connection.escape(content)}'`);
+      WHERE entityId = '${entityId}' AND userId = '${userId}' AND content = '${content}'`);
   }
 
   /**
@@ -507,6 +532,7 @@ class Database {
    * @param userId
    */
   deleteUser(userId) {
+    userId = this.esc(userId);
     return Promise.all([`DELETE FROM user WHERE userId = '${userId}'`,
       `DELETE FROM user_subscription WHERE userId = '${userId}'`,
       `DELETE FROM entity_like WHERE userId = '${userId}'`,
@@ -523,6 +549,7 @@ class Database {
    * @param targetId
    */
   deleteSubscription(userId, targetId) {
+    userId = this.esc(userId); targetId = this.esc(targetId);
     return this.query(`DELETE FROM user_subscription
       WHERE userId = '${userId}' AND targetId = '${targetId}'`);
   }
@@ -537,7 +564,8 @@ class Database {
    * @param newContent
    */
   updatePost(entityId, newContent) {
-    return this.query(`UPDATE post SET content = ${this.connection.escape(newContent)}
+    entityId = this.esc(entityId); newContent = this.esc(newContent);
+    return this.query(`UPDATE post SET content = '${newContent}'
       WHERE entityId = '${entityId}'`);
   }
 
@@ -547,8 +575,9 @@ class Database {
    * @param props -- username, password, email, bio
    */
   updateUser(userId, props = {}) {
+    userId = this.esc(userId);
     var updateStatements = Object.keys(props).map(key => {
-      return `${key} = ${this.connection.escape(props[key])}`;
+      return `${this.esc(key)} = '${this.esc(props[key])}'`;
     });
     return this.query(`UPDATE user SET ${updateStatements.join(`, `)}
       WHERE userId = '${userId}'`);
@@ -562,8 +591,9 @@ class Database {
    * @param newContent
    */
   updateComment(entityId, userId, oldContent, newContent) {
-    return this.query(`UPDATE entity_comment SET content = ${this.connection.escape(newContent)}
-      WHERE entityId = '${entityId}' AND userId = '${userId}' AND content = ${this.connection.escape(oldContent)}`);
+    entityId = this.esc(entityId); userId = this.esc(userId); oldContent = this.esc(oldContent); newContent = this.esc(newContent);
+    return this.query(`UPDATE entity_comment SET content = '${newContent}'
+      WHERE entityId = '${entityId}' AND userId = '${userId}' AND content = '${oldContent}'`);
   }
 }
 const db = new Database();
