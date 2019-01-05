@@ -1,0 +1,13 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+:root {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--mono-700);
+}

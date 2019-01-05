@@ -41,7 +41,7 @@ server must add subscriptions ✅
 
 Read Out DB content as csv
 
-All db inputs must be sanitized before being allowed into queries
+All db inputs must be sanitized before being allowed into queries ✅
 
 Session management    ✅
   create sessions     ✅
