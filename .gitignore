@@ -1,2 +1,4 @@
 back/node_modules/
 back/tester.js
+test/.sass-cache/
+test/css/style.css.map

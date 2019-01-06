@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat|Slabo+27px");
 * {
   margin: 0;
   padding: 0;
@@ -5,6 +6,10 @@
 
 :root {
   box-sizing: border-box; }
+
+h1, h2, h3, h4, h5, h6, p {
+  color: #141414;
+  font-family: 'Montserrat', sans-serif; }
 
 button, .bttn, .bttn--round, .nav__notification, .nav__profile, .nav__searchbar__search {
   cursor: pointer;
