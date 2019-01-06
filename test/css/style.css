@@ -6,12 +6,12 @@
 :root {
   box-sizing: border-box; }
 
-button, [class*="--bttn"] {
+button, .bttn, .bttn--round, .nav__notification, .nav__profile, .nav__searchbar__search {
   cursor: pointer;
   border: none;
   background: none; }
 
-.--bttn-round {
+.bttn--round, .nav__notification, .nav__profile {
   height: 40px;
   min-width: 40px;
   border-radius: 20px;
@@ -62,7 +62,7 @@ button, [class*="--bttn"] {
       transition: all 0.2s;
       outline: none;
       margin: 0; }
-    .nav__searchbar:hover .nav__searchbar__bar, .nav__searchbar__bar:focus {
+    .nav__searchbar:hover .nav__searchbar__bar, .nav__searchbar__bar:focus, .nav__searchbar__bar:not(:placeholder-shown) {
       width: 100px;
       margin: 0 7px; }
   .nav__notification {

@@ -31,6 +31,7 @@
 
     // searbar's search button
     &__search {
+      @extend .bttn;
       color: $color-prim;
       outline: none;
     }
@@ -44,7 +45,8 @@
       outline: none;
       margin: 0;
     }
-    &:hover &__bar, &__bar:focus { // searchbar hover...
+    // expand the bar on hover, focus, or typed text...
+    &:hover &__bar, &__bar:focus, &__bar:not(:placeholder-shown) {
       width: 100px;
       margin: 0 7px;
     }
@@ -54,6 +56,7 @@
 
   // nav's notification button
   &__notification {
+    @extend .bttn--round;
     // width: $size-200;
     color: $mono-100;
     background: none;
@@ -66,6 +69,7 @@
 
   // nav's profile button
   &__profile {
+    @extend .bttn--round;
     overflow: hidden;
     width: $size-200;
     background: $mono-100;
