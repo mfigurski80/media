@@ -1,0 +1,17 @@
+// Terminal command for sass watch:
+// sass --watch scss/style.scss:css/style.css
+@import "vars.scss";
+@import "reset.scss";
+
+// modules (used multiple times throughout)
+@import "modules/bttn.scss"; // button
+@import "modules/container.scss"; // container
+
+// components (specific section)
+@import "components/nav.scss";  // nav component
+
+
+body {
+  background: $mono-000;
+  min-height: 200vh;
+}

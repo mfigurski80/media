@@ -1,0 +1,18 @@
+button, [class*="--bttn"] {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.--bttn-round {
+  height: $size-200;
+  min-width: $size-200;
+  border-radius: $size-200/2;
+  background: $mono-100;
+
+  // center content
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}

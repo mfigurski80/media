@@ -1,0 +1,28 @@
+// Vars for colors/accents
+$color-prim: rgba(239, 208, 156, 1);
+$grad-prim: linear-gradient(35deg, $color-prim, rgba(245, 190, 140, 1));
+
+$color-error: rgba(240,100,100,1);
+$color-success: rgba(130, 230, 117, 1);
+
+// Vars for monochromatic shades
+$mono-000: white;
+$mono-100: rgba(245,245,245,1);
+$mono-200: rgba(230,230,230,1);
+// ...
+$mono-700: rgba(45,45,45,1);
+$mono-900: rgba(20,20,20,1);
+
+
+// Spacing vars
+$space-padding-sm: 5.5px;
+$space-padding-med: 16px;
+
+// Sizing vars
+$size-200: 40px;
+$size-300: 50px;
+$size-400: 60px;
+
+// transition timing
+$transtime: .2s;
+$transtime-bg: .1s;

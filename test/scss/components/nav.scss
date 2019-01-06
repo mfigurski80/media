@@ -1,0 +1,78 @@
+.nav {
+  position: fixed;
+  width: 100%;
+  height: $size-400;
+  background: $grad-prim;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: $space-padding-med;
+  padding-right: $space-padding-med;
+
+  & > * { // all children... margin
+    box-sizing: content-box;
+    margin-left: $space-padding-sm;
+    margin-right: $space-padding-sm;
+  }
+
+  // nav's logo
+  &__logo {
+    flex: auto;
+  }
+
+  // nav's searchbar
+  &__searchbar {
+    display: flex;
+    flex-direction: row;
+    background: $mono-100;
+    height: $size-200;
+    border-radius: 50px;
+    padding: 0 $space-padding-med;
+
+    // searbar's search button
+    &__search {
+      color: $color-prim;
+      outline: none;
+    }
+
+    // searchbar's actual bar part
+    &__bar {
+      background: none;
+      border: none;
+      width: 0px;
+      transition: all $transtime;
+      outline: none;
+      margin: 0;
+    }
+    &:hover &__bar, &__bar:focus { // searchbar hover...
+      width: 100px;
+      margin: 0 7px;
+    }
+
+
+  }
+
+  // nav's notification button
+  &__notification {
+    // width: $size-200;
+    color: $mono-100;
+    background: none;
+    transition: all $transtime-bg;
+    &:hover {
+      background: $mono-100;
+      color: $color-prim;
+    }
+  }
+
+  // nav's profile button
+  &__profile {
+    overflow: hidden;
+    width: $size-200;
+    background: $mono-100;
+    box-shadow: 0 0 0 3px $mono-100;
+    transition: all $transtime-bg;
+    &:hover {
+      box-shadow: 0 0 0 0px $mono-100;
+    }
+  }
+}
