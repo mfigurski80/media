@@ -1,5 +1,5 @@
 // Vars for colors/accents
-$color-prim: rgba(239, 208, 156, 1);
+$color-prim: rgba(245, 208, 156, 1);
 $grad-prim: linear-gradient(35deg, $color-prim, rgba(245, 190, 140, 1));
 
 $color-error: rgba(240,100,100,1);
@@ -19,9 +19,15 @@ $space-padding-sm: 5.5px;
 $space-padding-med: 16px;
 
 // Sizing vars
+$size-100: 20px;
 $size-200: 40px;
 $size-300: 50px;
 $size-400: 60px;
+$size-500: 100px;
+$size-600: 180px;
+$size-700: 300px;
+$size-800: 500px;
+$size-900: 600px;
 
 // transition timing
 $transtime: .2s;

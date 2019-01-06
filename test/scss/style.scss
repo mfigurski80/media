@@ -10,9 +10,8 @@
 
 // components (specific section)
 @import "components/nav.scss";  // nav component
-
+@import "components/gallery.scss"; // main gallery component
 
 body {
-  background: $mono-000;
-  min-height: 200vh;
+  background: $grad-prim;
 }
