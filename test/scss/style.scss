@@ -13,6 +13,7 @@
 @import "components/nav.scss";  // nav component
 @import "components/gallery.scss"; // main gallery component
 @import "components/post.scss"; // text/vid/img posts
+@import "components/new-note.scss"; // notification for new posts (will be conditional)
 
 body {
   // background: $grad-prim;

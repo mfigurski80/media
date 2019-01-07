@@ -1,5 +1,5 @@
 // Vars for colors/accents
-$color-prim: rgba(245, 208, 156, 1);
+$color-prim: rgba(255, 200, 150, 1);
 $color-prim-var: rgba(255, 180, 130, 1);
 $grad-prim: linear-gradient(35deg, $color-prim, $color-prim-var);
 
@@ -21,11 +21,12 @@ $mono-900: rgba(20,20,20,1);
 $mono-shade: rgba(0,0,0,0.1);
 
 // Box Shadow vars
-$shadow-100: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-$shadow-200: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-$shadow-300: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-$shadow-400: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-$shadow-500: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+$shadow-100: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.17);
+$shadow-200: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+$shadow-300: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+$shadow-400: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+$shadow-500: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+$shadow-600: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 
 // Spacing vars
 $space-padding-sm: 5.5px;

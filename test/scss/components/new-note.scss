@@ -1,0 +1,24 @@
+.new-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -1*(14px + 2*5px);
+  // background: $grad-prim;
+  min-height: 0;
+  background: none;
+
+  &__message {
+    @extend .bttn;
+    display: block;
+    padding: 5px 9px;
+    font-size: 14px;
+    color: $mono-500;
+    border-radius: $size-200;
+    transition: all $transtime-bg;
+    &:hover {
+      background: $mono-000;
+      box-shadow: $shadow-100;
+      color: $mono-700;
+    }
+  }
+}

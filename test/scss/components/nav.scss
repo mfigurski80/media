@@ -10,6 +10,7 @@
   align-items: center;
   padding-left: $space-padding-med;
   padding-right: $space-padding-med;
+  box-shadow: $shadow-100;
 
   & > * { // all children... margin
     box-sizing: content-box;

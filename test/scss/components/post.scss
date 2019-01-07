@@ -40,7 +40,7 @@
     width: 100%;
     overflow: hidden;
     text-decoration: none;
-    box-shadow: $shadow-100;
+    box-shadow: $shadow-200;
     transition: all $transtime;
   }
     &__content--vid {
@@ -68,10 +68,14 @@
       flex: 1;
       & > * { // all the tags
         @extend .bttn--tag;
-        padding: $space-padding-sm;
+        @extend .bttn--round;
+        display: inline;
+        padding: $space-padding-sm $space-padding-sm+2px;
+        transition: all $transtime-bg;
         text-decoration: none;
         &:hover {
           background: $mono-000;
+          box-shadow: $shadow-100;
         }
       }
     }
