@@ -3,18 +3,17 @@
   margin-top: $size-400;
   padding: $size-300 0;
   background: $mono-100;
-  min-height: 600px;
 
   &__container {
-    @extend .container;
-    background: $mono-200;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: $size-100;
+    @extend .container--tight;
+    // background: $mono-200;
+    // display: grid;
+    // grid-template-columns: 1fr;
+    // grid-gap: $size-100;
 
     & > * { // all 'articles' in gallery...
-      height: $size-700;
-      border: 1px solid black;
+      min-height: $size-200;
+      background: $mono-shade;
     }
   }
 }

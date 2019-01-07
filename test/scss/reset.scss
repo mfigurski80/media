@@ -6,3 +6,20 @@
 :root {
   box-sizing: border-box;
 }
+
+a {
+  color: inherit;
+  &:visited {
+    color: inherit;
+  }
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+
+img, video {
+  width: 100%;
+  height: auto;
+  display: block;
+}

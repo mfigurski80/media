@@ -1,6 +1,7 @@
 .nav {
   position: fixed;
   top: 0;
+  z-index: 10;
   width: 100%;
   height: $size-400;
   background: $grad-prim;

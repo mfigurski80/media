@@ -1,0 +1,87 @@
+.post {
+  // overflow: hidden;
+  background: none;
+  min-height: none;
+  padding-left: $size-400;
+  padding-top: $size-100;
+  padding-bottom: $size-100;
+
+  &__head {
+    margin-left: -1*$size-400;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: $mono-700;
+
+    // should also have profile module here
+    & .profile__picture { // move profile down
+      transform: translateY($size-100);
+    }
+
+    &__like {
+      @extend .bttn;
+      padding: 10px;
+      transition: all $transtime-bg;
+      &:hover {
+        color: $color-prim-var;
+        transform: scale(1.2);
+      }
+      &.--liked {
+        color: $color-prim-var;
+      }
+    }
+
+  }
+
+  &__content {
+    display: block;
+    margin: $space-padding-sm 0;
+    background: $mono-000;
+    width: 100%;
+    overflow: hidden;
+    text-decoration: none;
+    box-shadow: $shadow-100;
+    transition: all $transtime;
+  }
+    &__content--vid {
+      @extend .post__content;
+    }
+    &__content--img {
+      @extend .post__content;
+    }
+    &__content--text {
+      @extend .post__content;
+      padding: $space-padding-med;
+      &__tag {
+        @extend .bttn--tag;
+      }
+    }
+
+  &__meta {
+    color: $mono-700;
+    padding: $space-padding-sm 0;
+    width: 100%;
+    display: flex;
+    font-size: 13px;
+
+    &__tags {
+      flex: 1;
+      & > * { // all the tags
+        @extend .bttn--tag;
+        padding: $space-padding-sm;
+        text-decoration: none;
+        &:hover {
+          background: $mono-000;
+        }
+      }
+    }
+
+    &__stats {
+      & > * {
+        display: inline;
+        padding: $space-padding-sm;
+      }
+    }
+  }
+
+}

@@ -17,3 +17,15 @@ button, .bttn {
   align-items: center;
 
 }
+
+.bttn--tag {
+  @extend .bttn;
+  display: inline;
+  text-decoration: underline;
+  &:before {
+    content: "#";
+  }
+  &:hover {
+    text-decoration: none;
+  }
+}

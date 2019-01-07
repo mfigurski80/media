@@ -7,11 +7,13 @@
 @import "modules/text.scss"; // text
 @import "modules/bttn.scss"; // button
 @import "modules/container.scss"; // container
+@import "modules/profile.scss"; // profile display
 
 // components (specific section)
 @import "components/nav.scss";  // nav component
 @import "components/gallery.scss"; // main gallery component
+@import "components/post.scss"; // text/vid/img posts
 
 body {
-  background: $grad-prim;
+  // background: $grad-prim;
 }

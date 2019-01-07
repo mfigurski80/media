@@ -1,7 +1,26 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat|Slabo+27px');
 
-h1, h2, h3, h4, h5, h6, p {
-  color: $mono-900;
+h1, h2, h3, h4, h5, h6, p, a {
   font-family: 'Montserrat', sans-serif;
   // font-family: 'Slabo 27px', serif;
+  font-weight: normal;
+}
+h1 {
+
+}
+h2 {
+
+}
+h3 {
+
+}
+h4 {
+
+}
+h5 {
+
+}
+h6 {
+  font-size: 10px;
+  opacity: .8;
 }
