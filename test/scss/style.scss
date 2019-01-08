@@ -14,7 +14,8 @@
 @import "components/gallery.scss"; // main gallery component
 @import "components/post.scss"; // text/vid/img posts
 @import "components/new-note.scss"; // notification for new posts (will be conditional)
+@import "components/footer.scss"; // footer
 
 body {
-  // background: $grad-prim;
+  background: $mono-100;
 }
