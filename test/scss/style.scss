@@ -3,21 +3,17 @@
 @import "vars.scss";
 @import "reset.scss";
 
-// modules (used multiple times throughout)
-@import "modules/text.scss"; // text
-@import "modules/bttn.scss"; // button
-@import "modules/container.scss"; // container
-@import "modules/profile.scss"; // profile display
-@import "modules/animation.scss"; // css animations
+// partials (for performing common actions)
+@import "partials/theme.scss";
 
-// components (specific section)
-@import "components/nav.scss";  // nav component
-@import "components/gallery.scss"; // main gallery component
-@import "components/post.scss"; // text/vid/img posts
-@import "components/new-note.scss"; // notification for new posts (will be conditional)
-@import "components/footer.scss"; // footer
-@import "components/toaster.scss"; // popup notifications on the bottom right...
+// modules (for elements multiple times throughout)
 
-body {
-  background: $mono-100;
+
+// components (for specific element section)
+
+
+html {
+  @extend .--dark;
 }
+
+// check out text-stroke

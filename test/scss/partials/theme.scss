@@ -1,0 +1,20 @@
+.--dark {
+  background: $mono-darker;
+  color: $mono-light;
+}
+
+
+.--light {
+  background: $mono-lighter;
+  color: $mono-dark;
+}
+
+.--prim {
+  background: $color-prim;
+  color: $mono-dark;
+}
+
+.--sec {
+  background: $color-sec;
+  color: $mono-dark;
+}

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Slabo+27px');
+
 * {
   margin: 0;
   padding: 0;
@@ -7,6 +9,7 @@
   box-sizing: border-box;
 }
 
+// restyle hyperlinks
 a {
   color: inherit;
   &:visited {
@@ -17,9 +20,23 @@ a {
   }
 }
 
+// reset fonts
+h1, h2, h3, h4, h5, h6, p, a {
+  font-family: 'Montserrat', sans-serif;
+  // font-family: 'Slabo 27px', serif;
+  font-weight: normal;
+  color: inherit;
+}
 
+// fit images and videos
 img, video {
   width: 100%;
   height: auto;
   display: block;
+}
+
+// set selection color (nice if gradient, but kay)
+::selection {
+  background: $color-sec;
+  color: $mono-darker;
 }
