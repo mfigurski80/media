@@ -163,6 +163,7 @@ button, .bttn, .bttn--round, .profile__picture, .nav__notification, .nav__profil
     display: block;
     margin: 5.5px 0;
     background: white;
+    border-radius: 2px;
     width: 100%;
     overflow: hidden;
     text-decoration: none;
@@ -194,7 +195,7 @@ button, .bttn, .bttn--round, .profile__picture, .nav__notification, .nav__profil
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: -24px;
+  margin-top: -27px;
   min-height: 0;
   background: none; }
   .new-note__message {
