@@ -6,6 +6,8 @@
   // background: $grad-prim;
   min-height: 0;
   background: none;
+  animation: pop-down;
+  animation-duration: $transtime-translate;
 
   &__message {
     @extend .bttn;

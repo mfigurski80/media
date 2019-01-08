@@ -12,7 +12,7 @@
     padding: $space-padding-sm;
     border-radius: $border-radius;
     background: $mono-300;
-    color: $mono-500;
+    color: $mono-shade-dark;
     display: flex;
     align-items: center;
     animation-name: pop-up;
@@ -30,12 +30,13 @@
     //__toast variations
     &.--error {
       background: $color-error;
-      color: $mono-000;
+      // color: $mono-000;
+      color: $mono-shade-light;
     }
 
     &.--success {
       background: $color-success;
-      color: $mono-000;
+      color: $mono-shade-dark;
     }
   }
 }

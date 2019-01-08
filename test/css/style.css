@@ -80,6 +80,13 @@ button, .bttn, .bttn--round, .profile__picture, .nav__notification, .nav__profil
   100% {
     transform: translateY(0);
     opacity: 1; } }
+@keyframes pop-down {
+  0% {
+    transform: translateY(-50px);
+    opacity: 0; }
+  100% {
+    transform: translateY(0);
+    opacity: 1; } }
 .nav {
   position: fixed;
   top: 0;
@@ -189,7 +196,7 @@ button, .bttn, .bttn--round, .profile__picture, .nav__notification, .nav__profil
       flex: 1; }
       .post__meta__tags > * {
         display: inline;
-        padding: 5.5px 7.5px;
+        padding: 5.5px 5.5px;
         transition: all 0.1s;
         text-decoration: none;
         border-radius: 2px; }
@@ -206,7 +213,9 @@ button, .bttn, .bttn--round, .profile__picture, .nav__notification, .nav__profil
   justify-content: center;
   margin-top: -27px;
   min-height: 0;
-  background: none; }
+  background: none;
+  animation: pop-down;
+  animation-duration: 0.5s; }
   .new-note__message {
     display: block;
     padding: 5px 9px;
@@ -249,7 +258,7 @@ button, .bttn, .bttn--round, .profile__picture, .nav__notification, .nav__profil
     padding: 5.5px;
     border-radius: 2px;
     background: #d2d2d2;
-    color: #646464;
+    color: rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: center;
     animation-name: pop-up;
@@ -261,10 +270,10 @@ button, .bttn, .bttn--round, .profile__picture, .nav__notification, .nav__profil
       font-size: 15px; }
     .toaster__toast.--error {
       background: #f06464;
-      color: white; }
+      color: rgba(255, 255, 255, 0.6); }
     .toaster__toast.--success {
-      background: #6ec85a;
-      color: white; }
+      background: #82f078;
+      color: rgba(0, 0, 0, 0.5); }
 
 body {
   background: whitesmoke; }

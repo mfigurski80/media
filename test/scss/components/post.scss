@@ -70,7 +70,7 @@
       & > * { // all the tags
         @extend .bttn--tag;
         display: inline;
-        padding: $space-padding-sm $space-padding-sm+2px;
+        padding: $space-padding-sm $space-padding-sm;
         transition: all $transtime-bg;
         text-decoration: none;
         border-radius: $border-radius;
