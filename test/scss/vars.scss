@@ -4,7 +4,9 @@ $color-prim-var: rgba(255, 180, 130, 1);
 $grad-prim: linear-gradient(35deg, $color-prim, $color-prim-var);
 
 $color-error: rgba(240,100,100,1);
-$color-success: rgba(130, 230, 117, 1);
+$color-error-light: rgba(250,150,140,1);
+$color-success: rgba(110, 200, 90, 1);
+$color-success-light: rgba(130, 240, 120, 1);
 
 // Vars for monochromatic shades
 $mono-000: white;
@@ -43,6 +45,10 @@ $size-700: 300px;
 $size-800: 500px;
 $size-900: 600px;
 
+// Standard border radius
+$border-radius: 2px;
+
 // transition timing
+$transtime-translate: .5s;
 $transtime: .2s;
 $transtime-bg: .1s;

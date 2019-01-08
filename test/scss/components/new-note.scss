@@ -13,7 +13,7 @@
     padding: 5px 9px;
     font-size: 14px;
     color: $mono-500;
-    border-radius: $size-200;
+    border-radius: $border-radius;
     transition: all $transtime-bg;
     &:hover {
       background: $mono-000;

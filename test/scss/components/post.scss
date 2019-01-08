@@ -37,7 +37,7 @@
     display: block;
     margin: $space-padding-sm 0;
     background: $mono-000;
-    border-radius: 2px;
+    border-radius: $border-radius;
     width: 100%;
     overflow: hidden;
     text-decoration: none;
@@ -69,11 +69,11 @@
       flex: 1;
       & > * { // all the tags
         @extend .bttn--tag;
-        @extend .bttn--round;
         display: inline;
         padding: $space-padding-sm $space-padding-sm+2px;
         transition: all $transtime-bg;
         text-decoration: none;
+        border-radius: $border-radius;
         &:hover {
           background: $mono-000;
           box-shadow: $shadow-100;

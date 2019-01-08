@@ -1,0 +1,41 @@
+.toaster {
+  position: fixed;
+  z-index: 5;
+  bottom: 0;
+  right: 10px;
+  width: $size-600;
+  min-height: 10px;
+  background: none;
+
+  &__toast {
+    margin-bottom: 10px;
+    padding: $space-padding-sm;
+    border-radius: $border-radius;
+    background: $mono-300;
+    color: $mono-500;
+    display: flex;
+    align-items: center;
+    animation-name: pop-up;
+    animation-duration: $transtime-translate;
+
+    & > * {
+      padding: 0 $space-padding-sm;
+      font-size: 12px;
+    }
+    & > i {
+      font-size: 15px;
+      @extend .bttn;
+    }
+
+    //__toast variations
+    &.--error {
+      background: $color-error;
+      color: $mono-000;
+    }
+
+    &.--success {
+      background: $color-success;
+      color: $mono-000;
+    }
+  }
+}

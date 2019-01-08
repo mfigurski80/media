@@ -9,7 +9,6 @@
   <title>Media</title>
 </head>
 <body>
-  <div id="top"></div>
   <nav class="nav">
     <div class="nav__logo"><p>LOGO</p></div>
     <form class="nav__searchbar">
@@ -23,11 +22,14 @@
       <img src="images/profile.jpg" alt="profile">
     </div>
   </nav>
+  <div id="top">
+    <!-- This is an anchor to top of page -->
+  </div>
   <section class="gallery">
     <div class="gallery__container">
-      <!-- <div class="new-note">
+      <div class="new-note">
         <p class="new-note__message">Click to view new posts</p>
-      </div> -->
+      </div>
 
       <article class="post">
         <div class="post__head">
@@ -125,8 +127,22 @@
       <a href="#terms">Terms & Conditions</a>
     </div>
     <div class="footer__copywrite">
-      <h5>© Mikolaj Figurski - 2019</h5>
+      <h6>© Mikolaj Figurski - 2019</h6>
     </div>
   </footer>
+  <aside class="toaster">
+    <div class="toaster__toast">
+      <i class="fas fa-times"></i>
+      <p>Some Notification</p>
+    </div>
+    <div class="toaster__toast --error">
+      <i class="fas fa-times"></i>
+      <p>An error has occurred</p>
+    </div>
+    <div class="toaster__toast --success">
+      <i class="fas fa-times"></i>
+      <p>Something has succeeded</p>
+    </div>
+  </aside>
 </body>
 </html>
