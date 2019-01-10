@@ -81,7 +81,7 @@ img, video {
     width: 60px;
     height: 60px;
     padding: 13px; }
-    .nav__logo > img {
+    .nav__logo img {
       box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
       border-radius: 3px; }
   .nav__gen-options {
@@ -93,6 +93,7 @@ img, video {
 .gen-layout {
   display: grid;
   grid-template-columns: 60px auto;
+  grid-template-rows: 100vh;
   grid-gap: 5.5px;
   height: 100vh;
   overflow: hidden; }

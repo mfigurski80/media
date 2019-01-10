@@ -20,6 +20,7 @@ html {
 .gen-layout {
   display: grid;
   grid-template-columns: $size-nav auto;
+  grid-template-rows: 100vh;
   grid-gap: $padding-sm;
   height: 100vh;
   overflow: hidden;
