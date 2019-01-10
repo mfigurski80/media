@@ -1,0 +1,23 @@
+.--icon {
+  color: $mono-dark;
+  font-size: 23px;
+  text-align: center;
+  padding: $padding-lg;
+  // height: $size-nav - 2px;
+  display: block;
+  transition: all $trans-sm;
+
+  &.--nav {
+    @extend .--bttn;
+    color: $mono-light;
+    &:hover {
+      color: $mono-lighter;
+      background: $mono-dark;
+    }
+
+    &.--active {
+      background: $mono-dark;
+    }
+  }
+
+}

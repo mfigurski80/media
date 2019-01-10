@@ -1,0 +1,40 @@
+.nav {
+  background: $mono-darker;
+  position: relative;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  height: 100vh;
+  width: $size-nav;
+  padding-bottom: $padding-sm;
+  display: flex;
+  flex-direction: column;
+
+  &__logo {
+    width: $size-nav;
+    height: $size-nav;
+    // background: $mono-light;
+    padding: $padding-lg;
+    & > img {
+      box-shadow: $shadow-300;
+      border-radius: $border-radius;
+    }
+  }
+
+  &__gen-options {
+    flex: 1;
+    padding: $padding-sm 0;
+    &__icon { // all buttons
+      @extend .--icon, .--nav;
+
+    }
+  }
+
+  &__user-options {
+    padding: $padding-sm 0;
+    &__icon {
+      @extend .--icon, .--nav;
+    }
+  }
+
+}

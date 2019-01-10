@@ -1,16 +1,19 @@
 // Vars for colors/accents
-$color-prim: rgba(221,112,100,1);
+// #f57664
+$color-prim: rgba(245,112,100,1);
+// #f5c264
 $color-sec: rgba(245, 215, 110, 1);
-$grad-prim: linear-gradient(35deg, $color-prim, $color-sec);
+$grad-prim: linear-gradient(35deg, $color-sec, $color-prim);
 
 $color-error: red;
 $color-success: rgba(130, 240, 120, 1);
 
 // Vars for monochromatic shades
-$mono-lighter: rgba(245, 245, 245, 1);
+$mono-lighter: rgba(248, 248, 248, 1);
 $mono-light: rgba(218, 218, 218, 1);
-$mono-dark: rgba(46, 49, 49, 1);
+$mono-dark: rgba(55, 59, 59, 1);
 $mono-darker: rgba(33, 35, 35, 1);
+$mono-disabled: rgba(110,110,110,.6);
 
 // Box Shadow vars
 $shadow-100: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.17);
@@ -20,17 +23,20 @@ $shadow-400: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 $shadow-500: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 $shadow-600: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 
-// Spacing vars
+// Padding vars
 $padding-sm: 5.5px;
-$padding-md: 9px;
-$padding-lg: 16px;
+$padding-md: 9.5px;
+$padding-lg: 13px;
+$padding-xl: 18px;
 
 // Size vars
+$size-border: 2px;
+$size-nav: 60px;
 
 // Standard border radius
-$border-radius: 2px;
+$border-radius: 3px;
 
 // transition timing
-$transtime-translate: .5s;
-$transtime: .2s;
-$transtime-bg: .1s;
+$trans-sm: .15s;
+$trans-med: .2s;
+$trans-lg: .4s;

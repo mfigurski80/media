@@ -7,13 +7,23 @@
 @import "partials/theme.scss";
 
 // modules (for elements multiple times throughout)
-
+@import "modules/bttn.scss"; // buttons
+@import "modules/icons.scss"; // icon styles
 
 // components (for specific element section)
-
+@import "components/nav.scss"; // navbar
 
 html {
   @extend .--dark;
 }
 
+.gen-layout {
+  display: grid;
+  grid-template-columns: $size-nav auto;
+  grid-gap: $padding-sm;
+  height: 100vh;
+  overflow: hidden;
+}
+
 // check out text-stroke
+// https://ionicons.com/ icons
