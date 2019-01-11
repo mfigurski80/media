@@ -1,0 +1,53 @@
+.gallery {
+  background: $mono-darker;
+  display: grid;
+  grid-template-columns: 3fr auto 2fr;
+
+  &__controls {
+    // background: red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &__panel {
+      padding: $padding-sm;
+      // width: 130px;
+      &__option {
+        @extend .--bttn;
+        font-size: 15px;
+        text-align: right;
+        padding: $padding-sm;
+        border-right: $size-border solid transparent;
+        transition: all $trans-sm;
+        &:hover {
+          background: $mono-dark;
+        }
+
+        &.--active {
+          font-weight: bold;
+          border-right-color: $color-prim;
+        }
+      }
+    }
+  }
+
+  &__container {
+    @extend .--container;
+    width: $size-container;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: none;
+
+    &__posts {
+      height: 100vh;
+      background: $color-sec;
+    }
+
+    &__comments {
+      height: 100vh;
+      background: $color-prim;
+    }
+  }
+
+}

@@ -9,11 +9,13 @@
 // modules (for elements multiple times throughout)
 @import "modules/bttn.scss"; // buttons
 @import "modules/icons.scss"; // icon styles
+@import "modules/container.scss"; // container styles
 
 // components (for specific element section)
 @import "components/nav.scss"; // navbar
+@import "components/gallery.scss"; // element holding post structure and allowing 'sections'
 
-html {
+html, body {
   @extend .--dark;
 }
 
@@ -21,7 +23,6 @@ html {
   display: grid;
   grid-template-columns: $size-nav auto;
   grid-template-rows: 100vh;
-  grid-gap: $padding-sm;
   height: 100vh;
   overflow: hidden;
 }

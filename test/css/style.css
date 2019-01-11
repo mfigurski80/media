@@ -30,7 +30,7 @@ img, video {
   background: #f5d76e;
   color: #212323; }
 
-.--dark, html {
+.--dark, html, body {
   background: #212323;
   color: #dadada; }
 
@@ -46,14 +46,14 @@ img, video {
   background: #f5d76e;
   color: #373b3b; }
 
-.--bttn, .--icon.--nav, .nav__gen-options__icon, .nav__user-options__icon, button {
+.--bttn, .--icon.--nav, .nav__gen-options__icon, .nav__user-options__icon, .gallery__controls__panel__option, button {
   background: none;
   border: none;
   cursor: pointer; }
 
 .--icon, .nav__gen-options__icon, .nav__user-options__icon {
   color: #373b3b;
-  font-size: 23px;
+  font-size: 18px;
   text-align: center;
   padding: 13px;
   display: block;
@@ -65,6 +65,13 @@ img, video {
       background: #373b3b; }
     .--icon.--nav.--active, .--active.nav__gen-options__icon, .--active.nav__user-options__icon {
       background: #373b3b; }
+
+.--container, .gallery__container {
+  max-width: 800px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  background: rgba(110, 110, 110, 0.5); }
 
 .nav {
   background: #212323;
@@ -90,11 +97,44 @@ img, video {
   .nav__user-options {
     padding: 5.5px 0; }
 
+.gallery {
+  background: #212323;
+  display: grid;
+  grid-template-columns: 3fr auto 2fr; }
+  .gallery__controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; }
+    .gallery__controls__panel {
+      padding: 5.5px; }
+      .gallery__controls__panel__option {
+        font-size: 15px;
+        text-align: right;
+        padding: 5.5px;
+        border-right: 3px solid transparent;
+        transition: all 0.15s; }
+        .gallery__controls__panel__option:hover {
+          background: #373b3b; }
+        .gallery__controls__panel__option.--active {
+          font-weight: bold;
+          border-right-color: #f57064; }
+  .gallery__container {
+    width: 800px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: none; }
+    .gallery__container__posts {
+      height: 100vh;
+      background: #f5d76e; }
+    .gallery__container__comments {
+      height: 100vh;
+      background: #f57064; }
+
 .gen-layout {
   display: grid;
   grid-template-columns: 60px auto;
   grid-template-rows: 100vh;
-  grid-gap: 5.5px;
   height: 100vh;
   overflow: hidden; }
 

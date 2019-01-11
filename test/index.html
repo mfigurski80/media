@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#212323">
   <link rel="shortcut icon" type="image/png" href="resources/watermarkredyellow.png">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
   <link rel="stylesheet" href="css/style.css">
@@ -23,17 +24,19 @@
       <i class="nav__user-options__icon fas fa-bell"></i>
     </div>
   </nav>
-  <div class="content">
-    <p>Might as well keep a todo here:</p>
-    <p>Buttons I need in nav?</p>
-    <ol>
-      <li><p>Posts</p></li>
-      <li><p>Write</p></li>
-      <li><p>People</p></li>
-      <li><p>Messages?</p></li>
-      <!-- <li><p>Search - for groups/posts/people specifically?</p></li> -->
-      <li><p>Profile</p></li>
-    </ol>
+  <div class="gallery">
+    <div class="gallery__controls">
+      <div class="gallery__controls__panel">
+        <p class="gallery__controls__panel__option --active">recent</p>
+        <p class="gallery__controls__panel__option">trending</p>
+        <p class="gallery__controls__panel__option">subscribed</p>
+      </div>
+
+    </div>
+    <div class="gallery__container">
+      <div class="gallery__container__posts"></div>
+      <div class="gallery__container__comments"></div>
+    </div>
   </div>
 </body>
 </html>
