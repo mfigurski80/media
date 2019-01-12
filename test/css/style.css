@@ -159,10 +159,13 @@ img, video {
     .gallery__container__posts {
       min-height: 100vh; }
     .gallery__container__comments {
-      height: 100%;
-      width: 100%;
-      margin-top: 5.5px;
-      background: #343737; }
+      width: 100%; }
+      .gallery__container__comments__panel {
+        display: inline-block;
+        background: #343737;
+        position: fixed;
+        width: 350.8px;
+        height: 100vh; }
 
 .post {
   padding: 9.5px;
@@ -210,7 +213,7 @@ img, video {
     float: right;
     position: absolute;
     margin-top: 80px;
-    margin-left: 503.7px;
+    margin-left: 504.7px;
     width: 0;
     height: 0;
     box-sizing: content-box;

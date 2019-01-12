@@ -77,9 +77,7 @@
       float: right;
       position: absolute;
       margin-top: 80px;
-      margin-left: ( $size-container - $padding-xl ) * 3/5 - 3*$padding-md + 3px;
-      // left: $padding-md + 20px; //is now hugging the wall
-      // bottom: 100px;
+      margin-left: ( $size-container - $padding-xl ) * 3/5 - 3*$padding-md + 4px;
       width: 0;
       height: 0;
       box-sizing: content-box;
