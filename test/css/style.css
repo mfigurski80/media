@@ -47,7 +47,7 @@ img, video {
   background: #f5d76e;
   color: #343737; }
 
-.--bttn, .--icon.--nav, .nav__gen-options__icon, .nav__user-options__icon, .profile__picture, .gallery__controls__panel__option, .post__head__actions__action, .post__content, .post__meta__tags__tag, button {
+.--bttn, .--icon.--nav, .nav__gen-options__icon, .nav__user-options__icon, .--nav.post__head__actions__action, .post__head__actions__action.nav__gen-options__icon, .post__head__actions__action.nav__user-options__icon, .profile__picture, .gallery__controls__panel__option, .post__head__actions__action, .post__content, .post__meta__tags__tag, button {
   background: none;
   border: none;
   cursor: pointer;
@@ -64,19 +64,20 @@ img, video {
     .--bttn.--tag:hover, .--tag.--icon.--nav:hover, .--tag.nav__gen-options__icon:hover, .--tag.nav__user-options__icon:hover, .--tag.profile__picture:hover, .--tag.gallery__controls__panel__option:hover, .--tag.post__head__actions__action:hover, .--tag.post__content:hover, .post__meta__tags__tag:hover, button.--tag:hover, button.post__meta__tags__tag:hover {
       background: #f57064; }
 
-.--icon, .nav__gen-options__icon, .nav__user-options__icon {
+.--icon, .nav__gen-options__icon, .nav__user-options__icon, .post__head__actions__action {
   color: #343737;
   font-size: 18px;
+  line-height: 17px;
   text-align: center;
   padding: 13px;
   display: block;
   transition: all 0.15s; }
-  .--icon.--nav, .nav__gen-options__icon, .nav__user-options__icon {
+  .--icon.--nav, .nav__gen-options__icon, .nav__user-options__icon, .--nav.post__head__actions__action {
     color: #dadada; }
-    .--icon.--nav:hover, .nav__gen-options__icon:hover, .nav__user-options__icon:hover {
+    .--icon.--nav:hover, .nav__gen-options__icon:hover, .nav__user-options__icon:hover, .--nav.post__head__actions__action:hover {
       color: #f8f8f8;
       background: #343737; }
-    .--icon.--nav.--active, .--active.nav__gen-options__icon, .--active.nav__user-options__icon {
+    .--icon.--nav.--active, .--active.nav__gen-options__icon, .--active.nav__user-options__icon, .--nav.--active.post__head__actions__action {
       background: #343737; }
 
 .--container, .gallery__container {
@@ -177,9 +178,8 @@ img, video {
     .post__head__actions {
       display: flex; }
       .post__head__actions__action {
+        color: #dadada;
         padding: 9.5px;
-        font-size: 20px;
-        line-height: 18px;
         border-radius: 1000px;
         transition: all 0.15s; }
         .post__head__actions__action:hover {

@@ -17,10 +17,9 @@
       display: flex;
       &__action {
         @extend .--bttn;
+        @extend .--icon;
+        color: $mono-light;
         padding: $padding-md;
-        font-size: 20px;
-        line-height: 18px;
-        // height: 20px;
         border-radius: 1000px; // make a circle
         transition: all $trans-sm;
         &:hover {
