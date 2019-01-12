@@ -1,6 +1,7 @@
 // Vars for colors/accents
 // #f57664
-$color-prim: rgba(245,112,100,1);
+$color-prim: rgba(245, 112, 100, 1);
+$color-prim-dark: rgba(215, 90, 82, 1);
 // #f5c264
 $color-sec: rgba(245, 215, 110, 1);
 $grad-prim: linear-gradient(35deg, $color-sec, $color-prim);
@@ -11,7 +12,7 @@ $color-success: rgba(130, 240, 120, 1);
 // Vars for monochromatic shades
 $mono-lighter: rgba(248, 248, 248, 1);
 $mono-light: rgba(218, 218, 218, 1);
-$mono-dark: rgba(55, 59, 59, 1);
+$mono-dark: rgba(52, 55, 55, 1);
 $mono-darker: rgba(33, 35, 35, 1);
 $mono-disabled: rgba(110,110,110,.5);
 
@@ -31,13 +32,14 @@ $padding-xl: 18px;
 
 // Size vars
 $size-border: 3px;
+$size-userimg: 45px;
 $size-nav: 60px;
-$size-container: 800px;
+$size-container: 900px;
 
 // Standard border radius
 $border-radius: 3px;
 
 // transition timing
 $trans-sm: .15s;
-$trans-med: .2s;
+$trans-md: .2s;
 $trans-lg: .4s;

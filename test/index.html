@@ -34,9 +34,128 @@
 
     </div>
     <div class="gallery__container">
-      <div class="gallery__container__posts"></div>
-      <div class="gallery__container__comments"></div>
+      <div class="gallery__container__posts">
+
+        <article class="post --active">
+          <div class="post__head">
+            <a class="profile" href="#user">
+              <img src="resources/profile.jpg" alt="profile" class="profile__picture">
+              <div class="profile__info">
+                <h5>Mikolaj Figurski</h5>
+                <h6>posted: 2 hours ago</h6>
+              </div>
+            </a>
+            <div class="post__head__actions">
+              <i class="post__head__actions__action --active fas fa-heart"></i>
+              <i class="post__head__actions__action fas fa-share-alt"></i>
+            </div>
+          </div>
+          <div class="post__content">
+            <img src="resources/postimg1.jpg" alt="post1">
+          </div>
+          <div class="post__meta">
+            <div class="post__meta__tags">
+              <a class="post__meta__tags__tag" href="#dev">dev</a>
+              <a class="post__meta__tags__tag" href="#images">images</a>
+              <a class="post__meta__tags__tag" href="#testing">testing</a>
+            </div>
+            <div class="post__meta__stats">
+              <h6 class="post__meta__stats__stat">4 <i class="far fa-heart"></i></h6>
+              <h6 class="post__meta__stats__stat">1 <i class="far fa-comment-alt"></i></h6>
+            </div>
+        </div>
+        </article>
+
+        <article class="post">
+          <div class="post__head">
+            <a class="profile" href="#user">
+              <img src="resources/profile.jpg" alt="profile" class="profile__picture">
+              <div class="profile__info">
+                <h5>Mikolaj Figurski</h5>
+                <h6>posted: 2 hours ago</h6>
+              </div>
+            </a>
+            <div class="post__head__actions">
+              <i class="post__head__actions__action far fa-heart"></i>
+              <i class="post__head__actions__action fas fa-share-alt"></i>
+            </div>
+          </div>
+          <div class="post__content">
+            <video src="resources/postvid1.mp4" controls muted autoplay>
+          </div>
+          <div class="post__meta">
+            <div class="post__meta__tags">
+              <a class="post__meta__tags__tag" href="#dev">dev</a>
+              <a class="post__meta__tags__tag" href="#images">images</a>
+              <a class="post__meta__tags__tag" href="#testing">testing</a>
+            </div>
+            <div class="post__meta__stats">
+              <h6 class="post__meta__stats__stat">4 <i class="far fa-heart"></i></h6>
+              <h6 class="post__meta__stats__stat">1 <i class="far fa-comment-alt"></i></h6>
+            </div>
+        </div>
+        </article>
+
+        <article class="post">
+          <div class="post__head">
+            <a class="profile" href="#user">
+              <img src="resources/profile.jpg" alt="profile" class="profile__picture">
+              <div class="profile__info">
+                <h5>Mikolaj Figurski</h5>
+                <h6>posted: 6 hours ago</h6>
+              </div>
+            </a>
+            <div class="post__head__actions">
+              <i class="post__head__actions__action far fa-heart"></i>
+              <i class="post__head__actions__action fas fa-share-alt"></i>
+            </div>
+          </div>
+          <div class="post__content">
+            <p>*Controversial comment on politics* ... and thats why we should abolish elections.</p>
+          </div>
+          <div class="post__meta">
+            <div class="post__meta__tags">
+              <a class="post__meta__tags__tag" href="#dev">dev</a>
+            </div>
+            <div class="post__meta__stats">
+              <h6 class="post__meta__stats__stat">2 <i class="far fa-heart"></i></h6>
+              <h6 class="post__meta__stats__stat">5,304 <i class="far fa-comment-alt"></i></h6>
+          </div>
+        </div>
+        </article>
+
+      </div>
+      <div class="gallery__container__comments">
+
+      </div>
     </div>
   </div>
 </body>
+
+<!-- gallery controls -->
+<script>
+  const galControls = Array.from(document.getElementsByClassName("gallery__controls__panel__option"));
+  galControls.forEach(elem => {
+    elem.onclick = (event) => {
+      galControls.forEach(elm => {elm.classList.remove("--active")});
+      elem.classList.add("--active");
+    }
+  })
+</script>
+<!-- like button -->
+<script>
+  const toggleableHearts = Array.from(document.getElementsByClassName("fa-heart"));
+  toggleableHearts.forEach(heart => {
+    heart.onclick = (event) => {
+      let classList = Array.from(heart.classList);
+      if (classList.some(cssClass => cssClass=="--active")) {
+        heart.classList.remove("--active","fas");
+        heart.classList.add("far");
+      } else {
+        heart.classList.remove("far");
+        heart.classList.add("--active","fas");
+      }
+    }
+  })
+</script>
 </html>

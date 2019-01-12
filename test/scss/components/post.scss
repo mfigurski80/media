@@ -1,0 +1,93 @@
+.post {
+  padding: $padding-md;
+  background: $mono-dark;
+  border-bottom: $size-border solid $mono-darker;
+
+  &__head {
+    width: 100%;
+    margin: $padding-md 0;
+    display: flex;
+    align-items: center;
+
+    .profile {
+      flex: 1;
+    }
+
+    &__actions {
+      display: flex;
+      &__action {
+        @extend .--bttn;
+        padding: $padding-md;
+        font-size: 20px;
+        line-height: 18px;
+        // height: 20px;
+        border-radius: 1000px; // make a circle
+        transition: all $trans-sm;
+        &:hover {
+          background: $color-prim;
+        }
+
+        // an active heart...
+        &.fa-heart.--active {
+          color: $color-prim;
+          &:hover {
+            background: $color-prim;
+            color: $mono-light;
+          }
+        }
+
+      }
+    }
+
+  }
+
+  &__content {
+    @extend .--bttn;
+    display: block;
+    margin: $padding-md 0;
+    padding: $padding-md 0;
+    overflow: hidden;
+    border-radius: $border-radius;
+    line-height: 26px;
+  }
+
+  &__meta {
+    display: flex;
+
+    &__tags {
+      flex: 1;
+      &__tag {
+        @extend .--bttn, .--tag;
+      }
+    }
+
+    &__stats {
+      display: flex;
+      &__stat {
+        padding: $padding-sm;
+      }
+    }
+  }
+
+  // post is being viewed (comments)
+  &.--active {
+    // show an arrow...
+    &:before {
+      content: "";
+      display: block;
+      float: right;
+      position: absolute;
+      margin-top: 80px;
+      margin-left: ( $size-container - $padding-xl ) * 3/5 - 3*$padding-md + 3px;
+      // left: $padding-md + 20px; //is now hugging the wall
+      // bottom: 100px;
+      width: 0;
+      height: 0;
+      box-sizing: content-box;
+      border: $padding-xl solid transparent;
+      border-right-color: $mono-dark;
+
+    }
+  }
+
+}

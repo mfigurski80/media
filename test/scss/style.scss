@@ -6,14 +6,16 @@
 // partials (for performing common actions)
 @import "partials/theme.scss";
 
-// modules (for elements multiple times throughout)
+// modules (for elements multiple times throughout, and within components)
 @import "modules/bttn.scss"; // buttons
 @import "modules/icons.scss"; // icon styles
 @import "modules/container.scss"; // container styles
+@import "modules/profile.scss"; // profile standard
 
 // components (for specific element section)
 @import "components/nav.scss"; // navbar
 @import "components/gallery.scss"; // element holding post structure and allowing 'sections'
+@import "components/post.scss"; // individual post element (technically a module, but too high-level)
 
 html, body {
   @extend .--dark;
@@ -23,8 +25,14 @@ html, body {
   display: grid;
   grid-template-columns: $size-nav auto;
   grid-template-rows: 100vh;
-  height: 100vh;
-  overflow: hidden;
+  // height: 100vh;
+  // overflow: hidden;
+  & > .nav {
+    grid-column: 1;
+  }
+  & > .gallery {
+    grid-column: 2;
+  }
 }
 
 // check out text-stroke

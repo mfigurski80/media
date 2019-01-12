@@ -39,6 +39,7 @@ img, video {
 
 // set selection color (nice if gradient, but kay)
 ::selection {
+  opacity: 1;
   background: $color-sec;
   color: $mono-darker;
 }

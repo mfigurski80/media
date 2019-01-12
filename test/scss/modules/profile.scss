@@ -1,0 +1,17 @@
+.profile {
+  display: flex;
+  text-decoration: none;
+  color: inherit;
+  align-items: center;
+
+  &__picture {
+    @extend .--bttn;
+    width: $size-userimg;
+    height: $size-userimg;
+    // border-radius: $border-radius;
+    border-radius: $size-userimg; //circle
+    overflow: hidden;
+    margin-right: $padding-md;
+  }
+
+}

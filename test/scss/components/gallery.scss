@@ -1,10 +1,13 @@
 .gallery {
   background: $mono-darker;
   display: grid;
+  grid-template-rows: 100vh;
   grid-template-columns: 3fr auto 2fr;
 
   &__controls {
     // background: red;
+    height: 100vh;
+    grid-column: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -12,20 +15,25 @@
 
     &__panel {
       padding: $padding-sm;
-      // width: 130px;
+      position: fixed;
+      // width: 200px;
+
       &__option {
         @extend .--bttn;
         font-size: 15px;
         text-align: right;
         padding: $padding-sm;
+        border-top-left-radius: $border-radius;
+        border-bottom-left-radius: $border-radius;
         border-right: $size-border solid transparent;
         transition: all $trans-sm;
         &:hover {
-          background: $mono-dark;
+          background: $color-prim;
+          // color: $mono-dark;
         }
 
         &.--active {
-          font-weight: bold;
+          // font-weight: bold;
           border-right-color: $color-prim;
         }
       }
@@ -36,17 +44,22 @@
     @extend .--container;
     width: $size-container;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 3fr 2fr;
+    grid-gap: $padding-xl + 5px;
     background: none;
 
     &__posts {
-      height: 100vh;
-      background: $color-sec;
+      min-height: 100vh;
+      // background: $color-sec;
     }
 
     &__comments {
-      height: 100vh;
-      background: $color-prim;
+      // position: fixed;
+      height: 100%;
+      width: 100%;
+      // height: 100%;
+      margin-top: $padding-sm;
+      background: $mono-dark;
     }
   }
 
