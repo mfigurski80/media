@@ -157,7 +157,8 @@ img, video {
     grid-gap: 23px;
     background: none; }
     .gallery__container__posts {
-      min-height: 100vh; }
+      min-height: 100vh;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
     .gallery__container__comments {
       width: 100%; }
       .gallery__container__comments__panel {
@@ -165,7 +166,8 @@ img, video {
         background: #343737;
         position: fixed;
         width: 350.8px;
-        height: 100vh; }
+        height: 100vh;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
 
 .post {
   padding: 9.5px;
@@ -218,7 +220,8 @@ img, video {
     height: 0;
     box-sizing: content-box;
     border: 18px solid transparent;
-    border-right-color: #343737; }
+    border-right-color: #343737;
+    z-index: 10; }
 
 .gen-layout {
   display: grid;

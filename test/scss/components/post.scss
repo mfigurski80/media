@@ -83,7 +83,7 @@
       box-sizing: content-box;
       border: $padding-xl solid transparent;
       border-right-color: $mono-dark;
-
+      z-index: 10;
     }
   }
 
