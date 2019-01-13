@@ -5,6 +5,7 @@
   display: block;
   text-decoration: none;
 
+  // a 'tag' button
   &.--tag {
     display: inline;
     font-size: 14px;
@@ -18,6 +19,19 @@
 
     &:hover {
       background: $color-prim;
+    }
+  }
+
+  // a primary button
+  &.--prim {
+    background: $mono-light;
+    color: $mono-dark;
+    padding: $padding-sm $padding-md;
+    border-radius: $border-radius;
+    transition: all $trans-sm;
+    &:hover {
+      background: $color-prim;
+      color: $mono-light;
     }
   }
 

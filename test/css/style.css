@@ -21,17 +21,27 @@ h1, h2, h3, h4, h5, h6, p, a {
 h1, h2, h3 {
   font-family: 'Montserrat Black', sans-serif; }
 
+p {
+  font-size: 15px;
+  line-height: 23px; }
+
 img, video {
   width: 100%;
   height: auto;
   display: block; }
+
+input {
+  font-family: 'Montserrat', sans-serif;
+  color: inherit;
+  background: none;
+  border: none; }
 
 ::selection {
   opacity: 1;
   background: #f5d76e;
   color: #212323; }
 
-.--dark, html, body {
+.--dark, html {
   background: #212323;
   color: #dadada; }
 
@@ -39,7 +49,7 @@ img, video {
   background: #f8f8f8;
   color: #343737; }
 
-.--prim {
+.--prim, .gallery__container__comments__panel__add-comment > button {
   background: #f57064;
   color: #343737; }
 
@@ -47,22 +57,52 @@ img, video {
   background: #f5d76e;
   color: #343737; }
 
-.--bttn, .--icon.--nav, .nav__gen-options__icon, .nav__user-options__icon, .--nav.post__head__actions__action, .post__head__actions__action.nav__gen-options__icon, .post__head__actions__action.nav__user-options__icon, .profile__picture, .gallery__controls__panel__option, .post__head__actions__action, .post__content, .post__meta__tags__tag, button {
+.--layout.--sidebar, .--sidebar.profile, .--sidebar.gallery__container__comments__panel__add-comment {
+  display: grid;
+  grid-template-columns: 60px auto;
+  grid-template-rows: 100vh; }
+  .--layout.--sidebar:nth-child(1), .--sidebar.profile:nth-child(1), .--sidebar.gallery__container__comments__panel__add-comment:nth-child(1) {
+    grid-column: 1; }
+  .--layout.--sidebar:nth-child(2), .--sidebar.profile:nth-child(2), .--sidebar.gallery__container__comments__panel__add-comment:nth-child(2) {
+    grid-column: 2; }
+.--layout.--large-left, .--large-left.profile, .gallery__container__comments__panel__add-comment {
+  display: flex;
+  flex-direction: row;
+  align-items: center; }
+  .--layout.--large-left:nth-child(1), .--large-left.profile:nth-child(1), .gallery__container__comments__panel__add-comment:nth-child(1) {
+    flex: 1; }
+.--layout.--large-right, .profile, .--large-right.gallery__container__comments__panel__add-comment {
+  display: flex;
+  flex-direction: row;
+  align-items: center; }
+  .--layout.--large-right:nth-child(2), .profile:nth-child(2), .--large-right.gallery__container__comments__panel__add-comment:nth-child(2) {
+    flex: 1; }
+
+.--bttn, .--icon.--nav, .nav__gen-options__icon, .nav__user-options__icon, .--nav.post__head__actions__action, .post__head__actions__action.nav__gen-options__icon, .post__head__actions__action.nav__user-options__icon, .profile__picture, .gallery__controls__panel__option, .gallery__container__comments__panel__add-comment > button, .post__head__actions__action, .post__content, .post__meta__tags__tag, button {
   background: none;
   border: none;
   cursor: pointer;
   display: block;
   text-decoration: none; }
-  .--bttn.--tag, .--tag.--icon.--nav, .--tag.nav__gen-options__icon, .nav__gen-options__icon.post__meta__tags__tag, .--tag.nav__user-options__icon, .nav__user-options__icon.post__meta__tags__tag, .--icon.--nav.post__meta__tags__tag, .--tag.profile__picture, .--tag.gallery__controls__panel__option, .--tag.post__head__actions__action, .--tag.post__content, .post__meta__tags__tag, button.--tag, button.post__meta__tags__tag {
+  .--bttn.--tag, .--tag.--icon.--nav, .--tag.nav__gen-options__icon, .nav__gen-options__icon.post__meta__tags__tag, .--tag.nav__user-options__icon, .nav__user-options__icon.post__meta__tags__tag, .--icon.--nav.post__meta__tags__tag, .--tag.profile__picture, .--tag.gallery__controls__panel__option, .gallery__container__comments__panel__add-comment > button.--tag, .gallery__container__comments__panel__add-comment > button.post__meta__tags__tag, .--tag.post__head__actions__action, .--tag.post__content, .post__meta__tags__tag, button.--tag, button.post__meta__tags__tag {
     display: inline;
     font-size: 14px;
     padding: 5.5px;
     border-radius: 3px;
     transition: all 0.15s; }
-    .--bttn.--tag:before, .--tag.--icon.--nav:before, .--tag.nav__gen-options__icon:before, .nav__gen-options__icon.post__meta__tags__tag:before, .--tag.nav__user-options__icon:before, .nav__user-options__icon.post__meta__tags__tag:before, .--icon.--nav.post__meta__tags__tag:before, .--tag.profile__picture:before, .--tag.gallery__controls__panel__option:before, .--tag.post__head__actions__action:before, .--tag.post__content:before, .post__meta__tags__tag:before, button.--tag:before, button.post__meta__tags__tag:before {
+    .--bttn.--tag:before, .--tag.--icon.--nav:before, .--tag.nav__gen-options__icon:before, .nav__gen-options__icon.post__meta__tags__tag:before, .--tag.nav__user-options__icon:before, .nav__user-options__icon.post__meta__tags__tag:before, .--icon.--nav.post__meta__tags__tag:before, .--tag.profile__picture:before, .--tag.gallery__controls__panel__option:before, .gallery__container__comments__panel__add-comment > button.--tag:before, .--tag.post__head__actions__action:before, .--tag.post__content:before, .post__meta__tags__tag:before, button.--tag:before, button.post__meta__tags__tag:before {
       content: "#"; }
-    .--bttn.--tag:hover, .--tag.--icon.--nav:hover, .--tag.nav__gen-options__icon:hover, .--tag.nav__user-options__icon:hover, .--tag.profile__picture:hover, .--tag.gallery__controls__panel__option:hover, .--tag.post__head__actions__action:hover, .--tag.post__content:hover, .post__meta__tags__tag:hover, button.--tag:hover, button.post__meta__tags__tag:hover {
+    .--bttn.--tag:hover, .--tag.--icon.--nav:hover, .--tag.nav__gen-options__icon:hover, .--tag.nav__user-options__icon:hover, .--tag.profile__picture:hover, .--tag.gallery__controls__panel__option:hover, .gallery__container__comments__panel__add-comment > button.--tag:hover, .--tag.post__head__actions__action:hover, .--tag.post__content:hover, .post__meta__tags__tag:hover, button.--tag:hover, button.post__meta__tags__tag:hover {
       background: #f57064; }
+  .--bttn.--prim, .--prim.--icon.--nav, .--prim.nav__gen-options__icon, .gallery__container__comments__panel__add-comment > button.nav__gen-options__icon, .--prim.nav__user-options__icon, .gallery__container__comments__panel__add-comment > button.nav__user-options__icon, .gallery__container__comments__panel__add-comment > button.--icon.--nav, .--prim.profile__picture, .--prim.gallery__controls__panel__option, .gallery__container__comments__panel__add-comment > button, .--prim.post__head__actions__action, .--prim.post__content, .--prim.post__meta__tags__tag, button.--prim, .gallery__container__comments__panel__add-comment > button {
+    background: #dadada;
+    color: #343737;
+    padding: 5.5px 9.5px;
+    border-radius: 3px;
+    transition: all 0.15s; }
+    .--bttn.--prim:hover, .--prim.--icon.--nav:hover, .--prim.nav__gen-options__icon:hover, .--prim.nav__user-options__icon:hover, .--prim.profile__picture:hover, .--prim.gallery__controls__panel__option:hover, .gallery__container__comments__panel__add-comment > button:hover, .--prim.post__head__actions__action:hover, .--prim.post__content:hover, .--prim.post__meta__tags__tag:hover, button.--prim:hover, .gallery__container__comments__panel__add-comment > button:hover {
+      background: #f57064;
+      color: #dadada; }
 
 .--icon, .nav__gen-options__icon, .nav__user-options__icon, .post__head__actions__action {
   color: #343737;
@@ -88,10 +128,8 @@ img, video {
   background: rgba(110, 110, 110, 0.5); }
 
 .profile {
-  display: flex;
   text-decoration: none;
-  color: inherit;
-  align-items: center; }
+  color: inherit; }
   .profile__picture {
     width: 45px;
     height: 45px;
@@ -163,11 +201,12 @@ img, video {
       width: 100%; }
       .gallery__container__comments__panel {
         display: inline-block;
-        background: #343737;
         position: fixed;
+        overflow: auto;
         width: 350.8px;
-        height: 100vh;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
+        height: 100vh; }
+        .gallery__container__comments__panel__add-comment > input {
+          padding: 5.5px; }
 
 .post {
   padding: 9.5px;
@@ -222,6 +261,17 @@ img, video {
     border: 18px solid transparent;
     border-right-color: #343737;
     z-index: 10; }
+
+.comment, .gallery__container__comments__panel__add-comment {
+  margin-top: 5.5px;
+  padding: 18px;
+  background: #343737; }
+  .comment__user {
+    display: block;
+    padding: 5.5px 0;
+    font-size: 13px; }
+  .comment:last-of-type, .gallery__container__comments__panel__add-comment:last-of-type {
+    margin-bottom: 5.5px; }
 
 .gen-layout {
   display: grid;

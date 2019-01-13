@@ -56,11 +56,25 @@
 
       &__panel {
         display: inline-block;
-        background: $mono-dark;
         position: fixed;
+        overflow: auto;
         width: ( $size-container - $padding-xl - 5px) * 2/5;
         height: 100vh;
-        box-shadow: $shadow-200;
+
+        // add-comment section in comment panel
+        &__add-comment {
+          @extend .comment;
+          @extend .--layout, .--large-left;
+          // display: flex;
+
+          & > input {
+            // flex: 1;
+            padding: $padding-sm;
+          }
+          & > button {
+            @extend .--bttn, .--prim;
+          }
+        }
       }
 
     }

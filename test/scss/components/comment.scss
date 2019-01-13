@@ -1,0 +1,19 @@
+.comment {
+  margin-top: $padding-sm;
+  padding: $padding-xl;
+  background: $mono-dark;
+
+  &__user {
+    display: block;
+    padding: $padding-sm 0;
+    font-size: 13px;
+    // background: red;
+  }
+  &__content {
+
+  }
+
+  &:last-of-type { // give last one a bottom margin
+    margin-bottom: $padding-sm;
+  }
+}

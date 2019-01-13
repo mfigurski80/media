@@ -5,6 +5,7 @@
 
 // partials (for performing common actions)
 @import "partials/theme.scss";
+@import "partials/layout.scss";
 
 // modules (for elements multiple times throughout, and within components)
 @import "modules/bttn.scss"; // buttons
@@ -16,17 +17,20 @@
 @import "components/nav.scss"; // navbar
 @import "components/gallery.scss"; // element holding post structure and allowing 'sections'
 @import "components/post.scss"; // individual post element (technically a module, but too high-level)
+@import "components/comment.scss"; // individual comment element
 
-html, body {
+html {
   @extend .--dark;
+}
+
+body {
+  // @extend .--layout, .--sidebar;
 }
 
 .gen-layout {
   display: grid;
   grid-template-columns: $size-nav auto;
   grid-template-rows: 100vh;
-  // height: 100vh;
-  // overflow: hidden;
   & > .nav {
     grid-column: 1;
   }

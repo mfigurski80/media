@@ -1,0 +1,36 @@
+.--layout {
+
+  // sidebar layout (for nav)
+  &.--sidebar {
+    display: grid;
+    grid-template-columns: $size-nav auto;
+    grid-template-rows: 100vh;
+    // border: 20px solid red;
+    &:nth-child(1) { // hard set the grid columns (in case children are fixed or something)
+      grid-column: 1;
+    }
+    &:nth-child(2) {
+      grid-column: 2;
+    }
+  }
+
+  // 2 col with left expanded
+  &.--large-left {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    &:nth-child(1) {
+      // background: red !important; //TODO
+      flex: 1; // make left take up all space
+    }
+  }
+
+  &.--large-right {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    &:nth-child(2) {
+      flex: 1;
+    }
+  }
+}

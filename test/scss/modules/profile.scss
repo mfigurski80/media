@@ -1,8 +1,16 @@
+// html structure should look like:
+// <a class="profile" href="#user">
+//   <img src="resources/profile.jpg" alt="profile" class="profile__picture">
+//   <div class="profile__info">
+//     <h5>Mikolaj Figurski</h5>
+//     <h6>posted: 2 hours ago</h6>
+//   </div>
+// </a>
+
 .profile {
-  display: flex;
+  @extend .--layout,.--large-right;
   text-decoration: none;
   color: inherit;
-  align-items: center;
 
   &__picture {
     @extend .--bttn;
@@ -12,6 +20,10 @@
     border-radius: $size-userimg; //circle
     overflow: hidden;
     margin-right: $padding-md;
+  }
+
+  &__info {
+    
   }
 
 }
