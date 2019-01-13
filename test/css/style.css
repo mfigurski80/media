@@ -78,29 +78,29 @@ input {
   .--layout.--large-right:nth-child(2), .profile:nth-child(2), .--large-right.gallery__container__comments__panel__add-comment:nth-child(2) {
     flex: 1; }
 
-.--bttn, .--icon.--nav, .nav__gen-options__icon, .nav__user-options__icon, .--nav.post__head__actions__action, .post__head__actions__action.nav__gen-options__icon, .post__head__actions__action.nav__user-options__icon, .profile__picture, .gallery__controls__panel__option, .gallery__container__comments__panel__add-comment > button, .post__head__actions__action, .post__content, .post__meta__tags__tag, button {
+.--bttn, .--icon.--nav, .nav__gen-options__icon, .nav__user-options__icon, .--nav.post__head__actions__action, .post__head__actions__action.nav__gen-options__icon, .post__head__actions__action.nav__user-options__icon, .profile__picture, .nav__user-options__profile, .gallery__controls__panel__option, .gallery__container__comments__panel__add-comment > button, .post__head__actions__action, .post__content, .post__meta__tags__tag, button {
   background: none;
   border: none;
   cursor: pointer;
   display: block;
   text-decoration: none; }
-  .--bttn.--tag, .--tag.--icon.--nav, .--tag.nav__gen-options__icon, .nav__gen-options__icon.post__meta__tags__tag, .--tag.nav__user-options__icon, .nav__user-options__icon.post__meta__tags__tag, .--icon.--nav.post__meta__tags__tag, .--tag.profile__picture, .--tag.gallery__controls__panel__option, .gallery__container__comments__panel__add-comment > button.--tag, .gallery__container__comments__panel__add-comment > button.post__meta__tags__tag, .--tag.post__head__actions__action, .--tag.post__content, .post__meta__tags__tag, button.--tag, button.post__meta__tags__tag {
+  .--bttn.--tag, .--tag.--icon.--nav, .--tag.nav__gen-options__icon, .nav__gen-options__icon.post__meta__tags__tag, .--tag.nav__user-options__icon, .nav__user-options__icon.post__meta__tags__tag, .--icon.--nav.post__meta__tags__tag, .--tag.profile__picture, .--tag.nav__user-options__profile, .--tag.gallery__controls__panel__option, .gallery__container__comments__panel__add-comment > button.--tag, .gallery__container__comments__panel__add-comment > button.post__meta__tags__tag, .--tag.post__head__actions__action, .--tag.post__content, .post__meta__tags__tag, button.--tag, button.post__meta__tags__tag {
     display: inline;
     font-size: 14px;
     padding: 5.5px;
     border-radius: 3px;
     transition: all 0.15s; }
-    .--bttn.--tag:before, .--tag.--icon.--nav:before, .--tag.nav__gen-options__icon:before, .nav__gen-options__icon.post__meta__tags__tag:before, .--tag.nav__user-options__icon:before, .nav__user-options__icon.post__meta__tags__tag:before, .--icon.--nav.post__meta__tags__tag:before, .--tag.profile__picture:before, .--tag.gallery__controls__panel__option:before, .gallery__container__comments__panel__add-comment > button.--tag:before, .--tag.post__head__actions__action:before, .--tag.post__content:before, .post__meta__tags__tag:before, button.--tag:before, button.post__meta__tags__tag:before {
+    .--bttn.--tag:before, .--tag.--icon.--nav:before, .--tag.nav__gen-options__icon:before, .nav__gen-options__icon.post__meta__tags__tag:before, .--tag.nav__user-options__icon:before, .nav__user-options__icon.post__meta__tags__tag:before, .--icon.--nav.post__meta__tags__tag:before, .--tag.profile__picture:before, .--tag.nav__user-options__profile:before, .--tag.gallery__controls__panel__option:before, .gallery__container__comments__panel__add-comment > button.--tag:before, .--tag.post__head__actions__action:before, .--tag.post__content:before, .post__meta__tags__tag:before, button.--tag:before, button.post__meta__tags__tag:before {
       content: "#"; }
-    .--bttn.--tag:hover, .--tag.--icon.--nav:hover, .--tag.nav__gen-options__icon:hover, .--tag.nav__user-options__icon:hover, .--tag.profile__picture:hover, .--tag.gallery__controls__panel__option:hover, .gallery__container__comments__panel__add-comment > button.--tag:hover, .--tag.post__head__actions__action:hover, .--tag.post__content:hover, .post__meta__tags__tag:hover, button.--tag:hover, button.post__meta__tags__tag:hover {
+    .--bttn.--tag:hover, .--tag.--icon.--nav:hover, .--tag.nav__gen-options__icon:hover, .--tag.nav__user-options__icon:hover, .--tag.profile__picture:hover, .--tag.nav__user-options__profile:hover, .--tag.gallery__controls__panel__option:hover, .gallery__container__comments__panel__add-comment > button.--tag:hover, .--tag.post__head__actions__action:hover, .--tag.post__content:hover, .post__meta__tags__tag:hover, button.--tag:hover, button.post__meta__tags__tag:hover {
       background: #f57064; }
-  .--bttn.--prim, .--prim.--icon.--nav, .--prim.nav__gen-options__icon, .gallery__container__comments__panel__add-comment > button.nav__gen-options__icon, .--prim.nav__user-options__icon, .gallery__container__comments__panel__add-comment > button.nav__user-options__icon, .gallery__container__comments__panel__add-comment > button.--icon.--nav, .--prim.profile__picture, .--prim.gallery__controls__panel__option, .gallery__container__comments__panel__add-comment > button, .--prim.post__head__actions__action, .--prim.post__content, .--prim.post__meta__tags__tag, button.--prim, .gallery__container__comments__panel__add-comment > button {
+  .--bttn.--prim, .--prim.--icon.--nav, .--prim.nav__gen-options__icon, .gallery__container__comments__panel__add-comment > button.nav__gen-options__icon, .--prim.nav__user-options__icon, .gallery__container__comments__panel__add-comment > button.nav__user-options__icon, .gallery__container__comments__panel__add-comment > button.--icon.--nav, .--prim.profile__picture, .--prim.nav__user-options__profile, .--prim.gallery__controls__panel__option, .gallery__container__comments__panel__add-comment > button, .--prim.post__head__actions__action, .--prim.post__content, .--prim.post__meta__tags__tag, button.--prim, .gallery__container__comments__panel__add-comment > button {
     background: #dadada;
     color: #343737;
-    padding: 5.5px 9.5px;
+    padding: 9.5px 13px;
     border-radius: 3px;
     transition: all 0.15s; }
-    .--bttn.--prim:hover, .--prim.--icon.--nav:hover, .--prim.nav__gen-options__icon:hover, .--prim.nav__user-options__icon:hover, .--prim.profile__picture:hover, .--prim.gallery__controls__panel__option:hover, .gallery__container__comments__panel__add-comment > button:hover, .--prim.post__head__actions__action:hover, .--prim.post__content:hover, .--prim.post__meta__tags__tag:hover, button.--prim:hover, .gallery__container__comments__panel__add-comment > button:hover {
+    .--bttn.--prim:hover, .--prim.--icon.--nav:hover, .--prim.nav__gen-options__icon:hover, .--prim.nav__user-options__icon:hover, .--prim.profile__picture:hover, .--prim.nav__user-options__profile:hover, .--prim.gallery__controls__panel__option:hover, .gallery__container__comments__panel__add-comment > button:hover, .--prim.post__head__actions__action:hover, .--prim.post__content:hover, .--prim.post__meta__tags__tag:hover, button.--prim:hover, .gallery__container__comments__panel__add-comment > button:hover {
       background: #f57064;
       color: #dadada; }
 
@@ -160,6 +160,12 @@ input {
     padding: 5.5px 0; }
   .nav__user-options {
     padding: 5.5px 0; }
+    .nav__user-options__profile {
+      padding: 5.5px;
+      border-radius: 60px;
+      transition: all 0.15s; }
+      .nav__user-options__profile:hover {
+        background: #343737; }
 
 .gallery {
   background: #212323;
@@ -207,7 +213,7 @@ input {
         width: 350.8px;
         height: 100vh; }
         .gallery__container__comments__panel__add-comment > input {
-          padding: 5.5px; }
+          padding: 5.5px 5.5px 5.5px 0; }
 
 .post {
   padding: 9.5px;

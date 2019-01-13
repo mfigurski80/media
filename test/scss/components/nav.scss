@@ -35,6 +35,17 @@
     &__icon {
       @extend .--icon, .--nav;
     }
+
+    &__profile {
+      @extend .--bttn;
+      padding: $padding-sm;
+      border-radius: $size-nav;
+      transition: all $trans-sm;
+
+      &:hover {
+        background: $mono-dark;
+      }
+    }
   }
 
 }
