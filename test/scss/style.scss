@@ -24,20 +24,9 @@ html {
 }
 
 body {
-  // @extend .--layout, .--sidebar;
+  @extend .--layout, .--sidebar;
 }
 
-.gen-layout {
-  display: grid;
-  grid-template-columns: $size-nav auto;
-  grid-template-rows: 100vh;
-  & > .nav {
-    grid-column: 1;
-  }
-  & > .gallery {
-    grid-column: 2;
-  }
-}
 
 // check out text-stroke
 // https://ionicons.com/ icons

@@ -4,13 +4,11 @@
   border-bottom: $size-border solid $mono-darker;
 
   &__head {
+    @extend .--layout, .--large-left;
     width: 100%;
     margin: $padding-md 0;
-    display: flex;
-    align-items: center;
 
     .profile {
-      flex: 1;
     }
 
     &__actions {
@@ -51,10 +49,9 @@
   }
 
   &__meta {
-    display: flex;
+    @extend .--layout, .--large-left;
 
     &__tags {
-      flex: 1;
       &__tag {
         @extend .--bttn, .--tag;
       }
