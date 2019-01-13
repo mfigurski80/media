@@ -59,6 +59,7 @@
         display: inline-block;
         position: fixed;
         overflow: auto;
+        padding-right: $padding-md; // give scrollbar space
         width: ( $size-container - $padding-xl - 5px) * 2/5;
         height: 100vh;
 

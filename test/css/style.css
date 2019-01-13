@@ -210,6 +210,7 @@ input {
         display: inline-block;
         position: fixed;
         overflow: auto;
+        padding-right: 9.5px;
         width: 350.8px;
         height: 100vh; }
         .gallery__container__comments__panel__add-comment > input {
