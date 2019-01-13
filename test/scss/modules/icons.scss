@@ -13,11 +13,14 @@
     color: $mono-light;
     &:hover {
       color: $mono-lighter;
-      background: $mono-dark;
+      background: $color-prim;
     }
 
     &.--active {
       background: $mono-dark;
+      &:hover {
+        background: $color-prim;
+      }
     }
   }
 

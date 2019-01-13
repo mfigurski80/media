@@ -1,7 +1,8 @@
 .post {
   padding: $padding-md;
   background: $mono-dark;
-  border-bottom: $size-border solid $mono-darker;
+  margin: $padding-sm 0;
+  box-shadow: $shadow-200;
 
   &__head {
     @extend .--layout, .--large-left;

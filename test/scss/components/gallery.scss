@@ -48,8 +48,15 @@
 
     &__posts {
       min-height: 100vh;
-      // background: $color-sec;
-      box-shadow: $shadow-200;
+
+      &__new-post {
+        padding: $padding-md;
+        margin: $padding-sm 0;
+        display: block;
+        text-align: center;
+        margin-top: $padding-sm;
+        line-height: 40px;
+      }
     }
 
     &__comments {
