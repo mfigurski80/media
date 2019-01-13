@@ -24,6 +24,7 @@
         border-top-left-radius: $border-radius;
         border-bottom-left-radius: $border-radius;
         border-right: $size-border solid transparent;
+        border-left: $size-border solid transparent; // even it out
         transition: all $trans-sm;
         &:hover {
           background: $color-prim;
