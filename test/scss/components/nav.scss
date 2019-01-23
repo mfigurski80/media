@@ -1,51 +1,22 @@
+// html structure looks like this:
+// <nav class="nav">
+//   <div class="nav__slider">
+//   </div>
+// </nav>
+
 .nav {
-  background: $mono-darker;
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 100;
+  background: $color-prim;
   height: 100vh;
   width: $size-nav;
-  padding-bottom: $padding-sm;
-  display: flex;
-  flex-direction: column;
+  // padding-bottom: $padding-sm;
 
-  &__logo {
-    width: $size-nav;
-    height: $size-nav;
-    // background: $mono-light;
-    padding: $padding-lg;
-    & img {
-      box-shadow: $shadow-300;
-      border-radius: $border-radius;
-    }
-  }
-
-  &__gen-options {
-    flex: 1;
-    padding: $padding-sm 0;
-    &__icon { // all buttons
-      @extend .--icon, .--nav;
-
-    }
-  }
-
-  &__user-options {
-    padding: $padding-sm 0;
-    &__icon {
-      @extend .--icon, .--nav;
-    }
-
-    &__profile {
-      @extend .--bttn;
-      padding: $padding-sm;
-      border-radius: $size-nav;
-      transition: all $trans-sm;
-
-      &:hover {
-        background: $mono-dark;
-      }
-    }
+  .nav__slider {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    @extend .--layout.--large-right; // use as 3 col with large center
+    flex-direction: column;
   }
 
 }

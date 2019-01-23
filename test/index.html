@@ -4,167 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="theme-color" content="#212323">
+  <meta name="theme-color" content="rgba(33, 35, 35, 1)">
   <link rel="shortcut icon" type="image/png" href="resources/watermarkredyellow.png">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
   <link rel="stylesheet" href="css/style.css">
   <title>Media</title>
 </head>
-<body class="gen-layout">
-  <nav class="nav">
-    <div class="nav__logo">
-      <a href="http://meeksfigs.surge.sh"><img src="resources/watermarkredyellow.png" alt="watermark"></a>
-    </div>
-    <div class="nav__gen-options">
-      <a class="nav__gen-options__icon --active" href="#home"><i class="fas fa-home"></i></a>
-      <a class="nav__gen-options__icon" href="#hoe"><i class="fas fa-plus"></i></a>
-      <a class="nav__gen-options__icon" href="#ho"><i class="fas fa-user"></i></a>
-    </div>
-    <div class="nav__user-options">
-      <i class="nav__user-options__icon fas fa-bell"></i>
-      <img src="resources/profile.jpg" alt="profile" class="nav__user-options__profile">
-    </div>
-  </nav>
-  <div class="gallery">
-    <div class="gallery__controls">
-      <div class="gallery__controls__panel">
-        <p class="gallery__controls__panel__option --active">recent</p>
-        <p class="gallery__controls__panel__option">trending</p>
-        <p class="gallery__controls__panel__option">subscribed</p>
-      </div>
+<body>
 
-    </div>
-    <div class="gallery__container">
-      <div class="gallery__container__posts">
+<!-- <nav class="nav">
+  <div class="nav__slider">
 
-        <a href="#new-post" class="gallery__container__posts__new-post">
-          <p>What's on ur mind today?</p>
-          <i class="fas fa-plus"></i>
-        </a>
-
-        <article class="post">
-          <div class="post__head">
-            <a class="profile" href="#user">
-              <img src="resources/profile.jpg" alt="profile" class="profile__picture">
-              <div class="profile__info">
-                <h5>Tom Smith</h5>
-                <h6>posted: 2 hours ago</h6>
-              </div>
-            </a>
-            <div class="post__head__actions">
-              <i class="post__head__actions__action --active fas fa-heart"></i>
-              <i class="post__head__actions__action fas fa-share-alt"></i>
-            </div>
-          </div>
-          <div class="post__content">
-            <img src="resources/postimg1.jpg" alt="post1">
-          </div>
-          <div class="post__meta">
-            <div class="post__meta__tags">
-              <a class="post__meta__tags__tag" href="#dev">dev</a>
-              <a class="post__meta__tags__tag" href="#images">images</a>
-              <a class="post__meta__tags__tag" href="#testing">testing</a>
-            </div>
-            <div class="post__meta__stats">
-              <h6 class="post__meta__stats__stat">4 <i class="far fa-heart"></i></h6>
-              <h6 class="post__meta__stats__stat">1 <i class="far fa-comment-alt"></i></h6>
-            </div>
-        </div>
-        </article>
-
-        <article class="post --active">
-          <div class="post__head">
-            <a class="profile" href="#user">
-              <img src="resources/profile.jpg" alt="profile" class="profile__picture">
-              <div class="profile__info">
-                <h5>Tom Smith</h5>
-                <h6>posted: 2 hours ago</h6>
-              </div>
-            </a>
-            <div class="post__head__actions">
-              <i class="post__head__actions__action far fa-heart"></i>
-              <i class="post__head__actions__action fas fa-share-alt"></i>
-            </div>
-          </div>
-          <div class="post__content">
-            <video src="resources/postvid1.mp4" controls muted autoplay>
-          </div>
-          <div class="post__meta">
-            <div class="post__meta__tags">
-              <a class="post__meta__tags__tag" href="#dev">dev</a>
-              <a class="post__meta__tags__tag" href="#images">images</a>
-              <a class="post__meta__tags__tag" href="#testing">testing</a>
-            </div>
-            <div class="post__meta__stats">
-              <h6 class="post__meta__stats__stat">4 <i class="far fa-heart"></i></h6>
-              <h6 class="post__meta__stats__stat">1 <i class="far fa-comment-alt"></i></h6>
-            </div>
-        </div>
-        </article>
-
-        <article class="post">
-          <div class="post__head">
-            <a class="profile" href="#user">
-              <img src="resources/profile.jpg" alt="profile" class="profile__picture">
-              <div class="profile__info">
-                <h5>Tom Smith</h5>
-                <h6>posted: 6 hours ago</h6>
-              </div>
-            </a>
-            <div class="post__head__actions">
-              <i class="post__head__actions__action far fa-heart"></i>
-              <i class="post__head__actions__action fas fa-share-alt"></i>
-            </div>
-          </div>
-          <div class="post__content">
-            <p>*Controversial comment on politics* ... and thats why we should abolish elections.</p>
-          </div>
-          <div class="post__meta">
-            <div class="post__meta__tags">
-              <a class="post__meta__tags__tag" href="#dev">dev</a>
-            </div>
-            <div class="post__meta__stats">
-              <h6 class="post__meta__stats__stat">2 <i class="far fa-heart"></i></h6>
-              <h6 class="post__meta__stats__stat">5,304 <i class="far fa-comment-alt"></i></h6>
-          </div>
-        </div>
-        </article>
-
-      </div>
-      <div class="gallery__container__comments">
-        <div class="gallery__container__comments__panel">
-
-          <form class="gallery__container__comments__panel__add-comment">
-            <input type="text" placeholder="Type a comment...">
-            <button>Post</button>
-          </form>
-
-          <div class="comment">
-            <a href="#user" class="comment__user">Tom Smith</a>
-            <p class="comment__content">This is a demo comment. This entire bar will appear, with the appropriate comments, when an individual post is clicked on.</p>
-          </div>
-          <div class="comment">
-            <a href="#user" class="comment__user">Tom Smith</a>
-            <p class="comment__content">In the final version, the arrow will hopefully track the comments</p>
-          </div>
-          <div class="comment">
-            <a href="#user" class="comment__user">Tom Smith</a>
-            <p class="comment__content">In the final version, the arrow will hopefully track the comments</p>
-          </div>
-          <div class="comment">
-            <a href="#user" class="comment__user">Tom Smith</a>
-            <p class="comment__content">In the final version, the arrow will hopefully track the comments</p>
-          </div>
-          <div class="comment">
-            <a href="#user" class="comment__user">Tom Smith</a>
-            <p class="comment__content">In the final version, the arrow will hopefully track the comments</p>
-          </div>
-
-        </div>
-      </div>
-    </div>
   </div>
+</nav> -->
+
 </body>
+
+</html>
 
 <!-- gallery controls -->
 <script>
@@ -192,4 +48,3 @@
     }
   })
 </script>
-</html>

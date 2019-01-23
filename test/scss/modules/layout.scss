@@ -25,6 +25,8 @@
     }
   }
 
+  // 2 col with right expanded
+  // can also technically be used as 3 col with center expanded
   &.--large-right {
     display: flex;
     flex-direction: row;
@@ -33,4 +35,5 @@
       flex: 1;
     }
   }
+
 }

@@ -1,3 +1,33 @@
+// html structure looks like this:
+// <article class="post">
+//   <div class="post__head">
+//     <a class="profile" href="#user">
+//       <img src="resources/profile.jpg" alt="profile" class="profile__picture">
+//       <div class="profile__info">
+//         <h5>User Name</h5>
+//         <h6>posted: n hours ago</h6>
+//       </div>
+//     </a>
+//     <div class="post__head__actions">
+//       <i class="post__head__actions__action --active fas fa-heart"></i>
+//       <i class="post__head__actions__action fas fa-share-alt"></i>
+//     </div>
+//   </div>
+//   <div class="post__content"> <!-- actual content -->
+//     <img src="resources/postimg1.jpg" alt="post1">
+//   </div>
+//   <div class="post__meta">
+//     <div class="post__meta__tags">
+//       <a class="post__meta__tags__tag" href="#demo">demo</a>
+//     </div>
+//     <div class="post__meta__stats">
+//       <h6 class="post__meta__stats__stat">n <i class="far fa-heart"></i></h6>
+//       <h6 class="post__meta__stats__stat">n <i class="far fa-comment-alt"></i></h6>
+//     </div>
+// </div>
+// </article>
+
+
 .post {
   padding: $padding-md;
   background: $mono-dark;
@@ -16,7 +46,7 @@
       display: flex;
       &__action {
         @extend .--bttn;
-        @extend .--icon;
+        // @extend .--icon;
         color: $mono-light;
         padding: $padding-md;
         border-radius: 1000px; // make a circle

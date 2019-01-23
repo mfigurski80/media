@@ -1,13 +1,17 @@
 // Vars for colors/accents
-// #f57664
 $color-prim: rgba(245, 112, 100, 1);
-$color-prim-dark: rgba(215, 90, 82, 1);
-// #f5c264
+$color-prim-light: #F57D72;
+$color-prim-dark: #DF665B;
 $color-sec: rgba(245, 215, 110, 1);
-$grad-prim: linear-gradient(35deg, $color-sec, $color-prim);
+$color-sec-light: #F6DE88;
+$color-sec-dark: #DFC464;
 
-$color-error: red;
-$color-success: rgba(130, 240, 120, 1);
+$grad-prim: linear-gradient(35deg, $color-prim, $color-prim-light);
+$grad-sec: linear-gradient(35deg, $color-sec, $color-sec-light);
+$grad-cross: linear-gradient(35deg, $color-sec, $color-prim);
+
+$color-error: #FF5E5B;
+$color-success: #88AB75;
 
 // Vars for monochromatic shades
 $mono-lighter: rgba(248, 248, 248, 1);
@@ -33,7 +37,7 @@ $padding-xl: 18px;
 // Size vars
 $size-border: 3px;
 $size-userimg: 45px;
-$size-nav: 60px;
+$size-nav: 70px;
 $size-container: 900px;
 
 // Standard border radius

@@ -4,14 +4,12 @@
 @import "reset.scss";
 
 // partials (for performing common actions)
-@import "partials/theme.scss";
-@import "partials/layout.scss";
 
 // modules (for elements multiple times throughout, and within components)
 @import "modules/bttn.scss"; // buttons
-@import "modules/icons.scss"; // icon styles
 @import "modules/container.scss"; // container styles
 @import "modules/profile.scss"; // profile standard
+@import "modules/layout.scss";
 
 // components (for specific element section)
 @import "components/nav.scss"; // navbar
@@ -20,11 +18,12 @@
 @import "components/comment.scss"; // individual comment element
 
 html {
-  @extend .--dark;
+
 }
 
 body {
-  @extend .--layout, .--sidebar;
+  min-height: 100vh;
+  background: $color-sec;
 }
 
 

@@ -1,3 +1,9 @@
+// html structure should look like this:
+// <div class="comment">
+//   <a href="#user" class="comment__user">Tom Smith</a>
+//   <p class="comment__content">This is a demo comment. This entire bar will appear, with the appropriate comments, when an individual post is clicked on.</p>
+// </div>
+
 .comment {
   margin-top: $padding-sm;
   padding: $padding-xl;

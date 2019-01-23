@@ -1,3 +1,34 @@
+// html structure looks like:
+// <div class="gallery">
+//   <div class="gallery__controls">
+//     <div class="gallery__controls__panel">
+//       <p class="gallery__controls__panel__option --active">recent</p>
+//       <p class="gallery__controls__panel__option">trending</p>
+//       <p class="gallery__controls__panel__option">subscribed</p>
+//     </div>
+//   </div>
+//   <div class="gallery__container">
+//     <div class="gallery__container__posts">
+//
+//       <a href="#new-post" class="gallery__container__posts__new-post">
+//         <p>What's on ur mind today?</p>
+//         <i class="fas fa-plus"></i>
+//       </a>
+//
+//     </div>
+//     <div class="gallery__container__comments">
+//       <div class="gallery__container__comments__panel">
+//
+//         <form class="gallery__container__comments__panel__add-comment">
+//           <input type="text" placeholder="Type a comment...">
+//           <button>Post</button>
+//         </form>
+//
+//       </div>
+//     </div>
+//   </div>
+// </div>
+
 .gallery {
   background: $mono-darker;
   display: grid;
