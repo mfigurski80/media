@@ -13,7 +13,7 @@
 
 // components (for specific element section)
 @import "components/nav.scss"; // navbar
-@import "components/gallery.scss"; // element holding post structure and allowing 'sections'
+@import "components/slider.scss"; // slider that actually moves the posts
 @import "components/post.scss"; // individual post element (technically a module, but too high-level)
 @import "components/comment.scss"; // individual comment element
 

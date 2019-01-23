@@ -4,7 +4,8 @@
   box-sizing: inherit; }
 
 :root {
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  color: #343737; }
 
 a {
   color: inherit; }
@@ -41,34 +42,34 @@ input {
   background: #f5d76e;
   color: #212323; }
 
-.--bttn, .profile__picture, .nav__wrapper__top > i, .nav__wrapper__bottom > i, .nav__wrapper__bottom__userimg > img, .gallery__controls__panel__option, .gallery__container__comments__panel__add-comment > button, .post__head__actions__action, .post__content, .post__meta__tags__tag, button {
+.--bttn, .profile__picture, .nav__wrapper__top > i, .nav__wrapper__bottom > i, .nav__wrapper__bottom__userimg > img, .slider__controls__arrow, .post__head__actions__action, .post__content, .post__meta__tags__tag, button {
   background: none;
   border: none;
   cursor: pointer;
   display: block;
   text-decoration: none;
-  transition: all 0.15s; }
-  .--bttn.--tag, .--tag.profile__picture, .nav__wrapper__top > i.--tag, .nav__wrapper__top > i.post__meta__tags__tag, .nav__wrapper__bottom > i.--tag, .nav__wrapper__bottom > i.post__meta__tags__tag, .nav__wrapper__bottom__userimg > img.--tag, .nav__wrapper__bottom__userimg > img.post__meta__tags__tag, .--tag.gallery__controls__panel__option, .gallery__container__comments__panel__add-comment > button.--tag, .gallery__container__comments__panel__add-comment > button.post__meta__tags__tag, .--tag.post__head__actions__action, .--tag.post__content, .post__meta__tags__tag, button.--tag, button.post__meta__tags__tag {
+  transition: all 0.17s; }
+  .--bttn.--tag, .--tag.profile__picture, .nav__wrapper__top > i.--tag, .nav__wrapper__top > i.post__meta__tags__tag, .nav__wrapper__bottom > i.--tag, .nav__wrapper__bottom > i.post__meta__tags__tag, .nav__wrapper__bottom__userimg > img.--tag, .nav__wrapper__bottom__userimg > img.post__meta__tags__tag, .--tag.slider__controls__arrow, .--tag.post__head__actions__action, .--tag.post__content, .post__meta__tags__tag, button.--tag, button.post__meta__tags__tag {
     display: inline;
     font-size: 14px;
     padding: 5.5px;
     border-radius: 25px;
-    transition: all 0.15s; }
-    .--bttn.--tag:before, .--tag.profile__picture:before, .nav__wrapper__top > i.--tag:before, .nav__wrapper__bottom > i.--tag:before, .nav__wrapper__bottom__userimg > img.--tag:before, .--tag.gallery__controls__panel__option:before, .gallery__container__comments__panel__add-comment > button.--tag:before, .--tag.post__head__actions__action:before, .--tag.post__content:before, .post__meta__tags__tag:before, button.--tag:before, button.post__meta__tags__tag:before {
+    transition: all 0.17s; }
+    .--bttn.--tag:before, .--tag.profile__picture:before, .nav__wrapper__top > i.--tag:before, .nav__wrapper__bottom > i.--tag:before, .nav__wrapper__bottom__userimg > img.--tag:before, .--tag.slider__controls__arrow:before, .--tag.post__head__actions__action:before, .--tag.post__content:before, .post__meta__tags__tag:before, button.--tag:before, button.post__meta__tags__tag:before {
       content: "#"; }
-    .--bttn.--tag:hover, .--tag.profile__picture:hover, .nav__wrapper__top > i.--tag:hover, .nav__wrapper__bottom > i.--tag:hover, .nav__wrapper__bottom__userimg > img.--tag:hover, .--tag.gallery__controls__panel__option:hover, .gallery__container__comments__panel__add-comment > button.--tag:hover, .--tag.post__head__actions__action:hover, .--tag.post__content:hover, .post__meta__tags__tag:hover, button.--tag:hover, button.post__meta__tags__tag:hover {
+    .--bttn.--tag:hover, .--tag.profile__picture:hover, .nav__wrapper__top > i.--tag:hover, .nav__wrapper__bottom > i.--tag:hover, .nav__wrapper__bottom__userimg > img.--tag:hover, .--tag.slider__controls__arrow:hover, .--tag.post__head__actions__action:hover, .--tag.post__content:hover, .post__meta__tags__tag:hover, button.--tag:hover, button.post__meta__tags__tag:hover {
       background: #f57064; }
-  .--bttn.--nav, .--nav.profile__picture, .nav__wrapper__top > i, .nav__wrapper__bottom > i, .nav__wrapper__bottom__userimg > img.--nav, .--nav.gallery__controls__panel__option, .gallery__container__comments__panel__add-comment > button.--nav, .--nav.post__head__actions__action, .--nav.post__content, .--nav.post__meta__tags__tag, button.--nav {
-    font-size: 32px;
+  .--bttn.--nav, .--nav.profile__picture, .nav__wrapper__top > i, .nav__wrapper__bottom > i, .nav__wrapper__bottom__userimg > img.--nav, .--nav.slider__controls__arrow, .--nav.post__head__actions__action, .--nav.post__content, .--nav.post__meta__tags__tag, button.--nav {
+    font-size: 25px;
     padding: 38px; }
-    .--bttn.--nav:hover, .--nav.profile__picture:hover, .nav__wrapper__top > i:hover, .nav__wrapper__bottom > i:hover, .nav__wrapper__bottom__userimg > img.--nav:hover, .--nav.gallery__controls__panel__option:hover, .gallery__container__comments__panel__add-comment > button.--nav:hover, .--nav.post__head__actions__action:hover, .--nav.post__content:hover, .--nav.post__meta__tags__tag:hover, button.--nav:hover {
+    .--bttn.--nav:hover, .--nav.profile__picture:hover, .nav__wrapper__top > i:hover, .nav__wrapper__bottom > i:hover, .nav__wrapper__bottom__userimg > img.--nav:hover, .--nav.slider__controls__arrow:hover, .--nav.post__head__actions__action:hover, .--nav.post__content:hover, .--nav.post__meta__tags__tag:hover, button.--nav:hover {
       color: #f57064; }
-  .--bttn.--hover-shadow, .--hover-shadow.profile__picture, .nav__wrapper__top > i.--hover-shadow, .nav__wrapper__bottom > i.--hover-shadow, .nav__wrapper__bottom__userimg > img, .--hover-shadow.gallery__controls__panel__option, .gallery__container__comments__panel__add-comment > button.--hover-shadow, .--hover-shadow.post__head__actions__action, .--hover-shadow.post__content, .--hover-shadow.post__meta__tags__tag, button.--hover-shadow {
+  .--bttn.--hover-shadow, .--hover-shadow.profile__picture, .nav__wrapper__top > i.--hover-shadow, .nav__wrapper__bottom > i.--hover-shadow, .nav__wrapper__bottom__userimg > img, .--hover-shadow.slider__controls__arrow, .--hover-shadow.post__head__actions__action, .--hover-shadow.post__content, .--hover-shadow.post__meta__tags__tag, button.--hover-shadow {
     box-shadow: 0px 0px 0px 0px rgba(110, 110, 110, 0.5); }
-    .--bttn.--hover-shadow:hover, .--hover-shadow.profile__picture:hover, .nav__wrapper__top > i.--hover-shadow:hover, .nav__wrapper__bottom > i.--hover-shadow:hover, .nav__wrapper__bottom__userimg > img:hover, .--hover-shadow.gallery__controls__panel__option:hover, .gallery__container__comments__panel__add-comment > button.--hover-shadow:hover, .--hover-shadow.post__head__actions__action:hover, .--hover-shadow.post__content:hover, .--hover-shadow.post__meta__tags__tag:hover, button.--hover-shadow:hover {
-      box-shadow: 0px 0px 0px 9.5px rgba(110, 110, 110, 0.5); }
+    .--bttn.--hover-shadow:hover, .--hover-shadow.profile__picture:hover, .nav__wrapper__top > i.--hover-shadow:hover, .nav__wrapper__bottom > i.--hover-shadow:hover, .nav__wrapper__bottom__userimg > img:hover, .--hover-shadow.slider__controls__arrow:hover, .--hover-shadow.post__head__actions__action:hover, .--hover-shadow.post__content:hover, .--hover-shadow.post__meta__tags__tag:hover, button.--hover-shadow:hover {
+      box-shadow: 0px 0px 0px 14px rgba(110, 110, 110, 0.5); }
 
-.--container, .gallery__container {
+.--container {
   max-width: 900px;
   display: block;
   margin-left: auto;
@@ -83,19 +84,19 @@ input {
     height: 45px;
     border-radius: 45px;
     overflow: hidden;
-    margin-right: 9.5px; }
+    margin-right: 14px; }
 
-.--layout.--large-left, .--large-left.profile, .gallery__container__comments__panel__add-comment, .post__head, .post__meta {
+.--layout.--large-left, .--large-left.profile, .post__head, .post__meta {
   display: flex;
   flex-direction: row;
   align-items: center; }
-  .--layout.--large-left > *:nth-child(1), .--large-left.profile > *:nth-child(1), .profile.gallery__container__comments__panel__add-comment > *:nth-child(1), .profile.post__head > *:nth-child(1), .profile.post__meta > *:nth-child(1), .gallery__container__comments__panel__add-comment > *:nth-child(1), .post__head > *:nth-child(1), .post__meta > *:nth-child(1) {
+  .--layout.--large-left > *:nth-child(1), .--large-left.profile > *:nth-child(1), .profile.post__head > *:nth-child(1), .profile.post__meta > *:nth-child(1), .post__head > *:nth-child(1), .post__meta > *:nth-child(1) {
     flex: 1; }
-.--layout.--large-right, .profile, .nav__wrapper, .--large-right.gallery__container__comments__panel__add-comment, .--large-right.post__head, .--large-right.post__meta {
+.--layout.--large-right, .profile, .nav__wrapper, .--large-right.post__head, .--large-right.post__meta {
   display: flex;
   flex-direction: row;
   align-items: center; }
-  .--layout.--large-right > *:nth-child(2), .profile > *:nth-child(2), .nav__wrapper > *:nth-child(2), .--large-right.gallery__container__comments__panel__add-comment > *:nth-child(2), .gallery__container__comments__panel__add-comment.profile > *:nth-child(2), .--large-right.post__head > *:nth-child(2), .post__head.profile > *:nth-child(2), .--large-right.post__meta > *:nth-child(2), .post__meta.profile > *:nth-child(2) {
+  .--layout.--large-right > *:nth-child(2), .profile > *:nth-child(2), .nav__wrapper > *:nth-child(2), .--large-right.post__head > *:nth-child(2), .post__head.profile > *:nth-child(2), .--large-right.post__meta > *:nth-child(2), .post__meta.profile > *:nth-child(2) {
     flex: 1; }
 
 .nav {
@@ -103,7 +104,9 @@ input {
   width: auto;
   display: inline-block;
   position: fixed;
-  right: 0; }
+  right: 0;
+  pointer-events: none;
+  z-index: 10; }
   .nav__wrapper {
     height: 100vh;
     width: auto;
@@ -112,7 +115,8 @@ input {
     .nav__wrapper__top {
       display: flex;
       flex-direction: row;
-      padding-right: 20px; }
+      padding-right: 20px;
+      pointer-events: all; }
       .nav__wrapper__top > i {
         color: #343737; }
     .nav__wrapper__bottom {
@@ -121,87 +125,63 @@ input {
       overflow: hidden;
       display: flex;
       flex-direction: row;
-      padding: 0 20px; }
+      padding: 0 20px;
+      pointer-events: all; }
       .nav__wrapper__bottom > i {
         color: #dadada; }
       .nav__wrapper__bottom__userimg {
         box-sizing: content-box;
         padding: 26px;
-        width: 56px; }
+        width: 49px; }
         .nav__wrapper__bottom__userimg > img {
           border-radius: 17px;
           overflow: hidden; }
 
-.gallery {
-  background: #212323;
-  display: grid;
-  grid-template-rows: 100vh;
-  grid-template-columns: 3fr auto 2fr; }
-  .gallery__controls {
-    height: 100vh;
-    grid-column: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center; }
-    .gallery__controls__panel {
-      padding: 5.5px;
-      position: fixed; }
-      .gallery__controls__panel__option {
-        font-size: 15px;
-        text-align: right;
-        padding: 5.5px;
-        border-top-left-radius: 25px;
-        border-bottom-left-radius: 25px;
-        border-right: 3px solid transparent;
-        border-left: 3px solid transparent;
-        transition: all 0.15s; }
-        .gallery__controls__panel__option:hover {
-          background: #f57064; }
-        .gallery__controls__panel__option.--active {
-          border-right-color: #f57064; }
-  .gallery__container {
-    width: 900px;
-    display: grid;
-    grid-template-columns: 3fr 2fr;
-    grid-gap: 43px;
-    background: none; }
-    .gallery__container__posts {
-      min-height: 100vh; }
-      .gallery__container__posts__new-post {
-        padding: 9.5px;
-        margin: 5.5px 0;
-        display: block;
+.slider {
+  min-height: 100vh; }
+  .slider__controls {
+    height: 0;
+    width: 0; }
+    .slider__controls__arrow {
+      position: fixed;
+      z-index: 8;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      flex: column;
+      justify-content: center;
+      align-items: center; }
+      .slider__controls__arrow > i {
+        font-size: 28px;
+        padding: 14px;
+        margin: 5.5px;
+        width: 56px;
         text-align: center;
-        margin-top: 5.5px;
-        line-height: 40px; }
-    .gallery__container__comments {
-      width: 100%; }
-      .gallery__container__comments__panel {
-        display: inline-block;
-        position: fixed;
-        overflow: auto;
-        padding-right: 9.5px;
-        width: 342.8px;
-        height: 100vh; }
-        .gallery__container__comments__panel__add-comment > input {
-          padding: 5.5px 5.5px 5.5px 0; }
+        border-radius: 17px;
+        transition: all 0.17s; }
+      .slider__controls__arrow:hover > i {
+        background: #f57064;
+        color: #dadada; }
+      .slider__controls__arrow.--left {
+        left: 0; }
+      .slider__controls__arrow.--right {
+        right: 0; }
 
 .post {
-  padding: 9.5px;
+  padding: 14px;
   background: #343737;
   margin: 5.5px 0;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
   .post__head {
     width: 100%;
-    margin: 9.5px 0; }
+    margin: 14px 0; }
     .post__head__actions {
       display: flex; }
       .post__head__actions__action {
         color: #dadada;
-        padding: 9.5px;
+        padding: 14px;
         border-radius: 1000px;
-        transition: all 0.15s; }
+        transition: all 0.17s; }
         .post__head__actions__action:hover {
           background: #f57064; }
         .post__head__actions__action.fa-heart.--active {
@@ -211,8 +191,8 @@ input {
             color: #dadada; }
   .post__content {
     display: block;
-    margin: 9.5px 0;
-    padding: 9.5px 0;
+    margin: 14px 0;
+    padding: 14px 0;
     overflow: hidden;
     border-radius: 25px;
     line-height: 26px; }
@@ -226,7 +206,7 @@ input {
     float: right;
     position: absolute;
     margin-top: 80px;
-    margin-left: 492.7px;
+    margin-left: 479.2px;
     width: 0;
     height: 0;
     box-sizing: content-box;
@@ -234,7 +214,7 @@ input {
     border-right-color: #343737;
     z-index: 10; }
 
-.comment, .gallery__container__comments__panel__add-comment {
+.comment {
   margin-top: 5.5px;
   padding: 38px;
   background: #343737; }
@@ -242,7 +222,7 @@ input {
     display: block;
     padding: 5.5px 0;
     font-size: 13px; }
-  .comment:last-of-type, .gallery__container__comments__panel__add-comment:last-of-type {
+  .comment:last-of-type {
     margin-bottom: 5.5px; }
 
 body {

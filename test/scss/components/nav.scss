@@ -6,7 +6,7 @@
 //       <i class="fas fa-search"></i>
 //       <i class="fas fa-user"></i>
 //     </div>
-//     <div></div>
+//     <div><!-- divider --></div>
 //     <div class="nav__wrapper__bottom">
 //       <i class="fas fa-bell"></i>
 //       <div class="nav__wrapper__bottom__userimg">
@@ -22,6 +22,8 @@
   display: inline-block;
   position: fixed; // attach to right
   right: 0;
+  pointer-events: none; // don't interfere with things under you
+  z-index: 10;
 
   &__wrapper {
     height: 100vh;
@@ -36,6 +38,7 @@
       display: flex;
       flex-direction: row;
       padding-right: $padding-lg;
+      pointer-events: all; // give back pointer events
       & > i { // icons in the top navbar
         color: $mono-dark;
         @extend .--bttn,.--nav; // all actual styles found in .--bttn.--nav
@@ -50,6 +53,7 @@
       display: flex;
       flex-direction: row;
       padding: 0 $padding-lg;
+      pointer-events: all;
       // icons in the bottom navbar
       & > i {
         color: $mono-light;
