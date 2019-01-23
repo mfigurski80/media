@@ -31,17 +31,18 @@ $shadow-600: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 // Padding vars
 $padding-sm: 5.5px;
 $padding-md: 9.5px;
-$padding-lg: 13px;
-$padding-xl: 18px;
+$padding-lg: 20px;
+$padding-xl: 38px;
 
 // Size vars
 $size-border: 3px;
 $size-userimg: 45px;
-$size-nav: 70px;
+$size-navicons: 32px;
 $size-container: 900px;
 
 // Standard border radius
-$border-radius: 3px;
+$border-radius-sm: 17px;
+$border-radius: 25px;
 
 // transition timing
 $trans-sm: .15s;

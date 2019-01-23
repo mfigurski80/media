@@ -1,22 +1,71 @@
 // html structure looks like this:
 // <nav class="nav">
-//   <div class="nav__slider">
+//   <div class="nav__wrapper">
+//     <div class="nav__wrapper__top">
+//       <i class="fas fa-plus"></i>
+//       <i class="fas fa-search"></i>
+//       <i class="fas fa-user"></i>
+//     </div>
+//     <div></div>
+//     <div class="nav__wrapper__bottom">
+//       <i class="fas fa-bell"></i>
+//       <div class="nav__wrapper__bottom__userimg">
+//         <img src="resources/profile.jpg" alt="profile">
+//       </div>
+//     </div>
 //   </div>
 // </nav>
 
 .nav {
-  background: $color-prim;
   height: 100vh;
-  width: $size-nav;
-  // padding-bottom: $padding-sm;
+  width: auto; // conform to content
+  display: inline-block;
+  position: fixed; // attach to right
+  right: 0;
 
-  .nav__slider {
-    position: fixed;
-    left: 0;
-    top: 0;
-    z-index: 10;
-    @extend .--layout.--large-right; // use as 3 col with large center
+  &__wrapper {
+    height: 100vh;
+    // background: $color-prim;
+    width: auto;
+    @extend .--layout.--large-right; // expand the center (to push top and bottom nav to top/bottom)
     flex-direction: column;
-  }
+    align-items: flex-end; // align all children right
 
+    // top navbar
+    &__top {
+      display: flex;
+      flex-direction: row;
+      padding-right: $padding-lg;
+      & > i { // icons in the top navbar
+        color: $mono-dark;
+        @extend .--bttn,.--nav; // all actual styles found in .--bttn.--nav
+      }
+    }
+
+    // bottom navbar
+    &__bottom {
+      background: $mono-dark;
+      border-top-left-radius: $border-radius;
+      overflow: hidden;
+      display: flex;
+      flex-direction: row;
+      padding: 0 $padding-lg;
+      // icons in the bottom navbar
+      & > i {
+        color: $mono-light;
+        @extend .--bttn,.--nav;
+      }
+      // user profile img
+      &__userimg {
+        box-sizing: content-box;
+        padding: $padding-xl - 12px;
+        width: $size-navicons + 2*12px;
+        & > img { // actual img
+          @extend .--bttn,.--hover-shadow;
+          border-radius: $border-radius-sm;
+          overflow: hidden;
+        }
+      }
+    }
+  }
 }
