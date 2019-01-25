@@ -75,7 +75,7 @@
     margin: $padding-md 0;
     padding: $padding-md 0;
     overflow: hidden;
-    border-radius: $border-radius;
+    // border-radius: $border-radius;
     line-height: 26px;
   }
 
@@ -84,7 +84,7 @@
 
     &__tags {
       &__tag {
-        @extend .--bttn, .--tag;
+        @extend .--bttn;
       }
     }
 

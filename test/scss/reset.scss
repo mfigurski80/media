@@ -4,10 +4,12 @@
   margin: 0;
   padding: 0;
   box-sizing: inherit;
+  // border: 1px solid red !important; // for debug!
 }
 :root {
   box-sizing: border-box;
   color: $mono-dark;
+  overflow-x: hidden;
 }
 
 // restyle hyperlinks

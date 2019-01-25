@@ -31,10 +31,41 @@
 
   <div class="slider">
     <div class="slider__controls">
-      <div class="slider__controls__arrow --left"><i class="fas fa-angle-left"></i></div>
-      <div class="slider__controls__arrow --right"><i class="fas fa-angle-right"></i></div>
+      <div class="slider__controls__arrow --left" onclick="slideLeft()"><i class="fas fa-angle-left"></i></div>
+      <div class="slider__controls__arrow --right" onclick="slideRight()"><i class="fas fa-angle-right"></i></div>
+      <script>
+        var curSliderPos = 0;
+        function slideLeft(e) {
+          const slider = document.getElementsByClassName("slider__slides")[0];
+          curSliderPos += 100;
+          slider.setAttribute("style", `transform: translateX(${curSliderPos}vw)`);
+        }
+        function slideRight(e) {
+          const slider = document.getElementsByClassName("slider__slides")[0];
+          curSliderPos -= 100;
+          slider.setAttribute("style", `transform: translateX(${curSliderPos}vw)`);
+        }
+
+        document.onkeydown = function (evt) {
+          evt = evt || window.event;
+          var charCode = evt.keyCode || evt.which;
+          var charStr = String.fromCharCode(charCode);
+          // console.log(`'${charStr}'`);
+
+          if (["A","%","J"].indexOf(charStr) > -1) {
+            slideLeft();
+          }
+          if (["D","'","L", " "].indexOf(charStr) > -1) {
+            slideRight();
+          }
+        };
+      </script>
     </div>
-    <div class="slider__slides"></div>
+    <div class="slider__slides">
+      <div class="slider__slides__single-slide">a</div>
+      <div class="slider__slides__single-slide">b</div>
+      <div class="slider__slides__single-slide">c</div>
+    </div>
   </div>
 
 </body>

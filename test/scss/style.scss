@@ -1,20 +1,20 @@
 // Terminal command for sass watch:
 // sass --watch scss/style.scss:css/style.css
+
+// import vars and reset...
 @import "vars.scss";
 @import "reset.scss";
-
-// partials (for performing common actions)
 
 // modules (for elements multiple times throughout, and within components)
 @import "modules/bttn.scss"; // buttons
 @import "modules/container.scss"; // container styles
 @import "modules/profile.scss"; // profile standard
-@import "modules/layout.scss";
+@import "modules/layout.scss"; // different layout standards
 
 // components (for specific element section)
 @import "components/nav.scss"; // navbar
 @import "components/slider.scss"; // slider that actually moves the posts
-@import "components/post.scss"; // individual post element (technically a module, but too high-level)
+@import "components/post.scss"; // individual post element
 @import "components/comment.scss"; // individual comment element
 
 html {

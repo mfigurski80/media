@@ -6,23 +6,6 @@
   text-decoration: none;
   transition: all $trans-sm;
 
-  // a 'tag' button
-  &.--tag {
-    display: inline;
-    font-size: 14px;
-    padding: $padding-sm;
-    border-radius: $border-radius;
-    transition: all $trans-sm;
-
-    &:before {
-      content: "#";
-    }
-
-    &:hover {
-      background: $color-prim;
-    }
-  }
-
   // a navbar button
   &.--nav {
     font-size: $size-navicons;
@@ -32,7 +15,7 @@
     }
   }
 
-  // button with cool hover shadow
+  // a button with cool hover shadow
   &.--hover-shadow {
     box-shadow: 0px 0px 0px 0px $mono-disabled;
     &:hover {
