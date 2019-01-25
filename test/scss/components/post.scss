@@ -1,117 +1,71 @@
-// html structure looks like this:
-// <article class="post">
-//   <div class="post__head">
-//     <a class="profile" href="#user">
-//       <img src="resources/profile.jpg" alt="profile" class="profile__picture">
-//       <div class="profile__info">
-//         <h5>User Name</h5>
-//         <h6>posted: n hours ago</h6>
-//       </div>
-//     </a>
-//     <div class="post__head__actions">
-//       <i class="post__head__actions__action --active fas fa-heart"></i>
-//       <i class="post__head__actions__action fas fa-share-alt"></i>
-//     </div>
-//   </div>
-//   <div class="post__content"> <!-- actual content -->
-//     <img src="resources/postimg1.jpg" alt="post1">
-//   </div>
-//   <div class="post__meta">
-//     <div class="post__meta__tags">
-//       <a class="post__meta__tags__tag" href="#demo">demo</a>
-//     </div>
-//     <div class="post__meta__stats">
-//       <h6 class="post__meta__stats__stat">n <i class="far fa-heart"></i></h6>
-//       <h6 class="post__meta__stats__stat">n <i class="far fa-comment-alt"></i></h6>
-//     </div>
-// </div>
-// </article>
+// html structure looks like this: TODO
 
 
 .post {
-  padding: $padding-md;
-  background: $mono-dark;
-  margin: $padding-sm 0;
-  box-shadow: $shadow-200;
+  max-width: $size-container;
+  margin-left: auto;
+  margin-right: auto;
+  @extend .--layout,.--large-left;
+  align-items: flex-start;
 
-  &__head {
-    @extend .--layout, .--large-left;
-    width: 100%;
-    margin: $padding-md 0;
+  &__content {
+    height: 120vh;
+    overflow: show;
+  }
 
-    .profile {
-    }
+  &__meta {
+    height: 100vh;
+    width: $size-postmeta;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
-    &__actions {
-      display: flex;
-      &__action {
-        @extend .--bttn;
-        // @extend .--icon;
-        color: $mono-light;
-        padding: $padding-md;
-        border-radius: 1000px; // make a circle
-        transition: all $trans-sm;
-        &:hover {
-          background: $color-prim;
+
+    &__wrapper {
+      width: 100%;
+      // background: red;
+      padding-bottom: 12vh;
+
+      // picture and title...
+      &__head {
+        @extend .--layout, .--large-right;
+        padding: $padding-sm 0;
+        text-decoration: none;
+
+        &__img {
+          @extend .--bttn;
+          box-shadow: $shadow-100;
+          width: 60px;
+          border-radius: $border-radius-sm;
+          overflow: hidden;
         }
+        &__title {
+          padding: 0 $padding-md;
+        }
+      }
 
-        // an active heart...
-        &.fa-heart.--active {
-          color: $color-prim;
+      // tags...
+      &__content {
+        padding: $padding-md 0;
+        // each tag...
+        & > a {
+          @extend .--bttn;
+          display: inline-block;
+          padding: $padding-sm $padding-md;
+          font-size: 13px;
+          margin: $padding-sm;
+          margin-left: 0;
+          background: $color-sec-dark;
+          border-radius: $border-radius-xs;
+          &:before {
+            content: "#";
+          }
           &:hover {
             background: $color-prim;
             color: $mono-light;
           }
         }
-
       }
-    }
-
-  }
-
-  &__content {
-    @extend .--bttn;
-    display: block;
-    margin: $padding-md 0;
-    padding: $padding-md 0;
-    overflow: hidden;
-    // border-radius: $border-radius;
-    line-height: 26px;
-  }
-
-  &__meta {
-    @extend .--layout, .--large-left;
-
-    &__tags {
-      &__tag {
-        @extend .--bttn;
-      }
-    }
-
-    &__stats {
-      display: flex;
-      &__stat {
-        padding: $padding-sm;
-      }
-    }
-  }
-
-  // post is being viewed (comments)
-  &.--active {
-    // show an arrow...
-    &:before {
-      content: "";
-      display: block;
-      float: right;
-      position: absolute;
-      margin-top: 80px;
-      margin-left: ( $size-container - $padding-xl ) * 3/5 - 3*$padding-md + 4px;
-      width: 0;
-      height: 0;
-      box-sizing: content-box;
-      border: $padding-xl solid transparent;
-      border-right-color: $mono-dark;
-      z-index: 10;
     }
   }
 
