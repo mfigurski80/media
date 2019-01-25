@@ -43,21 +43,21 @@ input {
   background: #f5d76e;
   color: #212323; }
 
-.--bttn, .profile__picture, .nav__wrapper__top > i, .nav__wrapper__bottom > i, .nav__wrapper__bottom__userimg > img, .slider__controls__arrow, .post__meta__wrapper__head__img, .post__meta__wrapper__content > a, button {
+.--bttn, .profile__picture, .nav__wrapper__top > i, .nav__wrapper__bottom > i, .nav__wrapper__bottom__userimg > img, .slider__controls__arrow, .post__action__bar__icon, .post__meta__wrapper__head__img, .post__meta__wrapper__content > a, button {
   background: none;
   border: none;
   cursor: pointer;
   display: block;
   text-decoration: none;
   transition: all 0.17s; }
-  .--bttn.--nav, .--nav.profile__picture, .nav__wrapper__top > i, .nav__wrapper__bottom > i, .nav__wrapper__bottom__userimg > img.--nav, .--nav.slider__controls__arrow, .--nav.post__meta__wrapper__head__img, .post__meta__wrapper__content > a.--nav, button.--nav {
+  .--bttn.--nav, .--nav.profile__picture, .nav__wrapper__top > i, .nav__wrapper__bottom > i, .nav__wrapper__bottom__userimg > img.--nav, .nav__wrapper__bottom__userimg > img.post__action__bar__icon, .--nav.slider__controls__arrow, .post__action__bar__icon, .--nav.post__meta__wrapper__head__img, .post__meta__wrapper__content > a.--nav, .post__meta__wrapper__content > a.post__action__bar__icon, button.--nav, button.post__action__bar__icon {
     font-size: 25px;
     padding: 38px; }
-    .--bttn.--nav:hover, .--nav.profile__picture:hover, .nav__wrapper__top > i:hover, .nav__wrapper__bottom > i:hover, .nav__wrapper__bottom__userimg > img.--nav:hover, .--nav.slider__controls__arrow:hover, .--nav.post__meta__wrapper__head__img:hover, .post__meta__wrapper__content > a.--nav:hover, button.--nav:hover {
+    .--bttn.--nav:hover, .--nav.profile__picture:hover, .nav__wrapper__top > i:hover, .nav__wrapper__bottom > i:hover, .nav__wrapper__bottom__userimg > img.--nav:hover, .--nav.slider__controls__arrow:hover, .post__action__bar__icon:hover, .--nav.post__meta__wrapper__head__img:hover, .post__meta__wrapper__content > a.--nav:hover, button.--nav:hover, button.post__action__bar__icon:hover {
       color: #f57064; }
-  .--bttn.--hover-shadow, .--hover-shadow.profile__picture, .nav__wrapper__top > i.--hover-shadow, .nav__wrapper__bottom > i.--hover-shadow, .nav__wrapper__bottom__userimg > img, .--hover-shadow.slider__controls__arrow, .--hover-shadow.post__meta__wrapper__head__img, .post__meta__wrapper__content > a.--hover-shadow, button.--hover-shadow {
+  .--bttn.--hover-shadow, .--hover-shadow.profile__picture, .nav__wrapper__top > i.--hover-shadow, .nav__wrapper__bottom > i.--hover-shadow, .nav__wrapper__bottom__userimg > img, .--hover-shadow.slider__controls__arrow, .--hover-shadow.post__action__bar__icon, .--hover-shadow.post__meta__wrapper__head__img, .post__meta__wrapper__content > a.--hover-shadow, button.--hover-shadow {
     box-shadow: 0px 0px 0px 0px rgba(110, 110, 110, 0.5); }
-    .--bttn.--hover-shadow:hover, .--hover-shadow.profile__picture:hover, .nav__wrapper__top > i.--hover-shadow:hover, .nav__wrapper__bottom > i.--hover-shadow:hover, .nav__wrapper__bottom__userimg > img:hover, .--hover-shadow.slider__controls__arrow:hover, .--hover-shadow.post__meta__wrapper__head__img:hover, .post__meta__wrapper__content > a.--hover-shadow:hover, button.--hover-shadow:hover {
+    .--bttn.--hover-shadow:hover, .--hover-shadow.profile__picture:hover, .nav__wrapper__top > i.--hover-shadow:hover, .nav__wrapper__bottom > i.--hover-shadow:hover, .nav__wrapper__bottom__userimg > img:hover, .--hover-shadow.slider__controls__arrow:hover, .--hover-shadow.post__action__bar__icon:hover, .--hover-shadow.post__meta__wrapper__head__img:hover, .post__meta__wrapper__content > a.--hover-shadow:hover, button.--hover-shadow:hover {
       box-shadow: 0px 0px 0px 14px rgba(110, 110, 110, 0.5); }
 
 .--container {
@@ -77,17 +77,17 @@ input {
     overflow: hidden;
     margin-right: 14px; }
 
-.--layout.--large-left, .--large-left.profile, .post, .--large-left.post__meta__wrapper__head {
+.--layout.--large-left, .--large-left.profile, .--large-left.post__meta__wrapper__head {
   display: flex;
   flex-direction: row;
   align-items: center; }
-  .--layout.--large-left > *:nth-child(1), .--large-left.profile > *:nth-child(1), .profile.post > *:nth-child(1), .post > *:nth-child(1), .--large-left.post__meta__wrapper__head > *:nth-child(1), .post__meta__wrapper__head.post > *:nth-child(1) {
+  .--layout.--large-left > *:nth-child(1), .--large-left.profile > *:nth-child(1), .--large-left.post__meta__wrapper__head > *:nth-child(1) {
     flex: 1; }
-.--layout.--large-right, .profile, .nav__wrapper, .--large-right.post, .post__meta__wrapper__head {
+.--layout.--large-right, .profile, .nav__wrapper, .post__meta__wrapper__head {
   display: flex;
   flex-direction: row;
   align-items: center; }
-  .--layout.--large-right > *:nth-child(2), .profile > *:nth-child(2), .nav__wrapper > *:nth-child(2), .--large-right.post > *:nth-child(2), .post.profile > *:nth-child(2), .post.post__meta__wrapper__head > *:nth-child(2), .post__meta__wrapper__head > *:nth-child(2) {
+  .--layout.--large-right > *:nth-child(2), .profile > *:nth-child(2), .nav__wrapper > *:nth-child(2), .post__meta__wrapper__head > *:nth-child(2) {
     flex: 1; }
 
 .nav {
@@ -174,19 +174,36 @@ input {
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
-  align-items: flex-start; }
+  display: grid;
+  grid-template-columns: 15fr auto 1fr auto; }
   .post__content {
-    height: 120vh;
-    overflow: show; }
+    grid-column: 1;
+    margin-top: 38px;
+    overflow: hidden;
+    border-radius: 33px 33px 0 33px;
+    box-shadow: -10px 10px 0 1px rgba(33, 35, 35, 0.1), -17px 17px 0 1px rgba(33, 35, 35, 0.1); }
+  .post__action {
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; }
+    .post__action__bar {
+      padding: 5.5px 0;
+      background: #343737;
+      border-radius: 0 33px 33px 0;
+      box-shadow: -10px 10px 0 1px rgba(33, 35, 35, 0.1), -17px 17px 0 1px rgba(33, 35, 35, 0.1); }
+      .post__action__bar__icon {
+        padding: 33px;
+        color: #dadada; }
   .post__meta {
-    height: 100vh;
-    width: 250px;
+    grid-column: 4;
+    min-height: 40vh;
     display: flex;
     flex-direction: column;
     justify-content: center; }
     .post__meta__wrapper {
-      width: 100%;
-      padding-bottom: 12vh; }
+      width: 250px;
+      padding: 0 5.5px; }
       .post__meta__wrapper__head {
         padding: 5.5px 0;
         text-decoration: none; }
@@ -206,7 +223,7 @@ input {
           margin: 5.5px;
           margin-left: 0;
           background: #DFC464;
-          border-radius: 12px; }
+          border-radius: 11px; }
           .post__meta__wrapper__content > a:before {
             content: "#"; }
           .post__meta__wrapper__content > a:hover {

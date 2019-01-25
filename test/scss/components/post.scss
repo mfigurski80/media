@@ -5,26 +5,51 @@
   max-width: $size-container;
   margin-left: auto;
   margin-right: auto;
-  @extend .--layout,.--large-left;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: 15fr auto 1fr auto;
 
   &__content {
-    height: 120vh;
-    overflow: show;
+    grid-column: 1;
+    // min-height: 130vh;
+    margin-top: $padding-xl;
+    overflow: hidden;
+    border-radius: $border-radius-lg $border-radius-lg 0 $border-radius-lg;
+    box-shadow: $shadow-300;
+  }
+
+  // space for action buttons
+  &__action {
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    // containing bar
+    &__bar {
+      padding: $padding-sm 0;
+      background: $mono-dark;
+      border-radius: 0 $border-radius-lg $border-radius-lg 0;
+      box-shadow: $shadow-300;
+      // icons
+      &__icon {
+        @extend .--bttn, .--nav;
+        padding: $padding-xl - 5px; // tone it down a bit
+        color: $mono-light;
+      }
+    }
   }
 
   &__meta {
-    height: 100vh;
-    width: $size-postmeta;
+    grid-column: 4;
+    min-height: 40vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
 
 
     &__wrapper {
-      width: 100%;
-      // background: red;
-      padding-bottom: 12vh;
+      width: $size-postmeta;
+      padding: 0 $padding-sm;
+      // padding-bottom: 12vh;
 
       // picture and title...
       &__head {
@@ -67,6 +92,10 @@
         }
       }
     }
+  }
+
+  &__comments {
+
   }
 
 }
