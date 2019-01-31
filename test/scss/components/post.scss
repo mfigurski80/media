@@ -33,6 +33,7 @@
     // containing bar
     &__bar {
       padding: $padding-sm 0;
+      margin-bottom: $padding-lg;
       background: $mono-dark;
       border-radius: 0 $border-radius-sm $border-radius-sm 0;
       box-shadow: $shadow-100;
@@ -105,8 +106,26 @@
   }
 
   &__comments {
-    padding-left: 40vw; // yeah, make it less wide
-    // comment styles are in components/comment.scss
+    padding-left: 20%; // yeah, make it less wide
+    display: grid;
+    grid-template-columns: 2fr 4fr;
+
+    &__add {
+      &__wrapper {
+        @extend .--bttn, .--nav;
+        padding: $padding-lg $padding-sm;
+        font-size: 20px;
+        color: $mono-dark;
+        text-align: center;
+        & > i {
+          padding: $padding-sm;
+        }
+      }
+    }
+
+    &__wrapper {
+      // actual comment styles are in components/comment.scss
+    }
   }
 
 }

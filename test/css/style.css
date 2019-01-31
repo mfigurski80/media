@@ -46,21 +46,21 @@ input {
   background: #f5d76e;
   color: #212323; }
 
-.--bttn, .profile__picture, .nav__wrapper__top > i, .nav__wrapper__bottom > i, .nav__wrapper__bottom__userimg > img, .slider__controls__arrow, .post__action__bar__icon, .post__meta__wrapper__head__img, .post__meta__wrapper__content > a, button {
+.--bttn, .profile__picture, .nav__wrapper__top > i, .nav__wrapper__bottom > i, .nav__wrapper__bottom__userimg > img, .slider__controls__arrow, .post__action__bar__icon, .post__meta__wrapper__head__img, .post__meta__wrapper__content > a, .post__comments__add__wrapper, button {
   background: none;
   border: none;
   cursor: pointer;
   display: block;
   text-decoration: none;
   transition: all 0.17s; }
-  .--bttn.--nav, .--nav.profile__picture, .nav__wrapper__top > i, .nav__wrapper__bottom > i, .nav__wrapper__bottom__userimg > img.--nav, .nav__wrapper__bottom__userimg > img.post__action__bar__icon, .--nav.slider__controls__arrow, .post__action__bar__icon, .--nav.post__meta__wrapper__head__img, .post__meta__wrapper__content > a.--nav, .post__meta__wrapper__content > a.post__action__bar__icon, button.--nav, button.post__action__bar__icon {
+  .--bttn.--nav, .--nav.profile__picture, .nav__wrapper__top > i, .nav__wrapper__bottom > i, .nav__wrapper__bottom__userimg > img.--nav, .nav__wrapper__bottom__userimg > img.post__action__bar__icon, .nav__wrapper__bottom__userimg > img.post__comments__add__wrapper, .--nav.slider__controls__arrow, .post__action__bar__icon, .--nav.post__meta__wrapper__head__img, .post__meta__wrapper__content > a.--nav, .post__meta__wrapper__content > a.post__action__bar__icon, .post__meta__wrapper__content > a.post__comments__add__wrapper, .post__comments__add__wrapper, button.--nav, button.post__action__bar__icon, button.post__comments__add__wrapper {
     font-size: 25px;
     padding: 38px; }
-    .--bttn.--nav:hover, .--nav.profile__picture:hover, .nav__wrapper__top > i:hover, .nav__wrapper__bottom > i:hover, .nav__wrapper__bottom__userimg > img.--nav:hover, .--nav.slider__controls__arrow:hover, .post__action__bar__icon:hover, .--nav.post__meta__wrapper__head__img:hover, .post__meta__wrapper__content > a.--nav:hover, button.--nav:hover, button.post__action__bar__icon:hover {
+    .--bttn.--nav:hover, .--nav.profile__picture:hover, .nav__wrapper__top > i:hover, .nav__wrapper__bottom > i:hover, .nav__wrapper__bottom__userimg > img.--nav:hover, .--nav.slider__controls__arrow:hover, .post__action__bar__icon:hover, .--nav.post__meta__wrapper__head__img:hover, .post__meta__wrapper__content > a.--nav:hover, .post__comments__add__wrapper:hover, button.--nav:hover, button.post__action__bar__icon:hover, button.post__comments__add__wrapper:hover {
       color: #f57064; }
-  .--bttn.--hover-shadow, .--hover-shadow.profile__picture, .nav__wrapper__top > i.--hover-shadow, .nav__wrapper__bottom > i.--hover-shadow, .nav__wrapper__bottom__userimg > img, .--hover-shadow.slider__controls__arrow, .--hover-shadow.post__action__bar__icon, .--hover-shadow.post__meta__wrapper__head__img, .post__meta__wrapper__content > a.--hover-shadow, button.--hover-shadow {
+  .--bttn.--hover-shadow, .--hover-shadow.profile__picture, .nav__wrapper__top > i.--hover-shadow, .nav__wrapper__bottom > i.--hover-shadow, .nav__wrapper__bottom__userimg > img, .--hover-shadow.slider__controls__arrow, .--hover-shadow.post__action__bar__icon, .--hover-shadow.post__meta__wrapper__head__img, .post__meta__wrapper__content > a.--hover-shadow, .--hover-shadow.post__comments__add__wrapper, button.--hover-shadow {
     box-shadow: 0px 0px 0px 0px rgba(110, 110, 110, 0.5); }
-    .--bttn.--hover-shadow:hover, .--hover-shadow.profile__picture:hover, .nav__wrapper__top > i.--hover-shadow:hover, .nav__wrapper__bottom > i.--hover-shadow:hover, .nav__wrapper__bottom__userimg > img:hover, .--hover-shadow.slider__controls__arrow:hover, .--hover-shadow.post__action__bar__icon:hover, .--hover-shadow.post__meta__wrapper__head__img:hover, .post__meta__wrapper__content > a.--hover-shadow:hover, button.--hover-shadow:hover {
+    .--bttn.--hover-shadow:hover, .--hover-shadow.profile__picture:hover, .nav__wrapper__top > i.--hover-shadow:hover, .nav__wrapper__bottom > i.--hover-shadow:hover, .nav__wrapper__bottom__userimg > img:hover, .--hover-shadow.slider__controls__arrow:hover, .--hover-shadow.post__action__bar__icon:hover, .--hover-shadow.post__meta__wrapper__head__img:hover, .post__meta__wrapper__content > a.--hover-shadow:hover, .--hover-shadow.post__comments__add__wrapper:hover, button.--hover-shadow:hover {
       box-shadow: 0px 0px 0px 14px rgba(110, 110, 110, 0.5); }
 
 .--container {
@@ -194,6 +194,7 @@ input {
     justify-content: flex-end; }
     .post__action__bar {
       padding: 5.5px 0;
+      margin-bottom: 20px;
       background: #343737;
       border-radius: 0 17px 17px 0;
       box-shadow: -6px 6px 0 0px rgba(33, 35, 35, 0.1); }
@@ -237,11 +238,20 @@ input {
             background: #f57064;
             color: #dadada; }
   .post__comments {
-    padding-left: 40vw; }
+    padding-left: 20%;
+    display: grid;
+    grid-template-columns: 2fr 4fr; }
+    .post__comments__add__wrapper {
+      padding: 20px 5.5px;
+      font-size: 20px;
+      color: #343737;
+      text-align: center; }
+      .post__comments__add__wrapper > i {
+        padding: 5.5px; }
 
 .comment {
   border-top: 1px solid #212323;
-  padding: 14px;
+  padding: 20px;
   background: #343737;
   color: #dadada; }
   .comment:last-of-type {

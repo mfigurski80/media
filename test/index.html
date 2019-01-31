@@ -55,7 +55,7 @@
           if (["A","%","J"].indexOf(charStr) > -1) {
             slideLeft();
           }
-          if (["D","'","L", " "].indexOf(charStr) > -1) {
+          if (["D","'","L"].indexOf(charStr) > -1) {
             slideRight();
           }
         };
@@ -95,20 +95,29 @@
             </div>
           </div>
           <div class="post__comments">
-            <div class="comment">
+            <div class="post__comments__add">
+              <div class="post__comments__add__wrapper">
+                <i class="fas fa-plus"></i>
+                <p>Add Comment</p>
+              </div>
+            </div>
+            <div class="post__comments__wrapper">
+              <div class="comment">
+                <div class="comment__head">
+                  <img src="resources/profile.jpg" alt="profile">
+                  <h5>Tom Smith</h5>
+                </div>
+                <p>Great post! Appreciate your effort!</p>
+              </div>
+              <div class="comment">
               <div class="comment__head">
                 <img src="resources/profile.jpg" alt="profile">
                 <h5>Tom Smith</h5>
               </div>
               <p>Great post! Appreciate your effort!</p>
             </div>
-            <div class="comment">
-              <div class="comment__head">
-                <img src="resources/profile.jpg" alt="profile">
-                <h5>Tom Smith</h5>
-              </div>
-              <p>Great post! Appreciate your effort!</p>
             </div>
+
           </div>
         </article>
 
