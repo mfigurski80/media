@@ -80,17 +80,17 @@ input {
     overflow: hidden;
     margin-right: 14px; }
 
-.--layout.--large-left, .--large-left.profile, .--large-left.post__meta__wrapper__head {
+.--layout.--large-left, .--large-left.profile, .--large-left.post__meta__wrapper__head, .--large-left.comment__head {
   display: flex;
   flex-direction: row;
   align-items: center; }
-  .--layout.--large-left > *:nth-child(1), .--large-left.profile > *:nth-child(1), .--large-left.post__meta__wrapper__head > *:nth-child(1) {
+  .--layout.--large-left > *:nth-child(1), .--large-left.profile > *:nth-child(1), .--large-left.post__meta__wrapper__head > *:nth-child(1), .--large-left.comment__head > *:nth-child(1) {
     flex: 1; }
-.--layout.--large-right, .profile, .nav__wrapper, .post__meta__wrapper__head {
+.--layout.--large-right, .profile, .nav__wrapper, .post__meta__wrapper__head, .comment__head {
   display: flex;
   flex-direction: row;
   align-items: center; }
-  .--layout.--large-right > *:nth-child(2), .profile > *:nth-child(2), .nav__wrapper > *:nth-child(2), .post__meta__wrapper__head > *:nth-child(2) {
+  .--layout.--large-right > *:nth-child(2), .profile > *:nth-child(2), .nav__wrapper > *:nth-child(2), .post__meta__wrapper__head > *:nth-child(2), .comment__head > *:nth-child(2) {
     flex: 1; }
 
 .nav {
@@ -237,18 +237,24 @@ input {
             background: #f57064;
             color: #dadada; }
   .post__comments {
-    padding-left: 40%; }
+    padding-left: 40vw; }
 
 .comment {
-  margin-top: 5.5px;
-  padding: 38px;
-  background: #343737; }
-  .comment__user {
-    display: block;
-    padding: 5.5px 0;
-    font-size: 13px; }
+  border-top: 1px solid #212323;
+  padding: 14px;
+  background: #343737;
+  color: #dadada; }
   .comment:last-of-type {
-    margin-bottom: 5.5px; }
+    margin-bottom: 14px;
+    padding-bottom: 20px;
+    border-bottom-left-radius: 17px;
+    border-bottom-right-radius: 17px; }
+  .comment__head {
+    padding-bottom: 14px; }
+    .comment__head > img {
+      width: 40px;
+      border-radius: 11px;
+      margin-right: 14px; }
 
 body {
   min-height: 100vh;

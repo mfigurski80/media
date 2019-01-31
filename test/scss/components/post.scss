@@ -105,7 +105,8 @@
   }
 
   &__comments {
-    padding-left: 40%;
+    padding-left: 40vw; // yeah, make it less wide
+    // comment styles are in components/comment.scss
   }
 
 }

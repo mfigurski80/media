@@ -1,25 +1,35 @@
 // html structure should look like this:
 // <div class="comment">
-//   <a href="#user" class="comment__user">Tom Smith</a>
-//   <p class="comment__content">This is a demo comment. This entire bar will appear, with the appropriate comments, when an individual post is clicked on.</p>
+//   <div class="comment__head">
+//     <img src="resources/profile.jpg" alt="profile">
+//     <h5>Tom Smith</h5>
+//   </div>
+//   <p>Great post! Appreciate your effort!</p>
 // </div>
 
 .comment {
-  margin-top: $padding-sm;
-  padding: $padding-xl;
+  border-top: 1px solid $mono-darker;
+  padding: $padding-md;
   background: $mono-dark;
+  color: $mono-light;
+  // box-shadow: $shadow-100;
 
-  &__user {
-    display: block;
-    padding: $padding-sm 0;
-    font-size: 13px;
-    // background: red;
+  &:last-of-type { // give last one some border-radius and margin
+    margin-bottom: $padding-md;
+    padding-bottom: $padding-lg;
+    border-bottom-left-radius: $border-radius-sm;
+    border-bottom-right-radius: $border-radius-sm;
   }
-  &__content {
 
-  }
 
-  &:last-of-type { // give last one a bottom margin
-    margin-bottom: $padding-sm;
+  &__head {
+    @extend .--layout, .--large-right;
+    padding-bottom: $padding-md;
+    & > img {
+      width: $size-userimg - 5px;
+      border-radius: $border-radius-xs;
+      margin-right: $padding-md;
+    }
+
   }
 }
