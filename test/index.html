@@ -66,12 +66,12 @@
 
         <article class="post">
           <div class="post__content">
-            <img src="resources/postimg1.jpg" alt="post1" class="post__content__media">
+            <img src="https://source.unsplash.com/random/?nature,cliff" alt="post1" class="post__content__media">
           </div>
           <div class="post__action">
             <div class="post__action__bar">
-              <div class="post__action__bar__icon"><i class="fas fa-heart"></i></div>
-              <div class="post__action__bar__icon"><i class="fas fa-share-alt"></i></div>
+              <div class="post__action__bar__icon" title="Like"><i class="fas fa-heart"></i></div>
+              <div class="post__action__bar__icon" title="Share"><i class="fas fa-share-alt"></i></div>
             </div>
           </div>
           <div class="post__meta">
@@ -87,22 +87,24 @@
               </a>
               <div class="post__meta__wrapper__content">
                 <a href="#tag">tag</a>
-                <a href="#dev">dev</a>
+                <a href="#dev">development</a>
                 <a href="#awesomness">awesomness</a>
                 <a href="#hey">hey</a>
                 <a href="#test">test</a>
               </div>
             </div>
           </div>
-          <div class="post__comments">Comments</div>
+          <div class="post__comments">
+            Comments
+          </div>
         </article>
 
       </div>
       <div class="slider__slides__single-slide">
-        B
+        Post B
       </div>
       <div class="slider__slides__single-slide">
-        C
+        Post C
       </div>
     </div>
   </div>
@@ -110,30 +112,3 @@
 </body>
 
 </html>
-
-<!-- gallery controls -->
-<script>
-  const galControls = Array.from(document.getElementsByClassName("gallery__controls__panel__option"));
-  galControls.forEach(elem => {
-    elem.onclick = (event) => {
-      galControls.forEach(elm => {elm.classList.remove("--active")});
-      elem.classList.add("--active");
-    }
-  })
-</script>
-<!-- like button -->
-<script>
-  const toggleableHearts = Array.from(document.getElementsByClassName("fa-heart"));
-  toggleableHearts.forEach(heart => {
-    heart.onclick = (event) => {
-      let classList = Array.from(heart.classList);
-      if (classList.some(cssClass => cssClass=="--active")) {
-        heart.classList.remove("--active","fas");
-        heart.classList.add("far");
-      } else {
-        heart.classList.remove("far");
-        heart.classList.add("--active","fas");
-      }
-    }
-  })
-</script>

@@ -74,7 +74,7 @@
 
     &__single-slide {
       display: block;
-      padding-left: $size-arrowbuttons + 3 * $padding-md;
+      // padding-left: $size-arrowbuttons + 3 * $padding-md;
       padding-right: $size-arrowbuttons + 3 * $padding-md + 14px; // this needs to be bigger cuz scrollbar...
     }
   }

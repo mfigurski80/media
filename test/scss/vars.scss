@@ -22,9 +22,9 @@ $mono-disabled: rgba(110,110,110,.5);
 $mono-shade-dark: rgba(33,35,35,.1);
 
 // Box Shadow vars
-$shadow-100: -6px 6px 0 1px $mono-shade-dark;
-$shadow-200: -9px 9px 0 1px $mono-shade-dark;
-$shadow-300: -10px 10px 0 1px $mono-shade-dark, -17px 17px 0 1px $mono-shade-dark;
+$shadow-100: -6px 6px 0 0px $mono-shade-dark;
+$shadow-200: -9px 9px 0 0px $mono-shade-dark;
+$shadow-300: -10px 10px 0 0px $mono-shade-dark, -17px 17px 0 0px $mono-shade-dark;
 
 // Padding vars
 $padding-sm: 5.5px;
@@ -34,13 +34,11 @@ $padding-xl: 38px;
 $padding-xxl: 65px;
 
 // Size vars
-$size-border: 3px;
 $size-navicons: 25px;
 $size-arrowbuttons: 28px;
 $size-userimg: 45px;
 $size-container: 1200px;
-$size-postmeta: 250px;
-$size-postaction: 100px;
+$size-postmeta: 200px;
 
 // Standard border radius
 $border-radius-xs: 11px;

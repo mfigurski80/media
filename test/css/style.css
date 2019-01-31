@@ -23,6 +23,9 @@ h1, h2, h3, h4, h5, h6, p, a {
 h1, h2, h3 {
   font-family: 'Montserrat Black', sans-serif; }
 
+h6 {
+  font-size: 8px; }
+
 p {
   font-size: 15px;
   line-height: 23px; }
@@ -167,21 +170,23 @@ input {
     transition: all 0.5s; }
     .slider__slides__single-slide {
       display: block;
-      padding-left: 70px;
       padding-right: 84px; }
 
 .post {
-  max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
   display: grid;
-  grid-template-columns: 15fr auto 1fr auto; }
+  grid-template-columns: 20fr auto 1fr auto; }
   .post__content {
     grid-column: 1;
-    margin-top: 38px;
+    max-height: 100vh;
     overflow: hidden;
-    border-radius: 33px 33px 0 33px;
-    box-shadow: -10px 10px 0 1px rgba(33, 35, 35, 0.1), -17px 17px 0 1px rgba(33, 35, 35, 0.1); }
+    box-shadow: -6px 6px 0 0px rgba(33, 35, 35, 0.1); }
+    .post__content > img {
+      display: block;
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%); }
   .post__action {
     grid-column: 2;
     display: flex;
@@ -190,25 +195,27 @@ input {
     .post__action__bar {
       padding: 5.5px 0;
       background: #343737;
-      border-radius: 0 33px 33px 0;
-      box-shadow: -10px 10px 0 1px rgba(33, 35, 35, 0.1), -17px 17px 0 1px rgba(33, 35, 35, 0.1); }
+      border-radius: 0 17px 17px 0;
+      box-shadow: -6px 6px 0 0px rgba(33, 35, 35, 0.1); }
       .post__action__bar__icon {
-        padding: 33px;
+        font-size: 18px;
+        padding: 14px;
+        padding-left: 11px;
         color: #dadada; }
   .post__meta {
     grid-column: 4;
-    min-height: 40vh;
+    min-height: 50vh;
     display: flex;
     flex-direction: column;
     justify-content: center; }
     .post__meta__wrapper {
-      width: 250px;
+      width: 200px;
       padding: 0 5.5px; }
       .post__meta__wrapper__head {
         padding: 5.5px 0;
         text-decoration: none; }
         .post__meta__wrapper__head__img {
-          box-shadow: -6px 6px 0 1px rgba(33, 35, 35, 0.1);
+          box-shadow: -6px 6px 0 0px rgba(33, 35, 35, 0.1);
           width: 60px;
           border-radius: 17px;
           overflow: hidden; }
@@ -219,7 +226,7 @@ input {
         .post__meta__wrapper__content > a {
           display: inline-block;
           padding: 5.5px 14px;
-          font-size: 13px;
+          font-size: 11px;
           margin: 5.5px;
           margin-left: 0;
           background: #DFC464;
@@ -229,6 +236,8 @@ input {
           .post__meta__wrapper__content > a:hover {
             background: #f57064;
             color: #dadada; }
+  .post__comments {
+    padding-left: 40%; }
 
 .comment {
   margin-top: 5.5px;
