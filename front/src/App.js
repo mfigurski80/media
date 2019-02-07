@@ -13,15 +13,28 @@ import Profile from './views/Profile';
 export default class App extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      posts: [{"content":"This post is passed to the Profile page from the App's centeral state"}]
+    }
   }
 
   render() {
     return (
       <Router>
         <div> {/* Router can only have one child, so need this to wrap */}
+          <nav> {/* Rudimentary demo nav: TODO replace it */}
+            <p>Navigation</p>
+            <ul>
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/profile">Profile</Link></li>
+            </ul>
+          </nav>
+
           <Switch> {/* Render only first match */}
 
-            <Route exact path="/" component={Home} />
+            <Route exact path="/" render={(props) =>
+              <Home {...props} posts={this.state.posts}/>
+            }/>
             <Route path="/profile" component={Profile} />
 
           </Switch>
