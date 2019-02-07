@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class App extends Component {
+export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -11,7 +11,8 @@ class App extends Component {
   componentDidMount() {
     fetch('/posts')
       .then(res => res.json())
-      .then(posts => this.setState({ posts }));
+      .then(posts => this.setState({ posts }))
+      .catch(err => console.log(err));
   }
 
   render() {
@@ -26,6 +27,4 @@ class App extends Component {
       </div>
     );
   }
-}
-
-export default App;
+};
