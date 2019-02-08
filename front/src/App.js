@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
-// ^^ React-Router docs: https://reacttraining.com/react-router/web/guides/basic-components
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'; // React-Router docs: https://reacttraining.com/react-router/web/guides/basic-components
+import { Provider } from 'react-redux'; // Redux imports
+import store from './store';
 
 // import some paths
 import Home from './views/Home';
@@ -13,24 +14,26 @@ import Profile from './views/Profile';
 export default class App extends Component {
   render() {
     return (
-      <Router>
-        <div> {/* Router can only have one child, so need this to wrap */}
-          <nav> {/* Rudimentary demo nav: TODO replace it */}
-            <p>Navigation</p>
-            <ul>
-              <li><Link to="/">Home</Link></li>
-              <li><Link to="/profile">Profile</Link></li>
-            </ul>
-          </nav>
+      <Provider store={store}> {/* Redux */}
+        <Router>
+          <div> {/* Router can only have one child, so need this to wrap */}
 
-          <Switch> {/* Render only first match */}
+            <nav> {/* Rudimentary demo nav: TODO replace it */}
+              <p>Navigation</p>
+              <ul>
+                <li><Link to="/">Home</Link></li>
+                <li><Link to="/profile">Profile</Link></li>
+              </ul>
+            </nav>
 
-            <Route exact path="/" component={Home}/>
-            <Route path="/profile" component={Profile} />
+            <Switch> {/* Render only first match */}
+              <Route exact path="/" component={Home}/>
+              <Route path="/profile" component={Profile} />
+            </Switch>
 
-          </Switch>
-        </div>
-      </Router>
+          </div>
+        </Router>
+      </Provider>
     );
   }
 

@@ -1,26 +1,16 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { fetchPosts } from '../actions/postActions';
 
-export default class Home extends Component {
-  /* React lifecycle methods */
-  constructor(props) {
-    super(props);
-    this.state = {
-      posts: []
-    }
-  }
-
+class Home extends Component {
   componentWillMount() {
-    this.getPosts()
-      .then(res => {
-        this.setState({
-          posts: res
-        });
-      })
-      .catch(err => console.log(err));
+    this.props.fetchPosts();
   }
 
   render() {
-    const postItems = this.state.posts.map(post =>
+
+    const postItems = this.props.posts.map(post =>
       <div key={post}>
         <h3>{post.title}</h3>
         <p>{post.body}</p>
@@ -35,10 +25,15 @@ export default class Home extends Component {
     );
   }
 
-
-  /* Custom Methods */
-  getPosts() {
-    return fetch("http://jsonplaceholder.typicode.com/posts") // TODO: once backend is done, replace fetch
-      .then(res => res.json())
-  }
 }
+
+Home.propTypes = {
+  fetchPosts: PropTypes.func.isRequired,
+  posts: PropTypes.array.isRequired
+}
+
+const mapStateToProps = state => ({
+  posts: state.posts.items
+});
+
+export default connect(mapStateToProps, { fetchPosts })(Home);
