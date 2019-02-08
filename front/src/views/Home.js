@@ -36,3 +36,4 @@ const mapStateToProps = state => ({ // given entire state, what do you want as p
   posts: state.posts
 });
 export default connect(mapStateToProps, { fetchPosts })(Home);
+// what data do you want, want actions do you want, where should I attach it? ^^
