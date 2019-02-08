@@ -3,7 +3,9 @@ import thunk from 'redux-thunk';
 import rootReducer from './reducers/root';
 
 
-const initialState = {};
+const initialState = {
+  posts: []
+};
 const middleware = [thunk];
 const store = createStore(
   rootReducer,
