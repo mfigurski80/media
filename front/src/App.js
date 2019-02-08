@@ -11,13 +11,6 @@ import Profile from './views/Profile';
  * General component to contain entire app. Also functions as a router
  */
 export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      posts: [{"content":"This post is passed to the Profile page from the App's centeral state"}]
-    }
-  }
-
   render() {
     return (
       <Router>
@@ -32,9 +25,7 @@ export default class App extends Component {
 
           <Switch> {/* Render only first match */}
 
-            <Route exact path="/" render={(props) =>
-              <Home {...props} posts={this.state.posts}/>
-            }/>
+            <Route exact path="/" component={Home}/>
             <Route path="/profile" component={Profile} />
 
           </Switch>
@@ -42,4 +33,5 @@ export default class App extends Component {
       </Router>
     );
   }
+
 }
