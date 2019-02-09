@@ -1,0 +1,58 @@
+@import '../vars.scss';
+@import '../layout.scss';
+
+.app {
+  @extend .layout--large-right;
+  align-items: flex-start;
+
+  height: 100vh;
+  overflow: hidden;
+
+  &__nav {
+    @extend .layout--large-left;
+    flex-direction: column;
+
+    height: 100vh;
+    background: $color-prim;
+    padding: $padding-lg $padding-md;
+
+    // top section
+    &__top {
+    }
+    // bottom section
+    &__bottom {
+      &__profile {
+        width: 52px;
+        display: block;
+        border-radius: 15px;
+        transition: all $time-md;
+        &:hover {
+          box-shadow: 0 0 0 4px $color-prim-dark;
+        }
+      }
+    }
+
+    // all icons in the navbar
+    & i.fas {
+      font-size: 20px;
+      color: $mono-light;
+      text-decoration: none;
+      text-align: center;
+
+      padding: 15px;
+      margin: 10px 0; // margin must cover 4px shadow
+      display: block;
+      border-radius: 5px;
+      transition: all $time-md;
+      &:hover {
+        background: $color-prim-dark;
+        box-shadow: 0 0 0 4px $color-prim-dark;
+      }
+    }
+  }
+
+  &__page {
+    height: 100vh;
+    overflow: auto;
+  }
+}

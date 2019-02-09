@@ -1,0 +1,22 @@
+
+.layout {
+
+  // 2col with left expanded
+  &--large-left {
+    display: flex;
+    align-items: center;
+    & > *:nth-child(1) {
+      flex: 1;
+    }
+  }
+
+  // 2col with right expanded
+  &--large-right {
+    display: flex;
+    align-items: center;
+    & > *:nth-child(2) {
+      flex: 1;
+    }
+  }
+
+}
