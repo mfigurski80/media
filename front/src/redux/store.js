@@ -4,7 +4,9 @@ import rootReducer from './reducers/root';
 
 
 const initialState = {
-  posts: []
+  posts: [],
+  notifications: [{message: "This notification is brought to you from the depths of REDUX STORE"}],
+  user: undefined
 };
 const middleware = [thunk];
 const store = createStore(

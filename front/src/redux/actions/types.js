@@ -1,1 +1,3 @@
 export const SET_POSTS = 'SET_POSTS';
+
+export const RESET_NOTIFICATIONS = 'RESET_NOTIFICATIONS';

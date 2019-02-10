@@ -1,10 +1,8 @@
-import { SET_POSTS } from '../actions/types';
+import { SET_POSTS, RESET_NOTIFICATIONS } from '../actions/types';
 
-const initialState = {
-  posts: []
-}
 
-export default function(state = initialState, action) {
+
+export default function(state, action) {
   switch (action.type) {
 
 
@@ -12,6 +10,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         posts: action.payload
+      }
+
+    case RESET_NOTIFICATIONS:
+      return {
+        ...state,
+        notifications: []
       }
 
 
