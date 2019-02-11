@@ -1,42 +1,44 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+// import actions
+import { setPlay, setQueuePos } from './redux/actions/postActions';
 
-import { Howl, Howler } from 'howler'; // Howler docs: https://github.com/goldfire/howler.js
-
-
-import './css/Player.css';
+import './css/Player.css'; // import stylesheet
 
 class Player extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isPlay: false,
-      songQueuePos: -1,
-      songLoaded: false,
-      song: {
-        source: undefined,
-        title: undefined,
-        author: undefined,
-        Howl: undefined,
-      },
-      volume: .75
-    }
-
     this.loadNextSong = this.loadNextSong.bind(this);
+    this.loadPrevSong = this.loadPrevSong.bind(this);
     this.togglePlay = this.togglePlay.bind(this);
   }
 
-  componentWillMount() {
-    this.loadNextSong()
-  }
-
   render() {
+    var song = { // song default
+      id: "-",
+      title: "None",
+      author: "Please load a collection"
+    };
+    if (this.props.song) song=this.props.song;
+
     return (
       <div className="player">
-        <p>Player</p>
-        <h4 onClick={this.togglePlay}>{this.state.song.title} - {this.state.song.author}</h4>
+        <Link to={"/song/" + song.id}><div className="player__meta">
+          <h3>{song.title}</h3>
+          <h6>{song.author}</h6>
+        </div></Link>
+        <div className="player__controls">
+          <i className="fas fa-step-backward" onClick={this.loadPrevSong}></i>
+          {this.props.isPlaying // play/pause toggle button
+            ?
+            (<i className="fas fa-pause" onClick={this.togglePlay}></i>)
+            :
+            <i className="fas fa-play" onClick={this.togglePlay}></i>
+          }
+          <i className="fas fa-step-forward" onClick={this.loadNextSong}></i>
+        </div>
       </div>
     );
   }
@@ -48,53 +50,39 @@ class Player extends Component {
   **** */
 
   loadNextSong() {
-    if (this.props.songQueue.length > this.state.songQueuePos) { // if songQueuePos is valid...
-      const curSong = this.props.songQueue[this.state.songQueuePos+1]; // load next song
-      console.log("Loaded: " + curSong.title + " - " + curSong.author);
-
-      const howl = new Howl({ // form playable audio object
-        src: [curSong.source],
-        volume: this.state.volume
-      });
-      // howl.play();
-
-      this.setState({
-        songLoaded: true,
-        songQueuePos: this.state.songQueuePos + 1,
-        song: {
-          source: curSong.source,
-          title: curSong.title,
-          author: curSong.author,
-          Howl: howl
-        }
-      })
-
-    } else {
-      // TODO: load some sort of default placeholder?...
-    }
+    this.props.setQueuePos(this.props.songQueuePos + 1);
+  }
+  loadPrevSong() {
+    this.props.setQueuePos(this.props.songQueuePos - 1);
   }
 
+
   togglePlay() {
-    // play/pause howl
-    if (this.state.isPlay) {
-      this.state.song.Howl.pause()
-    } else {
-      this.state.song.Howl.play()
-    }
-    // update state
-    this.setState({
-      isPlay: !this.state.isPlay
-    });
+    // if current song is defined, set global state to play!
+    if (this.props.song) this.props.setPlay(!this.props.isPlaying);
   }
 
 }
+
+
 
 
 Player.proptypes = {
-  songQueue: PropTypes.array
+  song: PropTypes.shape({
+    title: PropTypes.string,
+    author: PropTypes.string,
+    source: PropTypes.string,
+    id: PropTypes.string
+  }),
+  songQueuePos: PropTypes.number.isRequired,
+  isPlaying: PropTypes.bool.isRequired,
+  volume: PropTypes.number.isRequired
 }
 
 const mapStateToProps = (state) => ({
-  songQueue: state.songQueue
+  song: state.songQueue[state.songQueuePos],
+  songQueuePos: state.songQueuePos,
+  isPlaying: state.isPlaying,
+  volume: state.volume
 })
-export default connect(mapStateToProps, {})(Player)
+export default connect(mapStateToProps, { setPlay, setQueuePos })(Player)

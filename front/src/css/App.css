@@ -15,7 +15,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  background: #fafafa; }
+  background: #f9f9f9; }
   .app__page {
     overflow: auto;
     flex: 1; }

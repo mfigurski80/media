@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-// React-Router -- docs: https://reacttraining.com/react-router/web/guides/basic-components
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'; // React-Router docs: https://reacttraining.com/react-router/web/guides/basic-components
+import { Howl, Howler } from 'howler'; // Howler docs: https://github.com/goldfire/howler.js
 
 // import some paths
 import Home from './views/Home';
@@ -34,5 +34,4 @@ export default class App extends Component {
       </Router>
     );
   }
-
 }

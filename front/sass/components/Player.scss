@@ -2,9 +2,37 @@
 
 .player {
   background: $mono-lightless;
-  padding: $padding-md;
-  & audio {
-    opacity: 0;
-    width: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  &__meta {
+    padding: $padding-sm $padding-lg;
+  }
+
+  &__controls {
+    padding: 0 $padding-lg;
+    display: flex;
+    align-items: center;
+    & i {
+      display: block;
+      width: 2*$padding-lg;
+      text-align: center;
+      font-size: $padding-lg;
+      padding: $padding-lg/2 0;
+      margin: $padding-sm;
+      border-radius: $padding-lg * 2;
+      background: $color-prim;
+      color: $mono-light;
+      cursor: pointer;
+      transition: background $time-md;
+      &:hover {
+        background: $color-prim-dark;
+      }
+      // play button
+      &.fa-play {
+        padding-left: 4px;
+      }
+    }
   }
 }

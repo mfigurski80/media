@@ -1,4 +1,4 @@
-import { SET_POSTS } from '../actions/types';
+import { SET_POSTS, SET_PLAY, SET_QUEUEPOS, SET_VOLUME } from '../actions/types';
 
 
 
@@ -10,6 +10,26 @@ export default function(state, action) {
       return {
         ...state,
         posts: action.payload
+      }
+
+    case SET_PLAY:
+      return {
+        ...state,
+        isPlaying: action.payload,
+        
+      }
+
+    case SET_QUEUEPOS:
+      return {
+        ...state,
+        songQueuePos: action.payload,
+        isPlaying: true // also immediately play selected song (TODO: make sure its not out of bounds!)
+      }
+
+    case SET_VOLUME:
+      return {
+        ...state,
+        volume: action.payload
       }
 
 
