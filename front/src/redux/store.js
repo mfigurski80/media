@@ -5,8 +5,8 @@ import rootReducer from './reducers/root';
 
 const initialState = {
   posts: [],
-  notifications: [{message: "This notification is brought to you from the depths of REDUX STORE"}],
-  user: undefined
+  user: undefined,
+  songQueue: [{title: "Miracle", author: "Caravan Palace", source: './resources/Miracle.mp3'}]
 };
 const middleware = [thunk];
 const store = createStore(

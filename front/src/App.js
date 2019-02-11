@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from './views/Home';
 import Profile from './views/Profile';
 // import components
-import Nav from './Nav';
+import Player from './Player';
 
 import './css/App.css'; // stylesheet import
 
@@ -21,14 +21,14 @@ export default class App extends Component {
       <Router>
         <div className="app"> {/* Router can only have one child, so need this to wrap */}
 
-          <Nav /> {/* nav element */}
-
           <div className="app__page">
             <Switch> {/* Render only first match */}
               <Route exact path="/" component={Home}/>
               <Route path="/profile" component={Profile} />
             </Switch>
           </div>
+
+          <Player />
 
         </div>
       </Router>

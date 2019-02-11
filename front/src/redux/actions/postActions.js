@@ -1,4 +1,4 @@
-import { SET_POSTS, RESET_NOTIFICATIONS } from './types';
+import { SET_POSTS } from './types';
 
 export const fetchPosts = () => dispatch => {
   fetch("http://jsonplaceholder.typicode.com/posts") // TODO: once backend is done, replace fetch
@@ -7,11 +7,4 @@ export const fetchPosts = () => dispatch => {
       type: SET_POSTS,
       payload: data
     }));
-}
-
-export const resetNotifications = () => dispatch => {
-  dispatch({
-    type: RESET_NOTIFICATIONS,
-    payload: undefined
-  });
 }

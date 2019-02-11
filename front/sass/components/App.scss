@@ -2,14 +2,15 @@
 @import '../layout.scss';
 
 .app {
-  @extend .layout--large-right;
-  align-items: flex-start;
-
   height: 100vh;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: $mono-light;
 
   &__page { // make only the app__page elem scroll
-    height: 100vh;
+    // height: 100%;
     overflow: auto;
+    flex: 1; //make page take up all remaining space...
   }
 }

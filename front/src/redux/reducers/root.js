@@ -1,4 +1,4 @@
-import { SET_POSTS, RESET_NOTIFICATIONS } from '../actions/types';
+import { SET_POSTS } from '../actions/types';
 
 
 
@@ -10,12 +10,6 @@ export default function(state, action) {
       return {
         ...state,
         posts: action.payload
-      }
-
-    case RESET_NOTIFICATIONS:
-      return {
-        ...state,
-        notifications: []
       }
 
 

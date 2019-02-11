@@ -5,6 +5,7 @@
   "proxy": "http://localhost:3001",
   "dependencies": {
     "gulp-cli": "^2.0.1",
+    "howler": "^2.1.1",
     "react": "^16.8.1",
     "react-dom": "^16.6.3",
     "react-redux": "^6.0.0",

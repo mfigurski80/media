@@ -1,0 +1,6 @@
+.player {
+  background: #eaeaea;
+  padding: 10px; }
+  .player audio {
+    opacity: 0;
+    width: 0; }
