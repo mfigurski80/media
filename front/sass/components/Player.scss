@@ -7,31 +7,31 @@
   align-items: center;
 
   &__meta {
-    padding: $padding-sm $padding-lg;
+    // width: 14vw;
+    // margin-left: 2vw;
+    padding: $padding-md $padding-lg;
+    min-width: 300px;
+    // background: $color-prim;
+    border-right: 1px solid $mono-light;
   }
 
   &__controls {
-    padding: 0 $padding-lg;
     display: flex;
     align-items: center;
-    & i {
-      display: block;
-      width: 2*$padding-lg;
-      text-align: center;
-      font-size: $padding-lg;
-      padding: $padding-lg/2 0;
-      margin: $padding-sm;
-      border-radius: $padding-lg * 2;
-      background: $color-prim;
+    padding: 0 $padding-lg;
+    &__button {
+      width: 45px; // make a circle
+      height: 45px;
+      border-radius: 50%;
       color: $mono-light;
-      cursor: pointer;
+      background: $color-prim;
+      display: flex; // center icons...
+      justify-content: center;
+      align-items: center;
+      margin: $padding-sm; // spacing
       transition: background $time-md;
       &:hover {
         background: $color-prim-dark;
-      }
-      // play button
-      &.fa-play {
-        padding-left: 4px;
       }
     }
   }

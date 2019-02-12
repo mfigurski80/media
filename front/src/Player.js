@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 // import actions
-import { setPlay, setQueuePos } from './redux/actions/postActions';
+import { setPlay, nextSong, prevSong } from './redux/actions/postActions';
 
 import './css/Player.css'; // import stylesheet
 
@@ -18,7 +18,7 @@ class Player extends Component {
   render() {
     var song = { // song default
       id: "-",
-      title: "None",
+      title: "--",
       author: "Please load a collection"
     };
     if (this.props.song) song=this.props.song;
@@ -29,15 +29,18 @@ class Player extends Component {
           <h3>{song.title}</h3>
           <h6>{song.author}</h6>
         </div></Link>
+
         <div className="player__controls">
-          <i className="fas fa-step-backward" onClick={this.loadPrevSong}></i>
-          {this.props.isPlaying // play/pause toggle button
-            ?
-            (<i className="fas fa-pause" onClick={this.togglePlay}></i>)
-            :
-            <i className="fas fa-play" onClick={this.togglePlay}></i>
-          }
-          <i className="fas fa-step-forward" onClick={this.loadNextSong}></i>
+          <div className="player__controls__button"><i className="fas fa-step-backward" onClick={this.loadPrevSong}></i></div>
+          <div className="player__controls__button">
+            {this.props.isPlaying // play/pause toggle button
+              ?
+              (<i className="fas fa-pause" onClick={this.togglePlay}></i>)
+              :
+              <i className="fas fa-play" onClick={this.togglePlay}></i>
+            }
+          </div>
+          <div className="player__controls__button"><i className="fas fa-step-forward" onClick={this.loadNextSong}></i></div>
         </div>
       </div>
     );
@@ -49,17 +52,21 @@ class Player extends Component {
   Custom Functions
   **** */
 
-  loadNextSong() {
-    this.props.setQueuePos(this.props.songQueuePos + 1);
+  loadNextSong(e) {
+    if (e) e.preventDefault();
+    this.props.nextSong();
   }
-  loadPrevSong() {
-    this.props.setQueuePos(this.props.songQueuePos - 1);
+  loadPrevSong(e) {
+    if (e) e.preventDefault();
+    this.props.prevSong();
   }
 
 
-  togglePlay() {
-    // if current song is defined, set global state to play!
-    if (this.props.song) this.props.setPlay(!this.props.isPlaying);
+  togglePlay(e) {
+    if (e) e.preventDefault();
+    console.log("play click")
+    // set global state to play! redux will figure out if song is defined
+    this.props.setPlay(!this.props.isPlaying);
   }
 
 }
@@ -85,4 +92,4 @@ const mapStateToProps = (state) => ({
   isPlaying: state.isPlaying,
   volume: state.volume
 })
-export default connect(mapStateToProps, { setPlay, setQueuePos })(Player)
+export default connect(mapStateToProps, { setPlay, nextSong, prevSong })(Player)

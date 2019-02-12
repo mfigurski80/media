@@ -33,14 +33,14 @@ class App extends Component {
           <Player />
 
           {this.props.sourceList[this.props.sourceListPos]
-            ? (
+            ? ( // if next song is defined...
               <ReactHowler
                 src={this.props.sourceList[this.props.sourceListPos]}
                 playing={this.props.isPlaying}
                 preload={true}
                 volume={this.props.volume}
               />
-            ) : (
+          ) : ( // if undefined, don't render ReactHowler
               null
             )
           }

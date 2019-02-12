@@ -4,24 +4,23 @@
   flex-direction: row;
   align-items: center; }
   .player__meta {
-    padding: 5px 25px; }
+    padding: 13px 25px;
+    min-width: 300px;
+    border-right: 1px solid #f9f9f9; }
   .player__controls {
-    padding: 0 25px;
     display: flex;
-    align-items: center; }
-    .player__controls i {
-      display: block;
-      width: 50px;
-      text-align: center;
-      font-size: 25px;
-      padding: 12.5px 0;
-      margin: 5px;
-      border-radius: 50px;
-      background: #1B9;
+    align-items: center;
+    padding: 0 25px; }
+    .player__controls__button {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
       color: #f9f9f9;
-      cursor: pointer;
+      background: #1B9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 5px;
       transition: background 0.17s; }
-      .player__controls i:hover {
+      .player__controls__button:hover {
         background: #0FA789; }
-      .player__controls i.fa-play {
-        padding-left: 4px; }
