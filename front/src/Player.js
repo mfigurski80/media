@@ -67,7 +67,7 @@ class Player extends Component {
 
 
 
-Player.proptypes = {
+Player.propTypes = {
   song: PropTypes.shape({
     title: PropTypes.string,
     author: PropTypes.string,
