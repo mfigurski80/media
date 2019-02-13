@@ -1,12 +1,33 @@
 .player {
-  background: #eaeaea;
+  background: #ededed;
   display: flex;
   flex-direction: row;
   align-items: center; }
   .player__meta {
     padding: 13px 25px;
-    min-width: 300px;
-    border-right: 1px solid #f9f9f9; }
+    text-transform: lowercase; }
+  .player__seekBar {
+    flex: 1;
+    height: 4px;
+    background: #f9f9f9;
+    margin: 25px;
+    cursor: pointer;
+    display: flex;
+    border-radius: 2px; }
+    .player__seekBar__viewed {
+      pointer-events: none;
+      height: 100%;
+      background: #FBB;
+      width: 30%;
+      border-radius: 2px; }
+    .player__seekBar__button {
+      pointer-events: none;
+      width: 20px;
+      height: 20px;
+      margin-left: -10px;
+      margin-top: -8px;
+      border-radius: 50%;
+      background: #FBB; }
   .player__controls {
     display: flex;
     align-items: center;

@@ -6,10 +6,11 @@
 
 :root {
   color: #28282b;
-  font-family: 'Montserrat', sans-serif; }
+  font-family: 'Infinity', sans-serif; }
 
 a {
-  color: inherit; }
+  color: inherit;
+  text-decoration: inherit; }
 
 img, video {
   width: 100%;

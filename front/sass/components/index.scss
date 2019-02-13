@@ -1,6 +1,11 @@
 @import 'https://use.fontawesome.com/releases/v5.7.1/css/all.css';
 @import '../vars.scss';
 
+// @font-face {
+//   font-family: 'Infinity';
+//   src: url('./public/resources/Infinity.ttf');
+// }
+
 * {
   margin: 0;
   padding: 0;
@@ -9,11 +14,12 @@
 
 :root {
   color: $mono-dark;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Infinity', sans-serif;
 }
 
 a {
   color: inherit;
+  text-decoration: inherit;
 }
 
 img, video {

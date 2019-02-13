@@ -10,9 +10,35 @@
     // width: 14vw;
     // margin-left: 2vw;
     padding: $padding-md $padding-lg;
-    min-width: 300px;
+    // min-width: 300px;
     // background: $color-prim;
-    border-right: 1px solid $mono-light;
+    text-transform: lowercase;
+  }
+
+  &__seekBar {
+    flex: 1;
+    height: 4px;
+    background: $mono-light;
+    margin: $padding-lg;
+    cursor: pointer;
+    display: flex;
+    border-radius: 2px;
+    &__viewed {
+      pointer-events: none;
+      height: 100%;
+      background: $color-sec;
+      width: 30%;
+      border-radius: 2px;
+    }
+    &__button {
+      pointer-events: none;
+      width: 20px;
+      height: 20px;
+      margin-left: -10px;
+      margin-top: -8px;
+      border-radius: 50%;
+      background: $color-sec;
+    }
   }
 
   &__controls {

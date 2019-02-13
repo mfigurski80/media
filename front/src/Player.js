@@ -17,7 +17,7 @@ class Player extends Component {
 
   render() {
     var song = { // song default
-      id: "-",
+      id: "--",
       title: "--",
       author: "Please load a collection"
     };
@@ -25,11 +25,16 @@ class Player extends Component {
 
     return (
       <div className="player">
-        <Link to={"/song/" + song.id}><div className="player__meta">
-          <h3>{song.title}</h3>
-          <h6>{song.author}</h6>
-        </div></Link>
-
+        <Link to={"/song/" + song.id}>
+          <div className="player__meta">
+            <h3>{song.title}</h3>
+            <h6>{song.author}</h6>
+          </div>
+        </Link>
+        <div className="player__seekBar" onMouseDown={this.playerSeeking}>
+          <div className="player__seekBar__viewed"></div>
+          <div className="player__seekBar__button"></div>
+        </div>
         <div className="player__controls">
           <div className="player__controls__button"><i className="fas fa-step-backward" onClick={this.loadPrevSong}></i></div>
           <div className="player__controls__button">
@@ -64,9 +69,19 @@ class Player extends Component {
 
   togglePlay(e) {
     if (e) e.preventDefault();
-    console.log("play click")
     // set global state to play! redux will figure out if song is defined
     this.props.setPlay(!this.props.isPlaying);
+  }
+
+
+  playerSeeking(e) {
+    if (e) e.preventDefault();
+    const viewed_elem = document.getElementsByClassName('player__seekBar__viewed')[0];
+    // console.log(e.clientX);
+    // console.log(e.target.offsetLeft);
+    // console.log(e.target.offsetWidth);
+    console.log(((e.clientX - e.target.offsetLeft)/e.target.offsetWidth) * 100);
+    viewed_elem.style.width = ((e.clientX - e.target.offsetLeft)/e.target.offsetWidth) * 100 + "%";
   }
 
 }

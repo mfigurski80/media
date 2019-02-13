@@ -1,5 +1,4 @@
 import {
-  SET_POSTS,
   SET_PLAY,
   SET_QUEUEPOS,
   NEXT_SONG,
@@ -11,14 +10,6 @@ import {
 
 export default function(state, action) {
   switch (action.type) {
-
-
-    case SET_POSTS:
-      return {
-        ...state,
-        posts: action.payload
-      }
-
 
     case SET_PLAY:
       if (!state.songQueue[state.songQueuePos]) return { // if invalid song

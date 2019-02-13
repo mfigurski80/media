@@ -10,6 +10,9 @@ import Profile from './views/Profile';
 import Player from './Player';
 import ReactHowler from 'react-howler'; // audio wrapper docs: https://www.npmjs.com/package/react-howler
 
+// import actions
+import { nextSong } from './redux/actions/postActions';
+
 import './css/App.css'; // stylesheet import
 
 
@@ -39,6 +42,8 @@ class App extends Component {
                 playing={this.props.isPlaying}
                 preload={true}
                 volume={this.props.volume}
+                onEnd={this.props.nextSong}
+                onLoadError={this.props.nextSong}
               />
           ) : ( // if undefined, don't render ReactHowler
               null
@@ -54,6 +59,7 @@ class App extends Component {
 
 
 App.propTypes = {
+  nextSong: PropTypes.func.isRequired,
   sourceList: PropTypes.array.isRequired,
   sourceListPos: PropTypes.number.isRequired,
   isPlaying: PropTypes.bool.isRequired,
@@ -66,4 +72,4 @@ const mapStateToProps = (state) => ({
   isPlaying: state.isPlaying,
   volume: state.volume,
 });
-export default connect(mapStateToProps,{})(App);
+export default connect(mapStateToProps,{ nextSong })(App);
