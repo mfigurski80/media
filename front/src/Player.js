@@ -10,9 +10,15 @@ import './css/Player.css'; // import stylesheet
 class Player extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      interval: undefined
+    }
+
     this.loadNextSong = this.loadNextSong.bind(this);
     this.loadPrevSong = this.loadPrevSong.bind(this);
     this.togglePlay = this.togglePlay.bind(this);
+    this.playerSeeking = this.playerSeeking.bind(this);
   }
 
   render() {
@@ -76,12 +82,19 @@ class Player extends Component {
 
   playerSeeking(e) {
     if (e) e.preventDefault();
+    const seek_elem = document.getElementsByClassName('player__seekBar')[0];
     const viewed_elem = document.getElementsByClassName('player__seekBar__viewed')[0];
-    // console.log(e.clientX);
-    // console.log(e.target.offsetLeft);
-    // console.log(e.target.offsetWidth);
-    console.log(((e.clientX - e.target.offsetLeft)/e.target.offsetWidth) * 100);
-    viewed_elem.style.width = ((e.clientX - e.target.offsetLeft)/e.target.offsetWidth) * 100 + "%";
+
+    this.props.setPlay(false); // turn off play
+
+    viewed_elem.style.width = ((e.clientX - seek_elem.offsetLeft)/seek_elem.offsetWidth) * 100 + "%";
+    window.onmousemove = (e) => {
+      viewed_elem.style.width = ((e.clientX - seek_elem.offsetLeft)/seek_elem.offsetWidth) * 100 + "%";
+    }
+    window.onmouseup = (e) => {
+      e.preventDefault();
+      window.onmousemove = undefined;
+    }
   }
 
 }
