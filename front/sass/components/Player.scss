@@ -12,7 +12,7 @@
     padding: $padding-md $padding-lg;
     // min-width: 300px;
     // background: $color-prim;
-    text-transform: lowercase;
+    // text-transform: lowercase;
   }
 
   &__seekBar {
@@ -20,24 +20,23 @@
     height: 4px;
     background: $mono-light;
     margin: $padding-lg;
-    cursor: pointer;
     display: flex;
     border-radius: 2px;
+    cursor: pointer;
     &__viewed {
-      pointer-events: none;
       height: 100%;
-      background: $color-sec;
-      width: 30%;
+      background: $color-prim;
+      width: 0%; // change this (from 0% to 100%) to progress 'viewed'
       border-radius: 2px;
     }
     &__button {
-      pointer-events: none;
       width: 20px;
       height: 20px;
       margin-left: -10px;
-      margin-top: -8px;
+      margin-top: -10px + 4/2px;
       border-radius: 50%;
-      background: $color-sec;
+      background: $color-prim;
+      cursor: pointer;
     }
   }
 

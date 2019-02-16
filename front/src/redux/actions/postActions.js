@@ -3,7 +3,9 @@ import {
   SET_QUEUEPOS,
   NEXT_SONG,
   PREV_SONG,
-  SET_VOLUME
+  SET_VOLUME,
+  SET_SEEK,
+  SET_SEEKING
 } from './types';
 
 export const setPlay = (play) => dispatch => {
@@ -38,4 +40,18 @@ export const setVolume = (newVolume) => dispatch => {
     type: SET_VOLUME,
     payload: newVolume
   });
+}
+
+
+export const setSeek = (songPos) => dispatch => {
+  dispatch({
+    type: SET_SEEK,
+    payload: songPos
+  });
+}
+export const setSeeking = (isSeeking) => dispatch => {
+  dispatch({
+    type: SET_SEEKING,
+    payload: isSeeking
+  })
 }

@@ -3,7 +3,9 @@ import {
   SET_QUEUEPOS,
   NEXT_SONG,
   PREV_SONG,
-  SET_VOLUME
+  SET_VOLUME,
+  SET_SEEK,
+  SET_SEEKING
 } from '../actions/types';
 
 
@@ -64,6 +66,21 @@ export default function(state, action) {
         volume: action.payload
       }
 
+    // seeking audio...
+    case SET_SEEK:
+      return {
+        ...state,
+        songPos: action.payload
+      }
+    case SET_SEEKING:
+      let isPlay = true;
+      if (action.payload) isPlay = false;
+
+      return {
+        ...state,
+        isSeeking: action.payload,
+        isPlaying: isPlay
+      }
 
     default:
       console.log(`[./redux/reducers/root]\nAction type '${action.type}' wasn't found`);

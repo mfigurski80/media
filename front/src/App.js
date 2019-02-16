@@ -11,7 +11,7 @@ import Player from './Player';
 import ReactHowler from 'react-howler'; // audio wrapper docs: https://www.npmjs.com/package/react-howler
 
 // import actions
-import { nextSong } from './redux/actions/postActions';
+import { nextSong, setSeek } from './redux/actions/postActions';
 
 import './css/App.css'; // stylesheet import
 
@@ -21,7 +21,29 @@ import './css/App.css'; // stylesheet import
  * General component to contain entire app. Functions as a router
  */
 class App extends Component {
+  componentWillMount() {
+    this.seekerInterval = window.setInterval(() => {
+      if (this.props.isPlaying) { // if ur currently playing...
+        if (this.props.isSeeking) { // if need to set audio position
+          this.howler.seek(this.props.songPos); // set it
+          this.props.setSeeking(false);
+        } else {                    // if need to give audio position
+          this.props.setSeek(this.howler.seek()); // give it
+        }
+      }
+    }, 300);
+  }
+
   render() {
+
+    if (this.howler) { // if ref is functional...
+      console.log(this.howler.seek());
+      if (this.props.isSeeking) { // if changing song pos...
+        this.howler.seek(this.props.songPos);
+      }
+    }
+
+
     return (
       <Router>
         <div className="app"> {/* Router can only have one child, so need this to wrap */}
@@ -38,6 +60,7 @@ class App extends Component {
           {this.props.sourceList[this.props.sourceListPos]
             ? ( // if next song is defined...
               <ReactHowler
+                ref={(ref) => (this.howler = ref)}
                 src={this.props.sourceList[this.props.sourceListPos]}
                 playing={this.props.isPlaying}
                 preload={true}
@@ -60,10 +83,14 @@ class App extends Component {
 
 App.propTypes = {
   nextSong: PropTypes.func.isRequired,
+  setSeek: PropTypes.func.isRequired,
+
   sourceList: PropTypes.array.isRequired,
   sourceListPos: PropTypes.number.isRequired,
   isPlaying: PropTypes.bool.isRequired,
-  volume: PropTypes.number.isRequired
+  volume: PropTypes.number.isRequired,
+  songPos: PropTypes.number.isRequired,
+  isSeeking: PropTypes.bool.isRequired
 }
 
 const mapStateToProps = (state) => ({
@@ -71,5 +98,7 @@ const mapStateToProps = (state) => ({
   sourceListPos: state.songQueuePos,
   isPlaying: state.isPlaying,
   volume: state.volume,
+  songPos: state.songPos,
+  isSeeking: state.isSeeking
 });
-export default connect(mapStateToProps,{ nextSong })(App);
+export default connect(mapStateToProps,{ nextSong, setSeek })(App);

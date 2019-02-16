@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 // import actions
-import { setPlay, nextSong, prevSong } from './redux/actions/postActions';
+import { setPlay, nextSong, prevSong, setSeek, setSeeking } from './redux/actions/postActions';
 
 import './css/Player.css'; // import stylesheet
 
@@ -38,8 +38,8 @@ class Player extends Component {
           </div>
         </Link>
         <div className="player__seekBar" onMouseDown={this.playerSeeking}>
-          <div className="player__seekBar__viewed"></div>
-          <div className="player__seekBar__button"></div>
+          <div className="player__seekBar__viewed" style={{width: this.props.songPos*100/262 + "%"}}></div>
+          <div className="player__seekBar__button" onMouseDown={this.playerSeeking}></div>
         </div>
         <div className="player__controls">
           <div className="player__controls__button"><i className="fas fa-step-backward" onClick={this.loadPrevSong}></i></div>
@@ -94,6 +94,7 @@ class Player extends Component {
     window.onmouseup = (e) => {
       e.preventDefault();
       window.onmousemove = undefined;
+      window.onmouseup = undefined;
     }
   }
 
@@ -109,15 +110,15 @@ Player.propTypes = {
     source: PropTypes.string,
     id: PropTypes.string
   }),
-  songQueuePos: PropTypes.number.isRequired,
   isPlaying: PropTypes.bool.isRequired,
-  volume: PropTypes.number.isRequired
+  volume: PropTypes.number.isRequired,
+  songPos: PropTypes.number.isRequired
 }
 
 const mapStateToProps = (state) => ({
   song: state.songQueue[state.songQueuePos],
-  songQueuePos: state.songQueuePos,
   isPlaying: state.isPlaying,
-  volume: state.volume
-})
-export default connect(mapStateToProps, { setPlay, nextSong, prevSong })(Player)
+  volume: state.volume,
+  songPos: state.songPos
+});
+export default connect(mapStateToProps, { setPlay, nextSong, prevSong, setSeek, setSeeking })(Player)
