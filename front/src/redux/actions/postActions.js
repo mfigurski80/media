@@ -1,19 +1,9 @@
 import {
-  SET_PLAY,
   SET_QUEUEPOS,
   NEXT_SONG,
   PREV_SONG,
   SET_VOLUME,
-  SET_SEEK,
-  SET_SEEKING
 } from './types';
-
-export const setPlay = (play) => dispatch => {
-  dispatch({
-    type: SET_PLAY,
-    payload: play
-  });
-}
 
 // song position controls
 export const setQueuePos = (newPos) => dispatch => {
@@ -40,18 +30,4 @@ export const setVolume = (newVolume) => dispatch => {
     type: SET_VOLUME,
     payload: newVolume
   });
-}
-
-
-export const setSeek = (songPos) => dispatch => {
-  dispatch({
-    type: SET_SEEK,
-    payload: songPos
-  });
-}
-export const setSeeking = (isSeeking) => dispatch => {
-  dispatch({
-    type: SET_SEEKING,
-    payload: isSeeking
-  })
 }

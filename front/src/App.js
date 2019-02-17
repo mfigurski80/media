@@ -8,10 +8,9 @@ import Home from './views/Home';
 import Profile from './views/Profile';
 // import components
 import Player from './Player';
-import ReactHowler from 'react-howler'; // audio wrapper docs: https://www.npmjs.com/package/react-howler
 
 // import actions
-import { nextSong, setSeek } from './redux/actions/postActions';
+import { nextSong } from './redux/actions/postActions';
 
 import './css/App.css'; // stylesheet import
 
@@ -21,29 +20,7 @@ import './css/App.css'; // stylesheet import
  * General component to contain entire app. Functions as a router
  */
 class App extends Component {
-  componentWillMount() {
-    this.seekerInterval = window.setInterval(() => {
-      if (this.props.isPlaying) { // if ur currently playing...
-        if (this.props.isSeeking) { // if need to set audio position
-          this.howler.seek(this.props.songPos); // set it
-          this.props.setSeeking(false);
-        } else {                    // if need to give audio position
-          this.props.setSeek(this.howler.seek()); // give it
-        }
-      }
-    }, 300);
-  }
-
   render() {
-
-    if (this.howler) { // if ref is functional...
-      console.log(this.howler.seek());
-      if (this.props.isSeeking) { // if changing song pos...
-        this.howler.seek(this.props.songPos);
-      }
-    }
-
-
     return (
       <Router>
         <div className="app"> {/* Router can only have one child, so need this to wrap */}
@@ -57,23 +34,6 @@ class App extends Component {
 
           <Player />
 
-          {this.props.sourceList[this.props.sourceListPos]
-            ? ( // if next song is defined...
-              <ReactHowler
-                ref={(ref) => (this.howler = ref)}
-                src={this.props.sourceList[this.props.sourceListPos]}
-                playing={this.props.isPlaying}
-                preload={true}
-                volume={this.props.volume}
-                onEnd={this.props.nextSong}
-                onLoadError={this.props.nextSong}
-              />
-          ) : ( // if undefined, don't render ReactHowler
-              null
-            )
-          }
-
-
         </div>
       </Router>
     );
@@ -81,24 +41,22 @@ class App extends Component {
 }
 
 
-App.propTypes = {
-  nextSong: PropTypes.func.isRequired,
-  setSeek: PropTypes.func.isRequired,
-
-  sourceList: PropTypes.array.isRequired,
-  sourceListPos: PropTypes.number.isRequired,
-  isPlaying: PropTypes.bool.isRequired,
-  volume: PropTypes.number.isRequired,
-  songPos: PropTypes.number.isRequired,
-  isSeeking: PropTypes.bool.isRequired
-}
+// TODO: sort out proptypes
+// App.propTypes = {
+//   nextSong: PropTypes.func.isRequired,
+//   setSeek: PropTypes.func.isRequired,
+//
+//   sourceList: PropTypes.array.isRequired,
+//   sourceListPos: PropTypes.number.isRequired,
+//   isPlaying: PropTypes.bool.isRequired,
+//   volume: PropTypes.number.isRequired,
+//   songPos: PropTypes.number.isRequired,
+//   isSeeking: PropTypes.bool.isRequired
+// }
 
 const mapStateToProps = (state) => ({
   sourceList: state.songQueue.map(song => song.source),
   sourceListPos: state.songQueuePos,
-  isPlaying: state.isPlaying,
-  volume: state.volume,
-  songPos: state.songPos,
-  isSeeking: state.isSeeking
+  volume: state.volume
 });
-export default connect(mapStateToProps,{ nextSong, setSeek })(App);
+export default connect(mapStateToProps,{ nextSong })(App);
