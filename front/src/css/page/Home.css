@@ -1,0 +1,67 @@
+.layout--large-left {
+  display: flex;
+  align-items: center; }
+  .layout--large-left > *:nth-child(1) {
+    flex: 1; }
+
+.layout--large-right {
+  display: flex;
+  align-items: center; }
+  .layout--large-right > *:nth-child(2) {
+    flex: 1; }
+
+.container, .page-Home__container {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto; }
+
+.page-Home {
+  background: #f9f9f9; }
+  .page-Home__container {
+    padding: 30px 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start; }
+    .page-Home__container__section {
+      height: 330px;
+      width: 330px;
+      padding: 5px;
+      display: grid;
+      cursor: pointer;
+      --child-background: #1B9;
+      --child-background-alt: #0FA789; }
+      .page-Home__container__section:nth-child(5n) {
+        grid-template-columns: 2fr 20fr 1fr;
+        grid-template-rows: 0fr 20fr 3fr;
+        --child-background: #FBB;
+        --child-background-alt: #FAA; }
+      .page-Home__container__section:nth-child(5n+1) {
+        grid-template-columns: 0fr 20fr 4fr;
+        grid-template-rows: 2fr 20fr 2fr; }
+      .page-Home__container__section:nth-child(5n+2) {
+        grid-template-columns: 3fr 20fr 0fr;
+        grid-template-rows: 2fr 20fr 1fr; }
+      .page-Home__container__section:nth-child(5n+3) {
+        grid-template-columns: 1fr 20fr 1fr;
+        grid-template-rows: 0fr 20fr 2fr; }
+      .page-Home__container__section:nth-child(5n+4) {
+        grid-template-columns: 0fr 20fr 3fr;
+        grid-template-rows: 1fr 20fr 2fr; }
+      .page-Home__container__section:nth-child(7n) {
+        --child-background: #FBB;
+        --child-background-alt: #FAA; }
+      .page-Home__container__section__post {
+        grid-column: 2;
+        grid-row: 2;
+        background: var(--child-background);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #f9f9f9;
+        transition: all 0.17s; }
+        .page-Home__container__section__post:hover {
+          background: var(--child-background-alt);
+          transform: scale(1.02); }

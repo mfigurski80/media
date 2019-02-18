@@ -29,9 +29,7 @@ class App extends Component {
             </Switch>
           </div>
 
-          <Switch> {/* Render small player when not rendering full one */}
-            <Route path="/" component={Player} />
-          </Switch>
+          <Player />
 
         </div>
       </Router>

@@ -4,6 +4,15 @@ import rootReducer from './reducers/root';
 
 
 const initialState = {
+  posts: [{
+    title: "Miracle",
+    author: "Caravan Palace",
+    source: "../resources/Miracle.mp3"},
+    {title: "Miracle", author: "Caravan Palace", source: "../resources/Miracle.mp3"},
+    {title: "Miracle", author: "Caravan Palace", source: "../resources/Miracle.mp3"},
+    {title: "Miracle", author: "Caravan Palace", source: "../resources/Miracle.mp3"},
+    {title: "Miracle", author: "Caravan Palace", source: "../resources/Miracle.mp3"}
+  ],
   songQueue: [{ // this is what a song object will look like roughly.
     title: "Miracle",
     author: "Caravan Palace",

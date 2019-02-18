@@ -1,0 +1,70 @@
+@import '../../vars.scss';
+@import '../../layout.scss';
+
+.page-Home {
+  background: $mono-light;
+  &__container {
+    @extend .container;
+    padding: $padding-lg 0;
+    display: flex;  // build layout with flex
+    flex-direction: row;
+    flex-wrap: wrap;  // by wrapping articles into roughly rows of 2
+    justify-content: center; // justify them to center
+    align-content: flex-start;
+
+    &__section {
+      height: 330px;
+      width: 330px;
+      padding: $padding-sm;
+      display: grid;
+      cursor: pointer;
+      --child-background: #{$color-prim};
+      --child-background-alt: #{$color-prim-dark};
+
+      &:nth-child(5n) {
+        grid-template-columns: 2fr 20fr 1fr; // top right
+        grid-template-rows: 0fr 20fr 3fr;
+        --child-background: #{$color-sec};
+        --child-background-alt: #{$color-sec-dark};
+      }
+      &:nth-child(5n+1) {
+        grid-template-columns: 0fr 20fr 4fr; // center left
+        grid-template-rows: 2fr 20fr 2fr;
+      }
+      &:nth-child(5n+2) {
+        grid-template-columns: 3fr 20fr 0fr; // bottom right
+        grid-template-rows: 2fr 20fr 1fr;
+      }
+      &:nth-child(5n+3) {
+        grid-template-columns: 1fr 20fr 1fr; // top center
+        grid-template-rows: 0fr 20fr 2fr;
+      }
+      &:nth-child(5n+4) {
+        grid-template-columns: 0fr 20fr 3fr; // bottom left
+        grid-template-rows: 1fr 20fr 2fr;
+      }
+      &:nth-child(7n) {
+        --child-background: #{$color-sec};
+        --child-background-alt: #{$color-sec-dark};
+      }
+
+      &__post {
+        grid-column: 2;
+        grid-row: 2; // put in correct position
+        background: var(--child-background);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $mono-light;
+        transition: all $time-md;
+
+        &:hover {
+          background: var(--child-background-alt);
+          transform: scale(1.02);
+        }
+      }
+
+    }
+  }
+}

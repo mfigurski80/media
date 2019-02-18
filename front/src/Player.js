@@ -103,12 +103,12 @@ class Player extends Component {
   **** */
 
   loadNextSong(e) {
-    if (e) e.preventDefault();
+    // if (e) e.preventDefault();
     if (this.howler) this.howler.seek(0);
     this.props.nextSong();
   }
   loadPrevSong(e) {
-    if (e) e.preventDefault();
+    // if (e) e.preventDefault();
     if (this.howler) this.howler.seek(0);
     this.props.prevSong();
   }

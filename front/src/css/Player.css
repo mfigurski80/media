@@ -4,12 +4,12 @@
   flex-direction: row;
   align-items: center; }
   .player__meta {
-    padding: 13px 25px; }
+    padding: 13px 30px; }
   .player__seekBar {
     flex: 1;
     height: 4px;
     background: #f9f9f9;
-    margin: 25px;
+    margin: 30px;
     display: flex;
     border-radius: 2px;
     cursor: pointer; }
@@ -29,7 +29,7 @@
   .player__controls {
     display: flex;
     align-items: center;
-    padding: 0 25px; }
+    padding: 0 30px; }
     .player__controls__button {
       width: 45px;
       height: 45px;
