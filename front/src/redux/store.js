@@ -7,7 +7,7 @@ const initialState = {
   songQueue: [{ // this is what a song object will look like roughly.
     title: "Miracle",
     author: "Caravan Palace",
-    source: './resources/Miracle.mp3'
+    source: '../resources/Miracle.mp3'
   }],
   songQueuePos: 0, // position in songQueue
   volume: .75     // volume

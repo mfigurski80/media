@@ -27,7 +27,6 @@ class Player extends Component {
 
   render() {
     var song = { // song default
-      id: "--",
       title: "--",
       author: "Please load a collection"
     };
@@ -43,9 +42,8 @@ class Player extends Component {
           });
         }
       }, 500);
-    } // else, if is not playing but howler and interval exist...
-    else if ((!this.state.isPlaying && this.updateInterval) || (!this.props.song && this.updateInterval)) {
-      console.log('removing')
+    } // else, if is not playing but interval exists...
+    else if ((!this.state.isPlaying || !this.props.song) && this.updateInterval) {
       window.clearInterval(this.updateInterval); // clear interval
       this.updateInterval = undefined;
     }
@@ -68,7 +66,7 @@ class Player extends Component {
           )
         }
 
-        <Link to={"/song/" + song.id}>
+        <Link to={"/song/" + song.title.replace(' ','-')}>
           <div className="player__meta">
             <h3>{song.title}</h3>
             <h6>{song.author}</h6>
@@ -160,22 +158,18 @@ class Player extends Component {
 
 
 
-// TODO: sort out proptypes
-// Player.propTypes = {
-//   song: PropTypes.shape({
-//     title: PropTypes.string,
-//     author: PropTypes.string,
-//     source: PropTypes.string,
-//     id: PropTypes.string
-//   }),
-//   isPlaying: PropTypes.bool.isRequired,
-//   volume: PropTypes.number.isRequired,
-//   songPos: PropTypes.number.isRequired
-// }
+Player.propTypes = {
+  song: PropTypes.shape({
+    title: PropTypes.string,
+    author: PropTypes.string,
+    source: PropTypes.string,
+    id: PropTypes.string
+  }),
+  volume: PropTypes.number.isRequired,
+}
 
 const mapStateToProps = (state) => ({
   song: state.songQueue[state.songQueuePos],
   volume: state.volume,
-  songPos: state.songPos
 });
 export default connect(mapStateToProps, { nextSong, prevSong })(Player)

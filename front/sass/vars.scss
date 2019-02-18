@@ -2,6 +2,9 @@ $color-prim: #1B9;
 $color-prim-dark: #0FA789;
 $color-sec: #FBB;
 
+$grad-prim: linear-gradient(25deg, $color-prim, $color-prim-dark);
+
+
 $mono-light: rgba(249,249,249,1);
 $mono-lightless: rgba(237,237,237,1);
 $mono-darkless: rgba(70,70,72,1);

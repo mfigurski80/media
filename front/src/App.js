@@ -9,9 +9,6 @@ import Profile from './views/Profile';
 // import components
 import Player from './Player';
 
-// import actions
-import { nextSong } from './redux/actions/postActions';
-
 import './css/App.css'; // stylesheet import
 
 
@@ -26,13 +23,15 @@ class App extends Component {
         <div className="app"> {/* Router can only have one child, so need this to wrap */}
 
           <div className="app__page">
-            <Switch> {/* Render only first match */}
+            <Switch> {/* Render only first match of pages */}
               <Route exact path="/" component={Home}/>
               <Route path="/profile" component={Profile} />
             </Switch>
           </div>
 
-          <Player />
+          <Switch> {/* Render small player when not rendering full one */}
+            <Route path="/" component={Player} />
+          </Switch>
 
         </div>
       </Router>
@@ -41,22 +40,14 @@ class App extends Component {
 }
 
 
-// TODO: sort out proptypes
-// App.propTypes = {
-//   nextSong: PropTypes.func.isRequired,
-//   setSeek: PropTypes.func.isRequired,
-//
-//   sourceList: PropTypes.array.isRequired,
-//   sourceListPos: PropTypes.number.isRequired,
-//   isPlaying: PropTypes.bool.isRequired,
-//   volume: PropTypes.number.isRequired,
-//   songPos: PropTypes.number.isRequired,
-//   isSeeking: PropTypes.bool.isRequired
-// }
+
+App.propTypes = {
+  sourceList: PropTypes.array.isRequired,
+  sourceListPos: PropTypes.number.isRequired,
+}
 
 const mapStateToProps = (state) => ({
   sourceList: state.songQueue.map(song => song.source),
   sourceListPos: state.songQueuePos,
-  volume: state.volume
 });
-export default connect(mapStateToProps,{ nextSong })(App);
+export default connect(mapStateToProps,{})(App);
