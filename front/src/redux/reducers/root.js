@@ -3,6 +3,7 @@ import {
   NEXT_SONG,
   PREV_SONG,
   SET_VOLUME,
+  SET_PLAY,
 } from '../actions/types';
 
 
@@ -14,7 +15,8 @@ export default function(state, action) {
     case SET_QUEUEPOS:
       if (action.payload < 0 || action.payload > state.songQueue.length) return { // if out of bounds
         ...state,
-        isPlaying: false
+        isPlaying: false,
+        songQueuePos: action.payload
       }
       return {
         ...state,
@@ -24,11 +26,11 @@ export default function(state, action) {
     case NEXT_SONG:
       if (state.songQueuePos === state.songQueue.length) return { // if already over...
         ...state,
-        isPlaying: false
+        isPlaying: false // keep playstate at 'false'
       };
       else if (state.songQueuePos === state.songQueue.length - 1) return { // if will be over...
         ...state,
-        isPlaying: false,
+        isPlaying: false, // turn playstate to 'false'
         songQueuePos: state.songQueuePos + 1
       }
       return {
@@ -51,6 +53,15 @@ export default function(state, action) {
         volume: action.payload
       }
 
+    case SET_PLAY:
+      if (state.songQueuePos >= state.songQueue.length || state.songQueuePos < 0) return { // if undefined
+        ...state,
+        isPlaying: false
+      }; // NOTE: at no point should the play state be true if the song isn't defined.
+      else return { // if defined, let em do whatever they want
+        ...state,
+        isPlaying: action.payload
+      };
 
 
     default:

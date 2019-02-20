@@ -5,17 +5,18 @@ import { Link } from 'react-router-dom';
 // import components
 import ReactHowler from 'react-howler'; // audio wrapper docs: https://www.npmjs.com/package/react-howler
 // import actions
-import { nextSong, prevSong } from './redux/actions/postActions';
+import { nextSong, prevSong, setVolume, setPlay } from './redux/actions/postActions';
 
 import './css/Player.css'; // import stylesheet
+
 
 class Player extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      viewed_width: 0,
-      isPlaying: false,
+      percentViewed: 0,
+      isInterrupted: false,
     }
     this.updateInterval = undefined;
 
@@ -23,40 +24,28 @@ class Player extends Component {
     this.loadPrevSong = this.loadPrevSong.bind(this);
     this.togglePlay = this.togglePlay.bind(this);
     this.playerSeeking = this.playerSeeking.bind(this);
+    this.updatePercent = this.updatePercent.bind(this);
+  }
+
+  componentDidUpdate() {
+    if (this.props.isPlaying && !this.updateInterval) {
+      this.updateInterval = window.setInterval(this.updatePercent, 500);
+    }
   }
 
   render() {
-    var song = { // song default
-      title: "--",
-      author: "Please load a collection"
-    };
-    if (this.props.song) song=this.props.song; // if song exists
-
-
-    // if is playing, howler exists, but update-interval doesn't...
-    if (this.state.isPlaying && this.howler && !this.updateInterval && this.props.song) {
-      this.updateInterval = window.setInterval(() => { // create update interval
-        if (this.howler) {
-          this.setState({
-            viewed_width: 100*this.howler.seek()/this.howler.duration()
-          });
-        }
-      }, 500);
-    } // else, if is not playing but interval exists...
-    else if ((!this.state.isPlaying || !this.props.song) && this.updateInterval) {
-      window.clearInterval(this.updateInterval); // clear interval
-      this.updateInterval = undefined;
-    }
-
+    // set default song (in case isn't defined)
+    var song = {title:"-",author:"-"};
+    if (this.props.song) song = this.props.song;
 
     return (
       <div className="player">
 
-        {this.props.song ? ( // if next song is defined...
+        {song.source ? ( // if song is defined...
           <ReactHowler
             ref={(ref) => (this.howler = ref)}
-            src={this.props.song.source}
-            playing={this.state.isPlaying}
+            src={song.source}
+            playing={(this.props.isPlaying && !this.state.isInterrupted)}
             preload={true}
             volume={this.props.volume}
             onEnd={this.loadNextSong}
@@ -66,14 +55,12 @@ class Player extends Component {
           )
         }
 
-        <Link to={"/song/" + song.title.replace(' ','-')}>
-          <div className="player__meta">
-            <h3>{song.title}</h3>
-            <h6>{song.author}</h6>
-          </div>
-        </Link>
+        <Link to={"song/" + song.title}><div className="player__meta">
+          <h3>{song.title}</h3>
+          <h6>{song.author}</h6>
+        </div></Link>
         <div className="player__seekBar" onMouseDown={this.playerSeeking}>
-          <div className="player__seekBar__viewed" style={{width: this.state.viewed_width + "%"}}></div>
+          <div className="player__seekBar__viewed" style={{width: this.state.percentViewed + "%"}}></div>
           <div className="player__seekBar__button" onMouseDown={this.playerSeeking}></div>
         </div>
         <div className="player__controls">
@@ -81,9 +68,9 @@ class Player extends Component {
             <i className="fas fa-step-backward"></i>
           </div>
           <div className="player__controls__button" onClick={this.togglePlay}>
-            {this.state.isPlaying && this.props.song // play/pause toggle button
+            {(this.props.isPlaying && !this.state.isInterrupted)
               ?
-              (<i className="fas fa-pause"></i>)
+              <i className="fas fa-pause"></i>
               :
               <i className="fas fa-play"></i>
             }
@@ -103,58 +90,71 @@ class Player extends Component {
   **** */
 
   loadNextSong(e) {
-    // if (e) e.preventDefault();
-    if (this.howler) this.howler.seek(0);
+    if (this.howler) {
+      this.howler.seek(0);
+      this.setState({
+        percentViewed: 0
+      });
+    }
     this.props.nextSong();
   }
   loadPrevSong(e) {
-    // if (e) e.preventDefault();
-    if (this.howler) this.howler.seek(0);
+    if (this.howler) {
+      this.howler.seek(0);
+      this.setState({
+        percentViewed: 0
+      });
+    }
     this.props.prevSong();
   }
 
-
   togglePlay(e) {
-    if (e) e.preventDefault();
-
-    var willPlay = false;
-    if (this.props.song) { // if song is defined
-      willPlay = !this.state.isPlaying;
-    }
-    this.setState({
-      isPlaying: willPlay
-    })
+    this.props.setPlay(!this.props.isPlaying);
   }
 
-
   playerSeeking(e) {
-    if (e) e.preventDefault();
-    if (!this.props.song) return;
+    if (!this.props.song) return; // if song is undefined, leave it
+    // setup elems we will need!
     const seek_elem = document.getElementsByClassName('player__seekBar')[0];
-    const viewed_elem = document.getElementsByClassName('player__seekBar__viewed')[0];
+    // const viewed_elem = document.getElementsByClassName('player__seekBar__viewed')[0];
 
     this.setState({
-      isPlaying: false
-    }); // turn off play
+      percentViewed: ((e.clientX - seek_elem.offsetLeft)/seek_elem.offsetWidth) * 100,
+      isInterrupted: true
+    });
 
-    viewed_elem.style.width = ((e.clientX - seek_elem.offsetLeft)/seek_elem.offsetWidth) * 100 + "%";
+    // viewed_elem.style.width = ((e.clientX - seek_elem.offsetLeft)/seek_elem.offsetWidth) * 100 + "%";
     window.onmousemove = (e) => {
-      viewed_elem.style.width = ((e.clientX - seek_elem.offsetLeft)/seek_elem.offsetWidth) * 100 + "%";
+      this.setState({
+        percentViewed: ((e.clientX - seek_elem.offsetLeft)/seek_elem.offsetWidth) * 100
+      });
     }
     window.onmouseup = (e) => {
-      e.preventDefault();
       window.onmousemove = undefined; // reset listeners
       window.onmouseup = undefined;
       // set seek
       this.howler.seek(((e.clientX - seek_elem.offsetLeft)/seek_elem.offsetWidth) * this.howler.duration());
       this.setState({
-        isPlaying: true
+        isInterrupted: false
       }); // turn on playing
     }
   }
 
-}
+  updatePercent() {
+    if ((!this.props.isPlaying || this.state.isInterrupted) && this.updateInterval) { // if shouldn't be update but is...
+      window.clearInterval(this.updateInterval);
+      this.updateInterval = undefined;
+      return;
+    }
 
+    // find new percent viewed
+    let new_percentViewed = 100*this.howler.seek()/this.howler.duration();
+    this.setState({
+      percentViewed: new_percentViewed
+    });
+  }
+
+}
 
 
 
@@ -162,14 +162,20 @@ Player.propTypes = {
   song: PropTypes.shape({
     title: PropTypes.string,
     author: PropTypes.string,
-    source: PropTypes.string,
-    id: PropTypes.string
+    source: PropTypes.string
   }),
   volume: PropTypes.number.isRequired,
+  isPlaying: PropTypes.bool.isRequired,
+
+  nextSong: PropTypes.func.isRequired,
+  prevSong: PropTypes.func.isRequired,
+  setVolume: PropTypes.func.isRequired,
+  setPlay: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
   song: state.songQueue[state.songQueuePos],
   volume: state.volume,
+  isPlaying: state.isPlaying
 });
-export default connect(mapStateToProps, { nextSong, prevSong })(Player)
+export default connect(mapStateToProps, { nextSong, prevSong, setVolume, setPlay })(Player)

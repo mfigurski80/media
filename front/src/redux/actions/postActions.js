@@ -3,6 +3,7 @@ import {
   NEXT_SONG,
   PREV_SONG,
   SET_VOLUME,
+  SET_PLAY,
 } from './types';
 
 // song position controls
@@ -29,5 +30,12 @@ export const setVolume = (newVolume) => dispatch => {
   dispatch({
     type: SET_VOLUME,
     payload: newVolume
+  });
+}
+
+export const setPlay = (newPlay) => dispatch => {
+  dispatch({
+    type: SET_PLAY,
+    payload: newPlay
   });
 }
