@@ -38,6 +38,7 @@ class Player extends Component {
     var song = {title:"-",author:"-"};
     if (this.props.song) song = this.props.song;
 
+
     return (
       <div className="player">
 
@@ -89,34 +90,48 @@ class Player extends Component {
   Custom Functions
   **** */
 
-  loadNextSong(e) {
-    if (this.howler) {
-      this.howler.seek(0);
-      this.setState({
-        percentViewed: 0
-      });
-    }
+  /**
+   * Loads next song and resets Howler Object
+   */
+  loadNextSong() {
     this.props.nextSong();
-  }
-  loadPrevSong(e) {
     if (this.howler) {
       this.howler.seek(0);
       this.setState({
         percentViewed: 0
       });
     }
+  }
+  /**
+   * Loads previous song and resets Howler Object
+   */
+  loadPrevSong() {
     this.props.prevSong();
+    if (this.howler) {
+      this.howler.seek(0);
+      this.setState({
+        percentViewed: 0
+      });
+    }
   }
 
-  togglePlay(e) {
+
+  /**
+   * Toggles the play state
+   */
+  togglePlay() {
     this.props.setPlay(!this.props.isPlaying);
   }
 
+
+  /**
+   * Adjusts viewedPercent bar in response to mouse movements
+   * @param  {Event Object} e event from mouseclick
+   */
   playerSeeking(e) {
     if (!this.props.song) return; // if song is undefined, leave it
     // setup elems we will need!
     const seek_elem = document.getElementsByClassName('player__seekBar')[0];
-    // const viewed_elem = document.getElementsByClassName('player__seekBar__viewed')[0];
 
     this.setState({
       percentViewed: ((e.clientX - seek_elem.offsetLeft)/seek_elem.offsetWidth) * 100,
@@ -140,13 +155,16 @@ class Player extends Component {
     }
   }
 
+
+  /**
+   * Updates the percentViewed bar. Built to be run repeatedly, on an interval
+   */
   updatePercent() {
     if ((!this.props.isPlaying || this.state.isInterrupted) && this.updateInterval) { // if shouldn't be update but is...
       window.clearInterval(this.updateInterval);
       this.updateInterval = undefined;
       return;
     }
-
     // find new percent viewed
     let new_percentViewed = 100*this.howler.seek()/this.howler.duration();
     this.setState({
