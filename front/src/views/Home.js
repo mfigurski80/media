@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 import './../css/page/Home.css'; // stylesheet import
 
@@ -35,7 +35,9 @@ class Home extends Component {
 }
 
 
-// TODO: PropTypes setup
+Home.propTypes = {
+  posts: PropTypes.array
+}
 
 const mapStateToProps = (state) => ({
   posts: state.posts
