@@ -4,13 +4,14 @@
 .app {
   height: 100vh;
   overflow: hidden;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   background: $mono-light;
 
   &__page { // make only the app__page elem scroll
-    // height: 100%;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
     flex: 1; //make page take up all remaining space...
   }
 }

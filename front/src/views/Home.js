@@ -10,13 +10,12 @@ class Home extends Component {
   render() {
     return (
       <div className="page-Home">
-        <h2>Home</h2>
         <div className="page-Home__container">
 
           {
-            this.props.posts.map(post => (
+            this.props.posts.map((post, index) => (
 
-              <div className="page-Home__container__section">
+              <div key={index} className="page-Home__container__section">
                 <div className="page-Home__container__section__post">
                   <div className="page-Home__container__section__post__info">
                     <h2>{post.title}</h2>

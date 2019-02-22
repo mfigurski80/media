@@ -18,9 +18,11 @@
 .app {
   height: 100vh;
   overflow: hidden;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   background: #f9f9f9; }
   .app__page {
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
     flex: 1; }

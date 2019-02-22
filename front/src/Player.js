@@ -58,7 +58,7 @@ class Player extends Component {
 
         <Link to={"song/" + song.title}><div className="player__meta">
           <h3>{song.title}</h3>
-          <h6>{song.author}</h6>
+          <p>{song.author}</p>
         </div></Link>
         <div className="player__seekBar" onMouseDown={this.playerSeeking}>
           <div className="player__seekBar__viewed" style={{width: this.state.percentViewed + "%"}}></div>

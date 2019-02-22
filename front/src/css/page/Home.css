@@ -16,45 +16,46 @@
   margin-right: auto; }
 
 .page-Home {
-  background: #f9f9f9; }
+  background: #0FA789;
+  min-height: 100%;
+  width: 100%;
+  overflow-x: hidden; }
+  .page-Home:before {
+    content: "home";
+    color: #1B9;
+    font-weight: bolder;
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+    letter-spacing: -2.4vw;
+    font-size: 29vw;
+    z-index: 0;
+    pointer-events: none; }
   .page-Home__container {
     padding: 30px 0;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    align-content: flex-start; }
+    align-content: flex-start;
+    position: relative;
+    z-index: 5; }
     .page-Home__container__section {
-      height: 330px;
-      width: 330px;
-      padding: 5px;
-      display: grid;
+      padding: 30px;
+      display: flex;
       cursor: pointer; }
-      .page-Home__container__section:nth-child(5n) {
-        grid-template-columns: 2fr 20fr 1fr;
-        grid-template-rows: 0fr 20fr 3fr; }
-      .page-Home__container__section:nth-child(5n+1) {
-        grid-template-columns: 0fr 20fr 4fr;
-        grid-template-rows: 2fr 20fr 2fr; }
-      .page-Home__container__section:nth-child(5n+2) {
-        grid-template-columns: 3fr 20fr 0fr;
-        grid-template-rows: 2fr 20fr 1fr; }
-      .page-Home__container__section:nth-child(5n+3) {
-        grid-template-columns: 1fr 20fr 1fr;
-        grid-template-rows: 0fr 20fr 2fr; }
-      .page-Home__container__section:nth-child(5n+4) {
-        grid-template-columns: 0fr 20fr 3fr;
-        grid-template-rows: 1fr 20fr 2fr; }
       .page-Home__container__section__post {
-        grid-column: 2;
-        grid-row: 2;
-        background: #1B9;
+        height: 220px;
+        width: 220px;
+        background: #FBB;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #f9f9f9;
+        color: #464648;
         transition: all 0.17s; }
         .page-Home__container__section__post:hover {
-          background: #0FA789;
-          transform: scale(1.02); }
+          background: #FAA;
+          transform: scale(1.01); }

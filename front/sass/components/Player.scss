@@ -2,7 +2,9 @@
 
 .player {
   background: $mono-lightless;
+  color: $mono-darkless;
   display: flex;
+  z-index: 10;
   flex-direction: row;
   align-items: center;
 
@@ -13,6 +15,13 @@
     // min-width: 300px;
     // background: $color-prim;
     // text-transform: lowercase;
+    transition: all $time-md;
+    & p {
+      font-size: 12px;
+    }
+    &:hover {
+      color: $color-prim-dark;
+    }
   }
 
   &__seekBar {
@@ -28,15 +37,21 @@
       background: $color-prim;
       width: 0%; // change this (from 0% to 100%) to progress 'viewed'
       border-radius: 2px;
+      transition: background $time-md;
     }
     &__button {
-      width: 20px;
-      height: 20px;
-      margin-left: -10px;
-      margin-top: -8px;
+      width: 12px;
+      height: 12px;
+      margin-left: -6px;
+      margin-top: -4px;
       border-radius: 50%;
       background: $color-prim;
       cursor: pointer;
+      transition: all $time-md;
+    }
+
+    &:hover > &__viewed, &:hover > &__button {
+      background: $color-prim-dark;
     }
   }
 
@@ -48,7 +63,7 @@
       width: 45px; // make a circle
       height: 45px;
       border-radius: 50%;
-      color: $mono-light;
+      color: $mono-lightless;
       background: $color-prim;
       display: flex; // center icons...
       justify-content: center;
