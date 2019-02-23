@@ -10,9 +10,13 @@ import './../css/page/Home.css'; // stylesheet import
 class Home extends Component {
   render() {
     return (
-      <div className="page-Home">
-        <div className="page-Home__container">
+      <div className="page-Home" background-text="Home.">
 
+        <div className="page-Home__container">
+          <h1>Page Home.</h1>
+        </div>
+
+        <div className="page-Home__container">
           {
             this.props.posts.map((post, index) => (
 
