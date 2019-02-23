@@ -16,13 +16,13 @@
   margin-right: auto; }
 
 .page-Home {
-  background: #0FA789;
   min-height: 100%;
   width: 100%;
   overflow-x: hidden; }
   .page-Home:before {
-    content: "home";
+    content: "Jungel.";
     color: #1B9;
+    background: #0FA789;
     font-weight: bolder;
     display: block;
     width: 100%;
@@ -30,11 +30,13 @@
     overflow: hidden;
     position: absolute;
     letter-spacing: -2.4vw;
-    font-size: 29vw;
-    z-index: 0;
+    font-size: 30vw;
+    text-align: center;
+    z-index: -5;
     pointer-events: none; }
   .page-Home__container {
     padding: 30px 0;
+    padding-top: 50vh;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -44,8 +46,7 @@
     z-index: 5; }
     .page-Home__container__section {
       padding: 30px;
-      display: flex;
-      cursor: pointer; }
+      display: flex; }
       .page-Home__container__section__post {
         height: 220px;
         width: 220px;
@@ -54,7 +55,8 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #464648;
+        color: #444242;
+        cursor: pointer;
         transition: all 0.17s; }
         .page-Home__container__section__post:hover {
           background: #FAA;

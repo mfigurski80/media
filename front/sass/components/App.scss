@@ -7,7 +7,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  background: $mono-light;
+  // background: $mono-light;
 
   &__page { // make only the app__page elem scroll
     overflow-y: auto;

@@ -1,5 +1,6 @@
 $color-prim: #1B9;
 $color-prim-dark: #0FA789;
+$color-sec-light: #FEE;
 $color-sec: #FBB;
 $color-sec-dark: #FAA;
 
@@ -7,9 +8,9 @@ $grad-prim: linear-gradient(25deg, $color-prim, $color-prim-dark);
 
 
 $mono-light: rgba(249,249,249,1);
-$mono-lightless: rgba(234,234,234,1);
-$mono-darkless: rgba(70,70,72,1);
-$mono-dark: rgba(45,45,48,1);
+$mono-lightless: rgba(230,230,230,1);
+$mono-darkless: rgba(68,66,66,1);
+$mono-dark: rgba(52,50,50,1);
 
 
 $shade-dark: rgba(10,10,10,.2);

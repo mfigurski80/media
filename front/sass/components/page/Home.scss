@@ -2,14 +2,15 @@
 @import '../../layout.scss';
 
 .page-Home {
-  background: $color-prim-dark;
+  // background: $color-prim-dark;
   min-height: 100%;
   width: 100%;
   overflow-x: hidden;
 
   &:before {
-    content: "home";
+    content: "Jungel.";
     color: $color-prim;
+    background: $color-prim-dark;
     font-weight: bolder;
     display: block;
     width: 100%;
@@ -18,14 +19,16 @@
     position: absolute;
     letter-spacing: -2.4vw;
     // line-height: 65vh;
-    font-size: 29vw;
-    z-index: 0;
+    font-size: 30vw;
+    text-align: center;
+    z-index: -5;
     pointer-events: none;
   }
 
   &__container {
     @extend .container;
     padding: $padding-lg 0;
+    padding-top: 50vh;
     // height: 200vh;
     display: flex;  // build layout with flex
     flex-direction: row;
@@ -38,7 +41,6 @@
     &__section {
       padding: $padding-lg;
       display: flex;
-      cursor: pointer;
 
       &__post {
         height: 220px;
@@ -49,6 +51,7 @@
         align-items: center;
         justify-content: center;
         color: $mono-darkless;
+        cursor: pointer;
         transition: all $time-md;
 
         &:hover {

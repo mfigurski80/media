@@ -4,6 +4,7 @@ import {
   PREV_SONG,
   SET_VOLUME,
   SET_PLAY,
+  SET_SONGQUEUE,
 } from './types';
 
 // song position controls
@@ -37,5 +38,12 @@ export const setPlay = (newPlay) => dispatch => {
   dispatch({
     type: SET_PLAY,
     payload: newPlay
+  });
+}
+
+export const setSongQueue = (newQueue) => dispatch => {
+  dispatch({
+    type: SET_SONGQUEUE,
+    payload: newQueue
   });
 }
