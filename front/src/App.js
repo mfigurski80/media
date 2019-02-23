@@ -8,6 +8,7 @@ import Home from './views/Home';
 import Profile from './views/Profile';
 // import components
 import Player from './Player';
+import Nav from './Nav';
 
 import './css/App.css'; // stylesheet import
 
@@ -22,11 +23,17 @@ class App extends Component {
       <Router>
         <div className="app"> {/* Router can only have one child, so need this to wrap */}
 
-          <div className="app__page">
-            <Switch> {/* Render only first match of pages */}
-              <Route exact path="/" component={Home}/>
-              <Route path="/profile" component={Profile} />
-            </Switch>
+          <div className="app__view">
+
+            <Nav />
+
+            <div className="app__view__page">
+              <Switch> {/* Render only first match of pages */}
+                <Route exact path="/" component={Home}/>
+                <Route path="/profile" component={Profile} />
+              </Switch>
+            </div>
+
           </div>
 
           <Player />

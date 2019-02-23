@@ -4,10 +4,10 @@
   .layout--large-left > *:nth-child(1) {
     flex: 1; }
 
-.layout--large-right {
+.layout--large-right, .app__view {
   display: flex;
   align-items: center; }
-  .layout--large-right > *:nth-child(2) {
+  .layout--large-right > *:nth-child(2), .app__view > *:nth-child(2) {
     flex: 1; }
 
 .container {
@@ -18,10 +18,12 @@
 .app {
   height: 100vh;
   overflow: hidden;
-  overflow: hidden;
+  position: relative;
   display: flex;
   flex-direction: column; }
-  .app__page {
-    overflow-y: auto;
-    overflow-x: hidden;
-    flex: 1; }
+  .app__view {
+    flex: 1;
+    overflow: hidden;
+    align-items: stretch; }
+    .app__view__page {
+      overflow-y: auto; }

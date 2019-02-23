@@ -17,8 +17,7 @@
 
 .page-Home {
   min-height: 100%;
-  width: 100%;
-  overflow-x: hidden; }
+  width: 100%; }
   .page-Home:before {
     content: attr(background-text);
     color: #1B9;
@@ -27,7 +26,6 @@
     display: inline-block;
     width: 100%;
     height: 100vh;
-    overflow-x: hidden;
     position: absolute;
     letter-spacing: -2.4vw;
     line-height: 60vw;
@@ -41,9 +39,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    align-content: flex-start;
-    position: relative;
-    z-index: 5; }
+    align-content: flex-start; }
     .page-Home__container__section {
       padding: 30px; }
       .page-Home__container__section__post {

@@ -7,7 +7,8 @@
   // z-index: -10;
   min-height: 100%;
   width: 100%;
-  overflow-x: hidden;
+  // color: $mono-darkless;
+  // overflow-x: hidden;
 
   &:before {
     content: attr(background-text);
@@ -17,7 +18,7 @@
     display: inline-block;
     width: 100%;
     height: 100vh;
-    overflow-x: hidden;
+    // overflow: hidden;
     position: absolute;
     letter-spacing: -2.4vw;
     line-height: 60vw;
@@ -37,8 +38,6 @@
     flex-wrap: wrap;  // by wrapping articles into roughly rows of 2
     justify-content: center; // justify them to center
     align-content: flex-start;
-    position: relative;
-    z-index: 5;
 
     &__section {
       padding: $padding-lg;

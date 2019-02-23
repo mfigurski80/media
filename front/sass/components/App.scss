@@ -4,14 +4,22 @@
 .app {
   height: 100vh;
   overflow: hidden;
-  overflow: hidden;
+  position: relative; // prevent absolute or weird positioned elements from overflowing and killing everything
   display: flex;
   flex-direction: column;
   // background: $mono-light;
 
-  &__page { // make only the app__page elem scroll
-    overflow-y: auto;
-    overflow-x: hidden;
-    flex: 1; //make page take up all remaining space...
+  &__view {
+    flex: 1; //make view take up all remaining vertical space...
+    // background: red;
+    overflow: hidden;
+    @extend .layout--large-right;
+    align-items: stretch;
+
+    &__page { // make only the app__page elem scroll
+      // position: relative;
+      overflow-y: auto;
+    }
   }
+
 }

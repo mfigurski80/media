@@ -1,0 +1,28 @@
+@import '../vars.scss';
+
+
+.nav {
+  background: $mono-dark;
+  padding: $padding-sm;
+  color: $mono-lightless;
+  font-size: 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__option {
+    width: 40px;
+    height: 40px;
+    // background: red;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3px 0;
+    transition: all $time-md;
+    &:hover {
+      background: $color-prim-dark;
+    }
+  }
+}

@@ -13,10 +13,11 @@ class Home extends Component {
       <div className="page-Home" background-text="Home.">
 
         <div className="page-Home__container">
-          <h1>Page Home.</h1>
+          <h1>Page Home</h1>
         </div>
 
         <div className="page-Home__container">
+          
           {
             this.props.posts.map((post, index) => (
 
@@ -31,6 +32,8 @@ class Home extends Component {
 
             ))
           }
+
+          <p>Note, the pagination here, as well as the content itself, is gonna change dramatically</p>
 
         </div>
       </div>
