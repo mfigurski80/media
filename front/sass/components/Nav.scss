@@ -2,27 +2,48 @@
 
 
 .nav {
-  background: $mono-dark;
-  padding: $padding-sm;
-  color: $mono-lightless;
-  font-size: 20px;
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  &__bar {
+    background: $mono-dark;
+    padding: $padding-sm;
+    color: $mono-lightless;
+    font-size: 20px;
+    height: 100%;
 
-  &__option {
-    width: 40px;
-    height: 40px;
-    // background: red;
-    border-radius: 50%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    margin: 3px 0;
-    transition: all $time-md;
-    &:hover {
-      background: $color-prim-dark;
+
+    &__option {
+      width: 40px;
+      height: 40px;
+      // background: red;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 3px 0;
+      transition: all $time-md;
+      &:hover {
+        background: $color-prim-dark;
+      }
+    }
+
+  }
+
+
+  &__aside {
+    position: absolute;
+    left: 40px + 2*$padding-sm; // 50px
+    padding: 0 $padding-sm;
+    transition: transform $time-md;
+    // transform: translateY(10px);
+
+    &__wrapper {
+      background: $mono-dark;
+      color: $mono-lightless;
+      border-radius: 6px;
+      padding: $padding-md;
     }
   }
 }

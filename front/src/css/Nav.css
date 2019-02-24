@@ -1,12 +1,13 @@
-.nav {
+.nav__bar {
   background: #343232;
   padding: 5px;
   color: #e6e6e6;
   font-size: 20px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center; }
-  .nav__option {
+  .nav__bar__option {
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -15,5 +16,16 @@
     align-items: center;
     margin: 3px 0;
     transition: all 0.17s; }
-    .nav__option:hover {
+    .nav__bar__option:hover {
       background: #0FA789; }
+
+.nav__aside {
+  position: absolute;
+  left: 50px;
+  padding: 0 5px;
+  transition: transform 0.17s; }
+  .nav__aside__wrapper {
+    background: #343232;
+    color: #e6e6e6;
+    border-radius: 6px;
+    padding: 13px; }
