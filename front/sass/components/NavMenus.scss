@@ -1,0 +1,16 @@
+@import '../vars.scss';
+
+.nav-menu {
+  padding: $padding-md;
+
+
+  & p {
+    font-size: 12px;
+  }
+  & a {
+    text-decoration: underline;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}

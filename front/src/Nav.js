@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import './css/Nav.css';
+import './css/NavMenus.css';
 
 export default class Nav extends Component {
   constructor(props) {
@@ -13,21 +14,33 @@ export default class Nav extends Component {
           title: 'Home',
           linksTo: '/',
           iconClass: 'fas fa-home',
-          open: []
+          submenu: undefined
         },{
           title: 'Music',
           linksTo: '/music',
-          iconClass: 'fas fa-compact-disc'
+          iconClass: 'fas fa-compact-disc',
+          submenu: (
+            <div className='nav-menu'>
+              <Link to='/music'><p>My Music</p></Link>
+              <Link to='/music/uploaded'><p>Uploaded</p></Link>
+            </div>
+          )
         },{
           title: 'Groups',
           linksTo: '/groups',
           // iconClass: 'fas fa-list-alt',
           iconClass: 'fas fa-th-list',
           // iconClass: 'fas fa-bars'
+          submenu: (
+            <div className='nav-menu'>
+              <Link to='/groups/a'><p>Group A</p></Link>
+            </div>
+          )
         },{
           title: 'Upload',
           linksTo: '/upload',
-          iconClass: 'fas fa-plus'
+          iconClass: 'fas fa-plus',
+          submenu: undefined
         }
       ]
     }
@@ -43,20 +56,21 @@ export default class Nav extends Component {
     return (
       <div className="nav" onMouseLeave={()=>this.setState({currentHover: -1})}>
 
-        {
+        { // render aside...
           (this.state.currentHover === -1)
           ? (
             null
           ) : (
             <div className='nav__aside' style={{transform: `translateY(${asidePos}px)`}}>
               <div className='nav__aside__wrapper'>
-                <p>{this.state.navOptions[this.state.currentHover].title}</p>
+                <h4 className='nav__aside__wrapper__head'>{this.state.navOptions[this.state.currentHover].title}</h4>
+                {this.state.navOptions[this.state.currentHover].submenu}
               </div>
             </div>
           )
         }
 
-        <div className='nav__bar'>{
+        <div className='nav__bar'>{ // render navOptions...
             this.state.navOptions.map((option, index) => (
               <Link to={option.linksTo} key={index}>
                 <div className='nav__bar__option' id={'navbar-option__' + option.title} title={option.title} onMouseEnter={()=>this.setState({currentHover: index})}>

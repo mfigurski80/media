@@ -1,4 +1,5 @@
 @import '../vars.scss';
+@import '../buttons.scss';
 
 .player {
   background: $mono-darkless;
@@ -9,14 +10,10 @@
   align-items: center;
 
   &__meta {
+    @extend .button--prim-alt;
     padding: $padding-md $padding-lg;
-    transition: all $time-md;
     & p {
       font-size: 12px;
-    }
-    &:hover {
-      background: $color-prim;
-      // color: $mono-darkless;
     }
   }
 

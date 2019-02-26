@@ -56,7 +56,7 @@ class Player extends Component {
           )
         }
 
-        <Link to={"song/" + song.title}><div className="player__meta">
+        <Link to={"/song/" + song.title}><div className="player__meta">
           <h3>{song.title}</h3>
           <p>{song.author}</p>
         </div></Link>

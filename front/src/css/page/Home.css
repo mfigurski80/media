@@ -1,14 +1,16 @@
-.layout--large-left {
+.layout {
   display: flex;
   align-items: center; }
-  .layout--large-left > *:nth-child(1) {
-    flex: 1; }
-
-.layout--large-right {
-  display: flex;
-  align-items: center; }
-  .layout--large-right > *:nth-child(2) {
-    flex: 1; }
+  .layout--large-left {
+    display: flex;
+    align-items: center; }
+    .layout--large-left > *:nth-child(1) {
+      flex: 1; }
+  .layout--large-right {
+    display: flex;
+    align-items: center; }
+    .layout--large-right > *:nth-child(2) {
+      flex: 1; }
 
 .container, .page-Home__container {
   max-width: 1000px;

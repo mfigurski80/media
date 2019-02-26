@@ -1,0 +1,22 @@
+@import './vars.scss';
+
+.button {
+
+  &--prim {
+    background: $color-prim;
+    color: $mono-lightless;
+  }
+
+
+  &--prim-alt {
+    color: $mono-lightless;
+    background: none;
+    transition: background $time-md;
+    &:hover {
+      background: $color-prim;
+    }
+    &:active {
+      background: $color-prim-dark;
+    }
+  }
+}

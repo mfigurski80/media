@@ -1,5 +1,7 @@
 
 .layout {
+  display: flex;
+  align-items: center;
 
   // 2col with left expanded
   &--large-left {

@@ -1,5 +1,6 @@
 @import '../vars.scss';
-
+@import '../layout.scss';
+@import '../buttons.scss';
 
 .nav {
 
@@ -15,18 +16,14 @@
     align-items: center;
 
     &__option {
+      @extend .button--prim-alt;
       width: 40px;
       height: 40px;
-      // background: red;
       border-radius: 50%;
       display: flex;
       justify-content: center;
       align-items: center;
       margin: 3px 0;
-      transition: all $time-md;
-      &:hover {
-        background: $color-prim-dark;
-      }
     }
 
   }
@@ -43,7 +40,17 @@
       background: $mono-dark;
       color: $mono-lightless;
       border-radius: 6px;
-      padding: $padding-md;
+
+      // head of nav submenus
+      &__head {
+        padding: 2*$padding-sm $padding-md;
+      }
+      &__head:not(:last-child) {
+        border-bottom: 1px solid $mono-darkless;
+      }
+
+      // NOTE: All stylings of nav menus will end up in NavMenus.scss
+
     }
   }
 }

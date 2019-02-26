@@ -1,3 +1,16 @@
+.button--prim {
+  background: #1B9;
+  color: #e6e6e6; }
+
+.button--prim-alt, .player__meta {
+  color: #e6e6e6;
+  background: none;
+  transition: background 0.17s; }
+  .button--prim-alt:hover, .player__meta:hover {
+    background: #1B9; }
+  .button--prim-alt:active, .player__meta:active {
+    background: #0FA789; }
+
 .player {
   background: #444242;
   color: #e6e6e6;
@@ -6,12 +19,9 @@
   flex-direction: row;
   align-items: center; }
   .player__meta {
-    padding: 13px 30px;
-    transition: all 0.17s; }
+    padding: 13px 30px; }
     .player__meta p {
       font-size: 12px; }
-    .player__meta:hover {
-      background: #1B9; }
   .player__seekBar {
     flex: 1;
     height: 4px;
