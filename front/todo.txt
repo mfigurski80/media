@@ -1,0 +1,17 @@
+Song Page
+  general design
+  layout
+  functionality
+  style up
+Text Editor Component (will come in handy)
+Groups Page
+Person Page
+Profile Page
+Upload Page
+Search/Results Page
+My Likes Page(s?)
+Home Page
+Nav Submenus
+
+
+NOTE: don't do anything relating to fetching/posting/putting/deleting yet. Wait for backend, placeholder data is fine

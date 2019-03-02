@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'; // Re
 // import some paths
 import Home from './views/Home';
 import Profile from './views/Profile';
+import Song from './views/Song';
 // import components
 import Player from './Player';
 import Nav from './Nav';
@@ -31,6 +32,7 @@ class App extends Component {
               <Switch> {/* Render only first match of pages */}
                 <Route exact path="/" component={Home}/>
                 <Route path="/profile" component={Profile} />
+                <Route path="/song/:title" component={Song}/>
               </Switch>
             </div>
 
