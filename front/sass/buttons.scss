@@ -3,14 +3,23 @@
 .button {
 
   &--prim {
+    display: inline-block;
+    padding: $padding-md;
     background: $color-prim;
     color: $mono-lightless;
+    transition: background $time-md;
+    &:hover {
+      background: none;
+    }
+    &:active {
+      color: $mono-light;
+    }
   }
 
 
   &--prim-alt {
+    display: inline-block;
     color: $mono-lightless;
-    background: none;
     transition: background $time-md;
     &:hover {
       background: $color-prim;

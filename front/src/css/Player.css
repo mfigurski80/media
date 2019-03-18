@@ -1,10 +1,17 @@
 .button--prim {
+  display: inline-block;
+  padding: 13px;
   background: #1B9;
-  color: #e6e6e6; }
+  color: #e6e6e6;
+  transition: background 0.17s; }
+  .button--prim:hover {
+    background: none; }
+  .button--prim:active {
+    color: #f9f9f9; }
 
 .button--prim-alt, .player__meta {
+  display: inline-block;
   color: #e6e6e6;
-  background: none;
   transition: background 0.17s; }
   .button--prim-alt:hover, .player__meta:hover {
     background: #1B9; }

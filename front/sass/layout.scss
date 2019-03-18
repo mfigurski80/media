@@ -24,7 +24,15 @@
 }
 
 .container {
+  display: block;
   max-width: 1000px;
   margin-left: auto;
   margin-right: auto;
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+.section {
+  padding-top: 19px;
+  padding-bottom: 19px;
 }
