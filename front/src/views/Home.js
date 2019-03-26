@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-// import { Link } from 'react-router-dom';
 import { setSongQueue } from './../redux/actions/postActions';
 
 import './../css/page/Home.css'; // stylesheet import
@@ -17,7 +16,7 @@ class Home extends Component {
         </div>
 
         <div className="page-Home__container">
-          
+
           {
             this.props.posts.map((post, index) => (
 

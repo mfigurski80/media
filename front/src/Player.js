@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 // import components
 import ReactHowler from 'react-howler'; // audio wrapper docs: https://www.npmjs.com/package/react-howler
 // import actions
@@ -56,10 +55,10 @@ class Player extends Component {
           )
         }
 
-        <Link to={"/song/" + song.title}><div className="player__meta">
+        <div className="player__meta">
           <h3>{song.title}</h3>
           <p>{song.author}</p>
-        </div></Link>
+        </div>
         <div className="player__seekBar" onMouseDown={this.playerSeeking}>
           <div className="player__seekBar__viewed" style={{width: this.state.percentViewed + "%"}}></div>
           <div className="player__seekBar__button" onMouseDown={this.playerSeeking}></div>

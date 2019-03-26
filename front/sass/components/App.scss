@@ -13,11 +13,10 @@
     flex: 1; //make view take up all remaining vertical space...
     // background: red;
     overflow: hidden;
-    @extend .layout--large-right;
-    align-items: stretch;
 
     &__page { // make only the app__page elem scroll
       // position: relative;
+      height: 100%;
       overflow-y: auto;
     }
   }
