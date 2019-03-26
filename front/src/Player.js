@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 // import components
 import ReactHowler from 'react-howler'; // audio wrapper docs: https://www.npmjs.com/package/react-howler
 // import actions
-import { nextSong, prevSong, setVolume, setPlay } from './redux/actions/postActions';
+import { nextSong, prevSong, setVolume, setPlay, setLoop } from './redux/actions/postActions';
 
 import './css/Player.css'; // import stylesheet
 
@@ -22,6 +22,7 @@ class Player extends Component {
     this.loadNextSong = this.loadNextSong.bind(this);
     this.loadPrevSong = this.loadPrevSong.bind(this);
     this.togglePlay = this.togglePlay.bind(this);
+    this.toggleLoop = this.toggleLoop.bind(this);
     this.playerSeeking = this.playerSeeking.bind(this);
     this.updatePercent = this.updatePercent.bind(this);
   }
@@ -78,6 +79,9 @@ class Player extends Component {
           <div className="player__controls__button" onClick={this.loadNextSong}>
             <i className="fas fa-step-forward" ></i>
           </div>
+          <div className={"player__controls__button " + (this.props.isLoop ? "--active" : "")} onClick={this.toggleLoop}>
+            <i className="fas fa-redo-alt"></i>
+          </div>
         </div>
       </div>
     );
@@ -122,6 +126,12 @@ class Player extends Component {
     this.props.setPlay(!this.props.isPlaying);
   }
 
+  /**
+   * Toggles the isLoop state
+   */
+  toggleLoop() {
+    this.props.setLoop(!this.props.isLoop);
+  }
 
   /**
    * Adjusts viewedPercent bar in response to mouse movements
@@ -183,16 +193,19 @@ Player.propTypes = {
   }),
   volume: PropTypes.number.isRequired,
   isPlaying: PropTypes.bool.isRequired,
+  isLoop: PropTypes.bool.isRequired,
 
   nextSong: PropTypes.func.isRequired,
   prevSong: PropTypes.func.isRequired,
   setVolume: PropTypes.func.isRequired,
-  setPlay: PropTypes.func.isRequired
+  setPlay: PropTypes.func.isRequired,
+  setLoop: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
   song: state.songQueue[state.songQueuePos],
   volume: state.volume,
-  isPlaying: state.isPlaying
+  isPlaying: state.isPlaying,
+  isLoop: state.isLoop
 });
-export default connect(mapStateToProps, { nextSong, prevSong, setVolume, setPlay })(Player)
+export default connect(mapStateToProps, { nextSong, prevSong, setVolume, setPlay, setLoop })(Player)

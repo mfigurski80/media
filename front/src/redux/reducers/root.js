@@ -4,6 +4,7 @@ import {
   PREV_SONG,
   SET_VOLUME,
   SET_PLAY,
+  SET_LOOP
 } from '../actions/types';
 
 
@@ -27,11 +28,18 @@ export default function(state, action) {
       if (state.songQueuePos === state.songQueue.length) return { // if already over...
         ...state,
         isPlaying: false // keep playstate at 'false'
-      };
-      else if (state.songQueuePos === state.songQueue.length - 1) return { // if will be over...
-        ...state,
-        isPlaying: false, // turn playstate to 'false'
-        songQueuePos: state.songQueuePos + 1
+      }
+      else if (state.songQueuePos === state.songQueue.length - 1) { // if will be over...
+        if (state.isLoop) { // if is looping...
+          return {
+            ...state,
+            songQueuePos: 0
+          }
+        } else return { // otherwise
+          ...state,
+          isPlaying: false, // turn playstate to 'false'
+          songQueuePos: state.songQueuePos + 1
+        }
       }
       return {
         ...state,
@@ -62,6 +70,12 @@ export default function(state, action) {
         ...state,
         isPlaying: action.payload
       };
+
+    case SET_LOOP:
+      return {
+        ...state,
+        isLoop: action.payload
+      }
 
     default:
       console.log(`[./redux/reducers/root]\nAction type '${action.type}' wasn't found`);

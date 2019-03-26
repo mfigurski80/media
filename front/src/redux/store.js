@@ -17,11 +17,11 @@ const initialState = {
     {title: "Jungle",author: "Hurley Mower",source: "../resources/Jungle.mp3"},
     {title: "Miracle",author: "Caravan Palace",source: "../resources/Miracle.mp3"},
     {title: "Jungle",author: "Hurley Mower",source: "../resources/Jungle.mp3"},
-    {title: "Miracle",author: "Caravan Palace",source: "../resources/Miracle.mp3"},
-    {title: "Jungle",author: "Hurley Mower",source: "../resources/Jungle.mp3"}],
+    {title: "Miracle",author: "Caravan Palace",source: "../resources/Miracle.mp3"}],
   songQueuePos: 0, // position in songQueue
   isPlaying: false,
-  volume: .75 // volume
+  isLoop: false, // should loop when goes over songqueue?
+  volume: .75, // volume
 };
 
 const middleware = [thunk];

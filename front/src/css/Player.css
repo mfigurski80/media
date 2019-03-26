@@ -59,8 +59,8 @@
     align-items: center;
     padding: 0 30px; }
     .player__controls__button {
-      width: 45px;
-      height: 45px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       color: #e6e6e6;
       background: #0FA789;
@@ -71,3 +71,7 @@
       transition: background 0.17s; }
       .player__controls__button:hover {
         background: #1B9; }
+      .player__controls__button.--active {
+        background: #FAA; }
+        .player__controls__button.--active:hover {
+          background: #FBB; }

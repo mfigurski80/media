@@ -53,8 +53,8 @@
     align-items: center;
     padding: 0 $padding-lg;
     &__button {
-      width: 45px; // make a circle
-      height: 45px;
+      width: 40px; // make a circle
+      height: 40px;
       border-radius: 50%;
       color: $mono-lightless;
       background: $color-prim-dark;
@@ -65,6 +65,13 @@
       transition: background $time-md;
       &:hover {
         background: $color-prim;
+      }
+
+      &.--active {
+        background: $color-sec-dark;
+        &:hover {
+          background: $color-sec;
+        }
       }
     }
   }
