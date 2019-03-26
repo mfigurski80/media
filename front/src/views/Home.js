@@ -11,12 +11,12 @@ class Home extends Component {
     return (
       <div className="page-Home">
 
-        <h3 className="page-Home__header">SongQueue</h3>
+        <h3 className="page-Home__header">Song Queue</h3>
 
         {
           this.props.songQueue.map((post, index) => (
 
-              <div key={index} className={"page-Home__post " + (this.props.songQueuePos == index ? "--selected" : "")} onClick={() => this.props.setQueuePos(index)}>
+              <div key={index} className={"page-Home__post " + (this.props.songQueuePos === index ? "--selected" : "")} onClick={() => this.props.setQueuePos(index)}>
                 <div className="page-Home__post__info">
                   <h2>{post.title}</h2>
                   <p>{post.author}</p>
@@ -33,8 +33,10 @@ class Home extends Component {
 
 
 Home.propTypes = {
-  songQueue: PropTypes.array,
-  // songQueuePos: PropTypes.Integer
+  songQueue: PropTypes.array.isRequired,
+  songQueuePos: PropTypes.number.isRequired,
+
+  setQueuePos: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
