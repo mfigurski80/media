@@ -33,3 +33,7 @@
     line-height: 230px; }
   .page-Song__container__title h2 {
     font-size: 27px; }
+  .page-Song__container__comments {
+    padding: 30px 0; }
+    .page-Song__container__comments__comment {
+      background: white; }

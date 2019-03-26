@@ -61,6 +61,11 @@ class Song extends Component {
 
           <div className='page-Song__container__comments'>
             {/*TODO: Comments section*/}
+            {this.state.comments.map(comment => (
+              <div className='page-Song__container__comments__comment'>
+                {comment.content}
+              </div>
+            ))}
           </div>
 
           <div className='page-Song__container__info'>
