@@ -4,7 +4,6 @@ import {
   PREV_SONG,
   SET_VOLUME,
   SET_PLAY,
-  SET_SONGQUEUE,
 } from '../actions/types';
 
 
@@ -62,14 +61,6 @@ export default function(state, action) {
       else return { // if defined, let em do whatever they want
         ...state,
         isPlaying: action.payload
-      };
-
-    case SET_SONGQUEUE:
-      return {
-        ...state,
-        isPlaying: true,
-        songQueuePos: 0,
-        songQueue: action.payload
       };
 
     default:

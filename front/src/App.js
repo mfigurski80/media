@@ -6,19 +6,18 @@ import PropTypes from 'prop-types';
 import Home from './views/Home';
 // import components
 import Player from './Player';
-import Nav from './Nav';
 
 import './css/App.css'; // stylesheet import
 
 
 
 /**
- * General component to contain entire app. Functions as a router
+ * General component to contain entire app.
  */
 class App extends Component {
   render() {
     return (
-      <div className="app"> {/* Router can only have one child, so need this to wrap */}
+      <div className="app">
 
         <div className="app__view">
 
